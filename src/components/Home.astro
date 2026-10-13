@@ -1,0 +1,58 @@
+---
+// Portada completa. La usan /index.astro (español) y /[lang]/index.astro (inglés, francés y alemán).
+import Layout from "../layouts/Layout.astro";
+import Hero from "./Hero.astro";
+import WhyGroup from "./WhyGroup.astro";
+import Tagline from "./Tagline.astro";
+import Modes from "./Modes.astro";
+import HowItWorks from "./HowItWorks.astro";
+import Community from "./Community.astro";
+import Coming from "./Coming.astro";
+import Faq from "./Faq.astro";
+import JoinForm from "./JoinForm.astro";
+import Marquee from "./Marquee.astro";
+import Merch from "./Merch.astro";
+import { site } from "../config";
+import { localizePath, useI18n } from "../i18n";
+
+const { t, lang } = useI18n(Astro.url);
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    name: site.name,
+    url: new URL(localizePath(lang), site.url).href,
+    sport: "Downwind foil",
+    description: t.meta.description,
+    areaServed: "Gran Canaria",
+    sameAs: [site.instagram],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage: lang,
+    mainEntity: t.faq.items.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+];
+---
+
+<Layout translated>
+  <Hero />
+  <Marquee items={t.marquee.top} tilt />
+  <WhyGroup />
+  <Tagline />
+  <Modes />
+  <HowItWorks />
+  <Community />
+  <Merch />
+  <Coming />
+  <Faq />
+  <JoinForm />
+  <Marquee items={t.marquee.bottom} tone="sun" size="sm" speed="30s" />
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</Layout>

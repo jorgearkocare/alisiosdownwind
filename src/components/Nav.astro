@@ -1,30 +1,34 @@
 ---
 import Logo from "./Logo.astro";
+import LangPicker from "./LangPicker.astro";
 import { nav } from "../config";
 import { btnSmall } from "../ui";
+import { languages, localizePath, useI18n, type Lang } from "../i18n";
 
-const menu = [...nav, { href: "/#unete", label: "Únete", id: "unete" }];
+const { t, lang, home } = useI18n(Astro.url);
+const items = nav.map((item) => ({ ...item, href: `${home}#${item.id}`, label: t.nav.items[item.id] }));
+const menu = [...items, { id: "unete", href: `${home}#unete`, label: t.nav.join }];
 const fluid = "transition-all duration-700 ease-fluid";
 ---
 
 <a
   href="#contenido"
   class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-sun focus:px-3 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink"
->Saltar al contenido</a>
+>{t.meta.skip}</a>
 
 <header data-nav data-open="false" class="group/nav fixed inset-x-0 top-0 z-50 px-4">
   <nav
-    aria-label="Principal"
-    class="relative z-10 mx-auto mt-6 flex w-max max-w-full items-center gap-4 rounded-full border-2 border-ink bg-cream/90 py-1 pl-2 pr-1 shadow-hard-sm backdrop-blur-xl md:gap-6"
+    aria-label={t.nav.label}
+    class="relative z-10 mx-auto mt-6 flex w-max max-w-full items-center gap-2 rounded-full border-2 border-ink bg-cream/90 py-1 pl-2 pr-1 shadow-hard-sm backdrop-blur-xl md:gap-4"
   >
-    <a href="/" class="flex items-center gap-2" aria-label="Alisios DW, ir al inicio">
+    <a href={home} class="flex items-center gap-2" aria-label={t.nav.home}>
       <Logo class="size-10 shrink-0 transition-transform duration-700 ease-fluid hover:-rotate-12" eager />
-      <span class="font-display text-xl uppercase leading-none">Alisios DW</span>
+      <span class="whitespace-nowrap font-display text-xl uppercase leading-none">Alisios DW</span>
     </a>
 
     <ul class="hidden items-center gap-1 lg:flex">
       {
-        nav.map((item) => (
+        items.map((item) => (
           <li>
             <a
               href={item.href}
@@ -36,14 +40,16 @@ const fluid = "transition-all duration-700 ease-fluid";
       }
     </ul>
 
-    <a href="/#unete" class={`${btnSmall} hidden sm:inline-flex`}>Únete</a>
+    <LangPicker />
+
+    <a href={`${home}#unete`} class={`${btnSmall.replace("inline-flex ", "")} hidden sm:inline-flex`}>{t.nav.join}</a>
 
     <button
       type="button"
       data-nav-toggle
       aria-expanded="false"
       aria-controls="menu-movil"
-      aria-label="Abrir menú"
+      aria-label={t.nav.openMenu}
       class={`group relative size-10 shrink-0 rounded-full bg-ink ${fluid} hover:bg-blue active:scale-[0.98] lg:hidden`}
     >
       <span class={`absolute inset-0 m-auto block h-0.5 w-4 -translate-y-1 rounded-full bg-cream ${fluid} group-aria-expanded:translate-y-0 group-aria-expanded:rotate-45`}></span>
@@ -55,19 +61,36 @@ const fluid = "transition-all duration-700 ease-fluid";
     id="menu-movil"
     class={`invisible fixed inset-0 bg-blue/90 opacity-0 backdrop-blur-3xl ${fluid} group-data-[open=true]/nav:visible group-data-[open=true]/nav:opacity-100 lg:hidden`}
   >
-    <ul class="flex h-full flex-col justify-center gap-4 px-6">
-      {
-        menu.map((item, i) => (
-          <li class="overflow-hidden">
-            <a
-              href={item.href}
-              data-menu-link
-              style={`transition-delay: ${100 + i * 50}ms`}
-              class={`block translate-y-12 font-display text-6xl uppercase leading-none text-cream opacity-0 ${fluid} hover:text-sun group-data-[open=true]/nav:translate-y-0 group-data-[open=true]/nav:opacity-100`}
-            >{item.label}</a>
-          </li>
-        ))
-      }
-    </ul>
+    <div class="flex h-full flex-col justify-center gap-12 px-6">
+      <ul class="flex flex-col gap-4">
+        {
+          menu.map((item, i) => (
+            <li class="overflow-hidden">
+              <a
+                href={item.href}
+                data-menu-link
+                style={`transition-delay: ${100 + i * 50}ms`}
+                class={`block translate-y-12 font-display text-6xl uppercase leading-none text-cream opacity-0 ${fluid} hover:text-sun group-data-[open=true]/nav:translate-y-0 group-data-[open=true]/nav:opacity-100`}
+              >{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <ul class="flex flex-wrap gap-2" aria-label={t.nav.language}>
+        {
+          (Object.keys(languages) as Lang[]).map((code) => (
+            <li>
+              <a
+                href={localizePath(code)}
+                hreflang={code}
+                lang={code}
+                aria-current={code === lang ? "true" : undefined}
+                class={`inline-flex rounded-full border-2 border-cream px-3 py-1 text-sm font-semibold uppercase text-cream ${fluid} hover:bg-cream hover:text-blue aria-[current=true]:bg-sun aria-[current=true]:text-ink aria-[current=true]:border-sun`}
+              >{code}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </div>
 </header>

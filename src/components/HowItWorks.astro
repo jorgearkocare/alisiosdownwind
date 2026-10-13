@@ -2,30 +2,17 @@
 import Icon from "./Icon.astro";
 import type { IconName } from "../icons";
 import { container, h2, section, sticker } from "../ui";
+import { useI18n } from "../i18n";
 
-const steps: { icon: IconName; title: string; text: string }[] = [
-  {
-    icon: "users",
-    title: "Únete a la comunidad",
-    text: "Déjanos tu email y entra al grupo de WhatsApp. Ahí se mueve todo.",
-  },
-  {
-    icon: "bell",
-    title: "Recibe el aviso",
-    text: "Cuando el parte confirma viento anunciamos ruta, hora, punto de encuentro y nivel, normalmente con uno o dos días de margen.",
-  },
-  {
-    icon: "path",
-    title: "Haz el run en grupo",
-    text: "Dejamos coches en la llegada, subimos juntos a la salida y hacemos el run con el alisio a la espalda.",
-  },
-];
+const { t } = useI18n(Astro.url);
+const icons: IconName[] = ["users", "bell", "path"];
+const steps = t.how.steps.map((step, i) => ({ ...step, icon: icons[i] }));
 ---
 
 <section id="como-funciona" aria-labelledby="como-funciona-title" class={section}>
   <div class={container}>
-    <p data-reveal class={`${sticker} rotate-1`}>Cómo funciona</p>
-    <h2 id="como-funciona-title" data-reveal style="--d: 80ms" class={h2}>Del sofá a la llegada en tres pasos</h2>
+    <p data-reveal class={`${sticker} rotate-1`}>{t.how.sticker}</p>
+    <h2 id="como-funciona-title" data-reveal style="--d: 80ms" class={h2}>{t.how.title}</h2>
 
     <ol class="mt-12 grid gap-12 md:grid-cols-3 md:gap-8">
       {

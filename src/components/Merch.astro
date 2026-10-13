@@ -1,42 +1,31 @@
 ---
 import Icon from "./Icon.astro";
 import { container, h2, section, sticker } from "../ui";
+import { useI18n } from "../i18n";
+
+const { t } = useI18n(Astro.url);
 
 // Primera tirada (diseños provisionales). Cada prenda lleva nombre propio, como una colección.
-const items = [
-  {
-    name: "Camiseta Pez Volador",
-    detail: "El logo completo en el pecho",
-    bg: "bg-blue",
-    garment: "tee",
-  },
-  {
-    name: "Gorra Nordeste",
-    detail: "Trucker con parche bordado del pez",
-    bg: "bg-sun",
-    garment: "cap",
-  },
-  {
-    name: "Sudadera Bump",
-    detail: "Para la espera en la llegada cuando refresca",
-    bg: "bg-cream",
-    garment: "hoodie",
-  },
+const looks = [
+  { bg: "bg-blue", garment: "tee" },
+  { bg: "bg-sun", garment: "cap" },
+  { bg: "bg-cream", garment: "hoodie" },
 ];
+const items = t.merch.items.map((item, i) => ({ ...item, ...looks[i] }));
 ---
 
 <section id="merch" aria-labelledby="merch-title" class={section}>
   <div class={container}>
     <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <div>
-        <p data-reveal class={`${sticker} -rotate-2`}>Colección 2026</p>
-        <h2 id="merch-title" data-reveal style="--d: 80ms" class={h2}>Merch de la comunidad</h2>
+        <p data-reveal class={`${sticker} -rotate-2`}>{t.merch.sticker}</p>
+        <h2 id="merch-title" data-reveal style="--d: 80ms" class={h2}>{t.merch.title}</h2>
         <p data-reveal style="--d: 160ms" class="mt-6 max-w-[680px] text-lg text-ink/70">
-          Primera tirada limitada y en preventa: solo se fabrica lo que se reserva.
+          {t.merch.lead}
         </p>
       </div>
       <a data-reveal href="#unete" data-interest="merch" class="inline-flex shrink-0 items-center gap-2 text-base font-semibold underline decoration-sun decoration-2 underline-offset-4 transition-all duration-700 ease-fluid hover:translate-x-1 hover:decoration-blue">
-        <span>Avísame de la preventa</span>
+        <span>{t.merch.cta}</span>
         <Icon name="arrowRight" class="size-4" />
       </a>
     </div>
@@ -46,7 +35,7 @@ const items = [
         items.map((item, i) => (
           <li data-reveal style={`--d: ${120 + i * 80}ms`} class="group rounded-2xl border-2 border-ink bg-paper p-2 shadow-hard">
             <div class={`relative aspect-square overflow-hidden rounded-lg border-2 border-ink ${item.bg}`}>
-              <svg viewBox="0 0 200 200" class="h-full w-full transition-transform duration-700 ease-fluid group-hover:-rotate-3 group-hover:scale-105" role="img" aria-label={`Boceto de ${item.name}`}>
+              <svg viewBox="0 0 200 200" class="h-full w-full transition-transform duration-700 ease-fluid group-hover:-rotate-3 group-hover:scale-105" role="img" aria-label={`${t.merch.sketchOf} ${item.name}`}>
                 {item.garment === "tee" && (
                   <>
                     <path d="M72 32 L50 40 L22 62 L36 90 L54 82 L54 176 L146 176 L146 82 L164 90 L178 62 L150 40 L128 32 C122 44 112 50 100 50 C88 50 78 44 72 32 Z" fill="#f8f6ea" stroke="#0b0b09" stroke-width="3" stroke-linejoin="round" />
@@ -74,7 +63,7 @@ const items = [
                   </>
                 )}
               </svg>
-              <span class="absolute right-3 top-3 rotate-3 rounded-full border-2 border-ink bg-paper px-2 py-0.5 text-xs font-semibold uppercase tracking-wide">Preventa pronto</span>
+              <span class="absolute right-3 top-3 rotate-3 rounded-full border-2 border-ink bg-paper px-2 py-0.5 text-xs font-semibold uppercase tracking-wide">{t.merch.tag}</span>
             </div>
             <div class="px-2 pb-2 pt-4">
               <h3 class="font-display text-2xl uppercase leading-none">{item.name}</h3>
@@ -84,6 +73,6 @@ const items = [
         ))
       }
     </ul>
-    <p class="mt-6 text-xs text-ink/50">Bocetos provisionales. Colores y prendas definitivas en la preventa.</p>
+    <p class="mt-6 text-xs text-ink/50">{t.merch.note}</p>
   </div>
 </section>

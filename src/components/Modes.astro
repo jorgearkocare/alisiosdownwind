@@ -2,41 +2,23 @@
 import Icon from "./Icon.astro";
 import type { IconName } from "../icons";
 import { container, h2, lead, section, sticker } from "../ui";
+import { useI18n } from "../i18n";
 
-const modes: { icon: IconName; name: string; text: string; needs: string[]; tone: string; tilt: string }[] = [
-  {
-    icon: "waves",
-    name: "SUP foil",
-    text: "La más pura. Despegas a remo sobre el choppy y encadenas bumps sin más tracción que la del mar.",
-    needs: ["Tabla de downwind, foil y pala", "Despegar a remo con choppy"],
-    tone: "bg-sun text-ink",
-    tilt: "md:-rotate-1",
-  },
-  {
-    icon: "wind",
-    name: "Parawing",
-    text: "Un ala sin botavara que te da el empujón para despegar y que recoges para surfear el swell.",
-    needs: ["Tabla, foil y parawing", "Soltura navegando con ala"],
-    tone: "bg-blue text-cream",
-    tilt: "md:rotate-1",
-  },
-  {
-    icon: "sailboat",
-    name: "Wing foil",
-    text: "Tracción constante para enlazar swells y volver a despegar si te caes a mitad de ruta.",
-    needs: ["Tabla, foil y wing", "Navegar a favor del viento"],
-    tone: "bg-ink text-cream",
-    tilt: "md:-rotate-1",
-  },
+const { t } = useI18n(Astro.url);
+const look: { icon: IconName; tone: string; tilt: string }[] = [
+  { icon: "waves", tone: "bg-sun text-ink", tilt: "md:-rotate-1" },
+  { icon: "wind", tone: "bg-blue text-cream", tilt: "md:rotate-1" },
+  { icon: "sailboat", tone: "bg-ink text-cream", tilt: "md:-rotate-1" },
 ];
+const modes = t.modes.items.map((m, i) => ({ ...m, ...look[i] }));
 ---
 
 <section id="modalidades" aria-labelledby="modalidades-title" class={section}>
   <div class={container}>
-    <p data-reveal class={`${sticker} -rotate-1`}>Modalidades</p>
-    <h2 id="modalidades-title" data-reveal style="--d: 80ms" class={h2}>Tres maneras de hacer downwind con el mismo viento</h2>
+    <p data-reveal class={`${sticker} -rotate-1`}>{t.modes.sticker}</p>
+    <h2 id="modalidades-title" data-reveal style="--d: 80ms" class={h2}>{t.modes.title}</h2>
     <p data-reveal style="--d: 160ms" class={lead}>
-      En cada aviso indicamos para qué modalidades es la ruta. Muchos runs juntan riders de las tres.
+      {t.modes.lead}
     </p>
 
     <ul class="mt-12 grid gap-8 md:grid-cols-3">
@@ -48,7 +30,7 @@ const modes: { icon: IconName; name: string; text: string; needs: string[]; tone
               <Icon name={mode.icon} class="size-8 shrink-0" />
             </div>
             <p class="mt-6 text-base opacity-80">{mode.text}</p>
-            <p class="mt-6 text-sm font-semibold uppercase tracking-wide opacity-60">Qué necesitas</p>
+            <p class="mt-6 text-sm font-semibold uppercase tracking-wide opacity-60">{t.modes.needs}</p>
             <ul class="mt-2 space-y-2">
               {mode.needs.map((need) => (
                 <li class="flex items-start gap-2 text-sm font-medium">

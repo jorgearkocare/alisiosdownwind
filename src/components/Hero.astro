@@ -3,6 +3,9 @@ import Icon from "./Icon.astro";
 import Logo from "./Logo.astro";
 import { site } from "../config";
 import { btnPrimary, container, sticker } from "../ui";
+import { useI18n } from "../i18n";
+
+const { t } = useI18n(Astro.url);
 ---
 
 <section aria-labelledby="hero-title" class="relative overflow-x-clip pb-16 pt-24">
@@ -11,43 +14,43 @@ import { btnPrimary, container, sticker } from "../ui";
       <div class="lg:col-span-7">
         <p data-reveal class={`${sticker} -rotate-2`}>
           <Icon name="mapPin" class="size-4" />
-          <span>Gran Canaria · Downwind foil</span>
+          <span>{t.hero.sticker}</span>
         </p>
 
         <h1 id="hero-title" data-reveal style="--d: 80ms" class="mt-6 max-w-[680px] font-display text-6xl uppercase leading-none sm:text-7xl">
-          Haz el downwind<br /> con los alisios.<br /> <span class="text-blue">Nunca solo.</span>
+          {t.hero.title[0]}<br /> {t.hero.title[1]}<br /> <span class="text-blue">{t.hero.titleAccent}</span>
         </h1>
 
         <p data-reveal style="--d: 160ms" class="mt-6 max-w-[680px] text-lg text-ink/70">
-          Somos una comunidad de riders de SUP foil, parawing y wing foil que organiza runs abiertos por la costa de Gran Canaria. Avisamos cuando entra el viento, cuadramos coches entre salida y llegada y hacemos el downwind juntos.
+          {t.hero.lead}
         </p>
 
         <div data-reveal style="--d: 240ms" class="mt-8 flex flex-wrap items-center gap-4">
           <a href="#unete" class={btnPrimary}>
-            <span>Apúntate al próximo downwind</span>
+            <span>{t.hero.cta}</span>
             <Icon name="arrowRight" class="size-4" />
           </a>
-          <span class="text-sm font-semibold text-ink/60">Gratis y sin cuotas</span>
+          <span class="text-sm font-semibold text-ink/60">{t.hero.free}</span>
         </div>
 
         <div data-reveal style="--d: 320ms" class="mt-12 flex items-start gap-3 text-sm text-ink/70">
           <Icon name="users" class="mt-0.5 size-5 shrink-0 text-blue" />
           <p>
-            Iballa Ruano, Foil Only, Moritz Mauch y Miguel Chapuis ya han hecho downwind con la comunidad. Lo vas viendo en <a href={site.instagram} target="_blank" rel="noopener" class="font-semibold text-ink underline decoration-sun decoration-2 underline-offset-4 transition-colors duration-700 ease-fluid hover:decoration-blue">{site.instagramHandle}</a>
+            {t.hero.proof} <a href={site.instagram} target="_blank" rel="noopener" class="font-semibold text-ink underline decoration-sun decoration-2 underline-offset-4 transition-colors duration-700 ease-fluid hover:decoration-blue">{site.instagramHandle}</a>
           </p>
         </div>
       </div>
 
       <div data-reveal style="--d: 200ms" class="relative lg:col-span-5">
-        <Logo full eager alt="Logo de Alisios DW: un pez con cresta volando sobre un foil, dentro de una explosión azul y amarilla" class="bob mx-auto h-auto w-full max-w-[460px]" />
+        <Logo full eager alt={t.hero.logoAlt} class="bob mx-auto h-auto w-full max-w-[460px]" />
 
         <figure class="relative mt-6 ml-auto max-w-[320px] rotate-2 rounded-2xl border-2 border-ink bg-paper p-4 shadow-hard">
           <figcaption class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-ink/60">
             <Icon name="whatsapp" class="size-4 text-blue" />
-            <span>Así llega un aviso al grupo</span>
+            <span>{t.hero.alertLabel}</span>
           </figcaption>
           <p class="mt-2 text-sm">
-            Mañana entra el alisio. Quedamos a las 10:30 en la llegada para dejar coches y subimos juntos a la salida. Nivel intermedio, quedan 3 plazas.
+            {t.hero.alert}
           </p>
         </figure>
       </div>

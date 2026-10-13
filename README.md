@@ -38,17 +38,26 @@ Es una web 100 % estática. Cualquiera de estas opciones sirve, gratis:
 
 El formulario ya trae validación en el navegador, estados de carga, error y éxito, y un campo trampa (`_gotcha`) contra bots.
 
+## Idiomas
+
+La portada está en español (`/`), inglés (`/en/`), francés (`/fr/`) y alemán (`/de/`), con un desplegable de idioma en el menú.
+
+- **Todos los textos** están en `src/i18n/es.ts`, `en.ts`, `fr.ts` y `de.ts`. Para cambiar una frase, edítala en los cuatro archivos.
+- **Añadir un idioma**: copia `en.ts` con el código nuevo (por ejemplo `it.ts`), tradúcelo y añádelo en `src/i18n/index.ts`.
+- **Privacidad y aviso legal** solo existen en español; desde los otros idiomas se enlazan con la nota "(in Spanish)".
+- Los datos del formulario se envían igual en todos los idiomas, con un campo `idioma` para saber desde qué versión se apuntó cada persona.
+
 ## Estructura
 
 ```
 src/
   config.ts            Enlaces, email, formulario y datos legales
-  faqs.ts              Preguntas frecuentes (también alimentan el schema FAQPage)
+  i18n/                Textos de cada idioma (es, en, fr, de) y utilidades de rutas
   icons.ts             Iconos Phosphor usados (SVG inline, sin dependencias)
   ui.ts                Clases compartidas de botones y títulos
   layouts/Layout.astro Head, SEO, Open Graph, nav y footer
   components/          Una sección por archivo (Hero, Marquee, WhyGroup, Tagline, Modes, Merch...)
-  pages/               index, privacidad, aviso-legal, 404
+  pages/               index (español), [lang]/index (en, fr, de), privacidad, aviso-legal, 404
   scripts/main.ts      Menú, apariciones con IntersectionObserver, frase palabra a palabra, formulario
   styles/global.css    Tema de Tailwind (colores, fuente Geist, curva de movimiento)
 public/                favicon, og.png (imagen al compartir), robots.txt
@@ -59,7 +68,6 @@ public/                favicon, og.png (imagen al compartir), robots.txt
 - **Fotos reales**: el hero solo lleva el logo. Una foto o un vídeo corto de un downwind (GoPro o dron) convierte mucho mejor. Pon la imagen en `src/assets/` y usa el componente `<Image />` de Astro en `Hero.astro`.
 - **Testimonios reales**: cuando tengáis frases de riders (con su permiso), añadid una sección de testimonios junto a `Community.astro`.
 - **Riders invitados**: confirmad con Iballa Ruano y Foil Only que os parece bien nombrarlos (aparecen en el hero y en la sección de comunidad).
-- **Versión en inglés** para riders de paso por la isla.
 - **Sitemap**: `bunx astro add sitemap`.
 
 ## Identidad visual

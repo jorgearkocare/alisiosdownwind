@@ -2,15 +2,14 @@
 import Icon from "./Icon.astro";
 import { site } from "../config";
 import { btnPrimary, container } from "../ui";
+import { useI18n } from "../i18n";
 
+const { t, lang } = useI18n(Astro.url);
+const j = t.join;
 const modes = ["SUP foil", "Parawing", "Wing foil"];
-const interests = [
-  { value: "runs", label: "Runs abiertos", checked: true },
-  { value: "cursos", label: "Cursos y clínics", checked: false },
-  { value: "pro-run-filmacion", label: "Pro runs y filmación", checked: false },
-  { value: "merch", label: "Merch", checked: false },
-];
-const levels = ["Estoy aprendiendo a despegar", "Despego y navego con choppy", "Hago downwind con soltura"];
+// Los valores (value) se envían siempre igual en todos los idiomas; solo cambia el texto
+const interests = Object.entries(j.interestLabels).map(([value, label]) => ({ value, label, checked: value === "runs" }));
+const levels = Object.entries(j.levels).map(([value, label]) => ({ value, label }));
 
 const field =
   "mt-2 block w-full rounded-xl border-2 border-ink bg-paper px-4 py-3 text-base text-ink placeholder:text-ink/30 transition-all duration-700 ease-fluid hover:bg-white focus:shadow-hard-sm focus:outline-none aria-[invalid=true]:border-red-600 aria-[invalid=true]:bg-red-50";
@@ -26,17 +25,17 @@ const joinUrl = site.whatsappGroup || site.instagram;
     <div class="grid gap-12 rounded-2xl border-2 border-ink bg-cream p-6 shadow-hard md:p-12 lg:grid-cols-12">
       <div class="lg:col-span-5">
         <h2 id="unete-title" data-reveal class="font-display text-5xl uppercase leading-none md:text-7xl">
-          Apúntate al próximo downwind
+          {j.title}
         </h2>
         <p data-reveal style="--d: 80ms" class="mt-6 text-lg text-ink/70">
-          Te avisamos por email de cada downwind y te pasamos el grupo de WhatsApp donde se cuadra todo.
+          {j.lead}
         </p>
         <ul data-reveal style="--d: 160ms" class="mt-8 space-y-4">
           {
-            ["Gratis y sin cuotas", "Te das de baja con un clic", "Sin spam: solo runs y novedades"].map((t) => (
+            j.perks.map((perk) => (
               <li class="flex items-center gap-2 text-base font-medium">
                 <Icon name="check" class="size-5 shrink-0 text-blue" />
-                <span>{t}</span>
+                <span>{perk}</span>
               </li>
             ))
           }
@@ -55,19 +54,19 @@ const joinUrl = site.whatsappGroup || site.instagram;
         >
           <div class="grid gap-6 sm:grid-cols-2">
             <div>
-              <label for="nombre" class={label}>Nombre</label>
-              <input id="nombre" name="nombre" type="text" autocomplete="given-name" required placeholder="Nayra" aria-describedby="nombre-error" class={field} />
+              <label for="nombre" class={label}>{j.name}</label>
+              <input id="nombre" name="nombre" type="text" autocomplete="given-name" required placeholder={j.namePlaceholder} aria-describedby="nombre-error" class={field} />
               <p id="nombre-error" data-error-for="nombre" class={error}></p>
             </div>
             <div>
-              <label for="email" class={label}>Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="nayra@correo.com" aria-describedby="email-error" class={field} />
+              <label for="email" class={label}>{j.email}</label>
+              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder={j.emailPlaceholder} aria-describedby="email-error" class={field} />
               <p id="email-error" data-error-for="email" class={error}></p>
             </div>
           </div>
 
           <fieldset>
-            <legend class={label}>Qué modalidad haces</legend>
+            <legend class={label}>{j.modes}</legend>
             <div class="mt-2 flex flex-wrap gap-2">
               {
                 modes.map((m) => (
@@ -81,11 +80,11 @@ const joinUrl = site.whatsappGroup || site.instagram;
           </fieldset>
 
           <div>
-            <label for="nivel" class={label}>Tu nivel</label>
+            <label for="nivel" class={label}>{j.level}</label>
             <div class="relative">
               <select id="nivel" name="nivel" required aria-describedby="nivel-error" class={`${field} appearance-none pr-12`}>
-                <option value="" disabled selected>Elige una opción</option>
-                {levels.map((l) => <option value={l}>{l}</option>)}
+                <option value="" disabled selected>{j.levelPlaceholder}</option>
+                {levels.map((l) => <option value={l.value}>{l.label}</option>)}
               </select>
               <Icon name="caretDown" class="pointer-events-none absolute right-4 top-1/2 mt-1 size-4 -translate-y-1/2 text-ink/60" />
             </div>
@@ -93,7 +92,7 @@ const joinUrl = site.whatsappGroup || site.instagram;
           </div>
 
           <fieldset>
-            <legend class={label}>Qué te interesa</legend>
+            <legend class={label}>{j.interests}</legend>
             <div class="mt-2 flex flex-wrap gap-2">
               {
                 interests.map((it) => (
@@ -107,21 +106,22 @@ const joinUrl = site.whatsappGroup || site.instagram;
           </fieldset>
 
           <div class="hidden" aria-hidden="true">
-            <label for="empresa">No rellenes este campo</label>
+            <label for="empresa">{j.honeypot}</label>
             <input id="empresa" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
           </div>
+          <input type="hidden" name="idioma" value={lang} />
 
           <div>
             <label class="flex items-start gap-3 text-sm text-ink/70">
               <input id="privacidad" name="privacidad" type="checkbox" required aria-describedby="privacidad-error" class="mt-0.5 size-4 shrink-0 accent-blue" />
-              <span>He leído la <a href="/privacidad" class="font-semibold text-ink underline decoration-sun decoration-2 underline-offset-4 hover:decoration-blue">política de privacidad</a> y acepto que me escribáis sobre la comunidad.</span>
+              <span>{j.consentBefore} <a href="/privacidad" class="font-semibold text-ink underline decoration-sun decoration-2 underline-offset-4 hover:decoration-blue">{j.consentLink}</a> {t.footer.legalLangNote && <span>{t.footer.legalLangNote} </span>}{j.consentAfter}</span>
             </label>
             <p id="privacidad-error" data-error-for="privacidad" class={error}></p>
           </div>
 
           <div class="flex flex-wrap items-center gap-4">
             <button type="submit" data-submit class={btnPrimary}>
-              <span data-submit-label>Apúntate al próximo downwind</span>
+              <span data-submit-label>{t.client.submit}</span>
               <Icon name="arrowRight" class="size-4" />
             </button>
             <p data-status role="status" aria-live="polite" class="text-sm font-medium text-ink/70"></p>
@@ -132,11 +132,11 @@ const joinUrl = site.whatsappGroup || site.instagram;
           <span class="flex size-12 items-center justify-center rounded-full border-2 border-ink bg-paper text-ink">
             <Icon name="check" class="size-6" />
           </span>
-          <h3 data-success-title class="mt-6 font-display text-4xl uppercase leading-none" tabindex="-1">Estás dentro.</h3>
-          <p data-success-text class="mt-2 text-base text-ink/80">Te escribimos en cuanto haya downwind. Mientras tanto, entra al grupo, que es donde se cuadra todo.</p>
+          <h3 data-success-title class="mt-6 font-display text-4xl uppercase leading-none" tabindex="-1">{j.successTitle}</h3>
+          <p data-success-text class="mt-2 text-base text-ink/80">{j.successText}</p>
           <a href={joinUrl} target="_blank" rel="noopener" class={`${btnPrimary} mt-6`}>
             <Icon name={site.whatsappGroup ? "whatsapp" : "instagram"} class="size-5" />
-            <span>{site.whatsappGroup ? "Entrar al grupo de WhatsApp" : `Seguir ${site.instagramHandle}`}</span>
+            <span>{site.whatsappGroup ? j.whatsapp : `${j.follow} ${site.instagramHandle}`}</span>
           </a>
         </div>
       </div>

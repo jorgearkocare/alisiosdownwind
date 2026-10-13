@@ -1,0 +1,11 @@
+---
+// Portada traducida: genera /en/, /fr/ y /de/
+import Home from "../../components/Home.astro";
+import { translatedLocales } from "../../i18n";
+
+export function getStaticPaths() {
+  return translatedLocales.map((lang) => ({ params: { lang } }));
+}
+---
+
+<Home />

@@ -3,12 +3,15 @@ import Logo from "./Logo.astro";
 import Icon from "./Icon.astro";
 import { site } from "../config";
 import { container } from "../ui";
+import { useI18n } from "../i18n";
 
 interface Props {
   current?: string;
 }
 
 const { current = "" } = Astro.props;
+const { t, home } = useI18n(Astro.url);
+const f = t.footer;
 const year = new Date().getFullYear();
 const link =
   "inline-flex items-center gap-2 rounded-sm text-sm text-cream/70 transition-colors duration-700 ease-fluid hover:text-sun aria-[current=page]:text-sun";
@@ -17,18 +20,18 @@ const link =
 <footer class="bg-ink pt-16 text-cream">
   <div class={`${container} grid gap-12 md:grid-cols-12`}>
     <div class="md:col-span-6">
-      <a href="/" class="inline-flex items-center gap-4" aria-label="Alisios DW, ir al inicio">
+      <a href={home} class="inline-flex items-center gap-4" aria-label={t.nav.home}>
         <Logo class="size-16 shrink-0" />
         <span class="font-display text-4xl uppercase leading-none">Alisios DW</span>
       </a>
       <p class="mt-6 max-w-[680px] text-sm text-cream/60">
-        Comunidad de downwind foil en Gran Canaria. Runs abiertos de SUP foil, parawing y wing foil.
+        {f.blurb}
       </p>
-      <p class="mt-2 text-sm text-cream/60">¿Dudas? Escríbenos y te contestamos en cuanto salgamos del agua.</p>
+      <p class="mt-2 text-sm text-cream/60">{f.contact}</p>
     </div>
 
-    <nav aria-label="Comunidad" class="md:col-span-3">
-      <p class="text-sm font-semibold uppercase tracking-wide text-sun">Comunidad</p>
+    <nav aria-label={f.community} class="md:col-span-3">
+      <p class="text-sm font-semibold uppercase tracking-wide text-sun">{f.community}</p>
       <ul class="mt-4 space-y-2">
         <li>
           <a href={site.instagram} target="_blank" rel="noopener" class={link}>
@@ -41,7 +44,7 @@ const link =
             <li>
               <a href={site.whatsappGroup} target="_blank" rel="noopener" class={link}>
                 <Icon name="whatsapp" class="size-4" />
-                <span>Grupo de WhatsApp</span>
+                <span>{f.whatsapp}</span>
               </a>
             </li>
           )
@@ -55,18 +58,18 @@ const link =
       </ul>
     </nav>
 
-    <nav aria-label="Legal" class="md:col-span-3">
-      <p class="text-sm font-semibold uppercase tracking-wide text-sun">Legal</p>
+    <nav aria-label={f.legal} class="md:col-span-3">
+      <p class="text-sm font-semibold uppercase tracking-wide text-sun">{f.legal}</p>
       <ul class="mt-4 space-y-2">
-        <li><a href="/privacidad" aria-current={current === "privacidad" ? "page" : undefined} class={link}>Política de privacidad</a></li>
-        <li><a href="/aviso-legal" aria-current={current === "aviso-legal" ? "page" : undefined} class={link}>Aviso legal y cookies</a></li>
+        <li><a href="/privacidad" aria-current={current === "privacidad" ? "page" : undefined} class={link}>{f.privacy} {f.legalLangNote}</a></li>
+        <li><a href="/aviso-legal" aria-current={current === "aviso-legal" ? "page" : undefined} class={link}>{f.legalNotice} {f.legalLangNote}</a></li>
       </ul>
     </nav>
   </div>
 
   <div class={`${container} mt-12 flex flex-wrap items-center justify-between gap-4 text-xs text-cream/50`}>
     <p>© {year} Alisios Downwind</p>
-    <p>Hecho en Gran Canaria, con el alisio de espalda</p>
+    <p>{f.madeIn}</p>
   </div>
 
   <div class="mt-12 overflow-hidden" aria-hidden="true">

@@ -3,6 +3,19 @@
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// Textos del idioma de la página (los escribe Layout.astro desde src/i18n)
+type ClientText = Record<
+  | "nameRequired" | "emailRequired" | "emailInvalid" | "levelRequired" | "consentRequired"
+  | "review" | "sending" | "submit" | "sendError" | "mailtoTitle" | "mailtoText" | "openMenu" | "closeMenu",
+  string
+>;
+let text = {} as ClientText;
+try {
+  text = JSON.parse(document.getElementById("i18n-client")?.textContent ?? "{}");
+} catch {
+  // Sin textos se usan los valores por defecto del HTML
+}
+
 /* ---------- Menú móvil (isla flotante) ---------- */
 const header = document.querySelector<HTMLElement>("[data-nav]");
 const toggle = document.querySelector<HTMLButtonElement>("[data-nav-toggle]");
@@ -12,7 +25,7 @@ function setMenu(open: boolean) {
   if (!header || !toggle) return;
   header.dataset.open = String(open);
   toggle.setAttribute("aria-expanded", String(open));
-  toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+  toggle.setAttribute("aria-label", open ? text.closeMenu : text.openMenu);
   document.documentElement.style.overflow = open ? "hidden" : "";
   if (open) window.setTimeout(() => menuLinks[0]?.focus({ preventScroll: true }), 300);
 }
@@ -112,14 +125,14 @@ if (form) {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
   const messages: Record<string, (el: HTMLInputElement | HTMLSelectElement) => string> = {
-    nombre: (el) => (el.value.trim() ? "" : "Escribe tu nombre."),
+    nombre: (el) => (el.value.trim() ? "" : text.nameRequired),
     email: (el) => {
       const v = el.value.trim();
-      if (!v) return "Escribe tu email.";
-      return emailPattern.test(v) ? "" : "Este email no parece válido. Revisa que tenga @ y dominio.";
+      if (!v) return text.emailRequired;
+      return emailPattern.test(v) ? "" : text.emailInvalid;
     },
-    nivel: (el) => (el.value ? "" : "Elige tu nivel para saber qué runs te encajan."),
-    privacidad: (el) => ((el as HTMLInputElement).checked ? "" : "Necesitamos tu permiso para escribirte."),
+    nivel: (el) => (el.value ? "" : text.levelRequired),
+    privacidad: (el) => ((el as HTMLInputElement).checked ? "" : text.consentRequired),
   };
 
   const fieldEl = (name: string) => form.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement | null;
@@ -151,7 +164,7 @@ if (form) {
     if (!submit || !submitLabel) return;
     submit.disabled = loading;
     submit.setAttribute("aria-busy", String(loading));
-    submitLabel.textContent = loading ? "Enviando…" : "Apúntate al próximo downwind";
+    submitLabel.textContent = loading ? text.sending : text.submit;
   }
 
   function showSuccess(text?: string, title?: string) {
@@ -171,7 +184,7 @@ if (form) {
     const firstInvalid = results.find(([, ok]) => !ok);
     if (firstInvalid) {
       fieldEl(firstInvalid[0])?.focus();
-      if (status) status.textContent = "Revisa los campos marcados.";
+      if (status) status.textContent = text.review;
       return;
     }
 
@@ -190,9 +203,10 @@ if (form) {
         `Modalidad: ${data.getAll("modalidad").join(", ") || "Sin indicar"}`,
         `Nivel: ${data.get("nivel")}`,
         `Me interesa: ${data.getAll("interes").join(", ") || "Sin indicar"}`,
+        `Idioma: ${data.get("idioma")}`,
       ].join("\n");
       window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent("Quiero unirme a Alisios Downwind")}&body=${encodeURIComponent(body)}`;
-      showSuccess("Hemos abierto tu correo con los datos ya escritos. Envíalo y te añadimos a la lista.", "Ya casi está.");
+      showSuccess(text.mailtoText, text.mailtoTitle);
       return;
     }
 
@@ -207,7 +221,7 @@ if (form) {
       showSuccess();
     } catch {
       if (status) {
-        status.textContent = `No hemos podido enviar el formulario. Inténtalo de nuevo o escríbenos a ${contactEmail}.`;
+        status.textContent = `${text.sendError} ${contactEmail}.`;
       }
     } finally {
       setLoading(false);
@@ -220,5 +234,22 @@ document.querySelectorAll<HTMLAnchorElement>("[data-interest]").forEach((link) =
   link.addEventListener("click", () => {
     const box = document.querySelector<HTMLInputElement>(`input[name="interes"][value="${link.dataset.interest}"]`);
     if (box) box.checked = true;
+  });
+});
+
+/* ---------- Desplegable de idioma: se cierra al pulsar fuera o con Escape ---------- */
+const pickers = document.querySelectorAll<HTMLDetailsElement>("[data-lang-picker]");
+document.addEventListener("click", (e) => {
+  pickers.forEach((p) => {
+    if (p.open && !p.contains(e.target as Node)) p.open = false;
+  });
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape") return;
+  pickers.forEach((p) => {
+    if (p.open) {
+      p.open = false;
+      p.querySelector("summary")?.focus();
+    }
   });
 });

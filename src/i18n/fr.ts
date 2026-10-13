@@ -1,0 +1,269 @@
+import type es from "./es";
+
+const fr: typeof es = {
+  meta: {
+    title: "Alisios DW · Communauté de downwind foil à Gran Canaria",
+    description:
+      "Communauté de downwind foil à Gran Canaria. Runs ouverts en SUP foil, parawing et wing foil le long de la côte de l'île, en groupe et avec la logistique réglée.",
+    ogAlt: "Logo d'Alisios DW, communauté de downwind foil à Gran Canaria",
+    skip: "Aller au contenu",
+  },
+  nav: {
+    label: "Principale",
+    home: "Alisios DW, aller à l'accueil",
+    items: {
+      "por-que": "Pourquoi",
+      modalidades: "Disciplines",
+      "como-funciona": "Comment ça marche",
+      merch: "Merch",
+      faq: "Questions",
+    },
+    join: "Rejoindre",
+    openMenu: "Ouvrir le menu",
+    closeMenu: "Fermer le menu",
+    language: "Langue",
+  },
+  hero: {
+    sticker: "Gran Canaria · Downwind foil",
+    title: ["Fais du downwind", "avec les alizés."],
+    titleAccent: "Jamais seul.",
+    lead: "Nous sommes une communauté de riders en SUP foil, parawing et wing foil qui organise des runs ouverts le long de la côte de Gran Canaria. On prévient quand le vent rentre, on organise les voitures entre départ et arrivée et on fait le downwind ensemble.",
+    cta: "Inscris-toi au prochain downwind",
+    free: "Gratuit et sans cotisation",
+    proof: "Iballa Ruano, Foil Only, Moritz Mauch et Miguel Chapuis ont déjà fait du downwind avec la communauté. Suis tout ça sur",
+    logoAlt: "Logo d'Alisios DW : un poisson à crête qui vole sur un foil, dans une explosion bleue et jaune",
+    alertLabel: "Voilà à quoi ressemble une annonce dans le groupe",
+    alert:
+      "Demain l'alizé rentre. Rendez-vous à 10h30 à l'arrivée pour laisser les voitures, puis on monte ensemble au départ. Niveau intermédiaire, il reste 3 places.",
+  },
+  marquee: {
+    top: ["SUP foil", "Parawing", "Wing foil", "Gran Canaria", "Runs ouverts"],
+    bottom: ["Rejoins le groupe", "Runs gratuits", "Jamais seul", "Alizé du nord-est"],
+  },
+  why: {
+    sticker: "Pourquoi en groupe",
+    title: "Faire du downwind seul pose trois problèmes. En groupe, aucun.",
+    alone: "Si tu es seul",
+    group: "En groupe",
+    items: [
+      {
+        title: "Logistique",
+        problem: "Un downwind commence à un endroit et finit à un autre. Sans deuxième voiture qui attend à l'arrivée, pas de run.",
+        solution: "On organise les voitures dans le groupe : on en laisse à l'arrivée et on monte ensemble au départ.",
+      },
+      {
+        title: "Sécurité",
+        problem: "Si tu casses un foil ou que tu n'as plus de jambes à mi-parcours, tu es seul face à des kilomètres de côte.",
+        solution: "On part ensemble, avec un parcours partagé et des riders qui connaissent chaque entrée et sortie de l'eau.",
+      },
+      {
+        title: "Progression",
+        problem: "Apprendre à lire la houle seul, à force d'essais et d'erreurs, prend des saisons entières.",
+        solution: "Tu fais le run à côté de riders plus expérimentés, tu vois leur trajectoire et tu copies ce qui marche.",
+      },
+    ],
+  },
+  tagline: {
+    label: "Ce qui nous anime",
+    lines: [
+      { text: "À Gran Canaria", accent: false },
+      { text: "le vent ne manque pas.", accent: false },
+      { text: "Ce qui manquait", accent: false },
+      { text: "c'était avec qui rider.", accent: true },
+    ],
+  },
+  modes: {
+    sticker: "Disciplines",
+    title: "Trois façons de faire du downwind avec le même vent",
+    lead: "Chaque annonce précise pour quelles disciplines le parcours est adapté. Beaucoup de runs mélangent des riders des trois.",
+    needs: "Ce qu'il te faut",
+    items: [
+      {
+        name: "SUP foil",
+        text: "La plus pure. Tu décolles à la rame sur le clapot et tu enchaînes les bumps sans autre traction que celle de la mer.",
+        needs: ["Planche de downwind, foil et pagaie", "Décoller à la rame dans le clapot"],
+      },
+      {
+        name: "Parawing",
+        text: "Une aile sans wishbone qui te donne l'élan pour décoller et que tu ranges pour surfer la houle.",
+        needs: ["Planche, foil et parawing", "À l'aise avec une aile"],
+      },
+      {
+        name: "Wing foil",
+        text: "Une traction constante pour enchaîner les houles et redécoller si tu tombes en plein parcours.",
+        needs: ["Planche, foil et wing", "Naviguer au portant"],
+      },
+    ],
+  },
+  how: {
+    sticker: "Comment ça marche",
+    title: "Du canapé à l'arrivée en trois étapes",
+    steps: [
+      { title: "Rejoins la communauté", text: "Laisse-nous ton email et rejoins le groupe WhatsApp. Tout se passe là-bas." },
+      {
+        title: "Reçois l'annonce",
+        text: "Quand la météo confirme le vent, on annonce parcours, horaire, point de rendez-vous et niveau, en général un ou deux jours avant.",
+      },
+      {
+        title: "Fais le run en groupe",
+        text: "On laisse des voitures à l'arrivée, on monte ensemble au départ et on fait le run avec l'alizé dans le dos.",
+      },
+    ],
+  },
+  community: {
+    sticker: "La communauté",
+    title: "On a commencé à quelques potes. Maintenant même les pros viennent.",
+    lead: "Alisios est né pour ne plus faire de downwind seul. Aujourd'hui c'est un groupe ouvert de riders de toute l'île, et on raconte chaque run sur Instagram.",
+    instagram: "Voir",
+    ridersLabel: "Ils ont fait du downwind avec nous",
+    roles: {
+      "Iballa Ruano": "Rideuse professionnelle de Gran Canaria",
+      "Foil Only": "École et communauté de foil de Tenerife",
+    } as Record<string, string>,
+    photos: [
+      {
+        caption: "Sur l'eau",
+        alt: "Deux riders en SUP foil en plein downwind sur la mer bleue, l'un en gilet rose qui rame et l'autre qui salue",
+      },
+      { caption: "Avant le run", alt: "Selfie du groupe à côté du van avec les planches et les foils prêts avant de partir" },
+      { caption: "Après le run", alt: "Le groupe qui fête l'arrivée avec une planche de downwind violette et des bières à la main" },
+    ],
+  },
+  merch: {
+    sticker: "Collection 2026",
+    title: "Le merch de la communauté",
+    lead: "Première série limitée en précommande : on ne fabrique que ce qui est réservé.",
+    cta: "Préviens-moi pour la précommande",
+    tag: "Précommande bientôt",
+    sketchOf: "Croquis de",
+    note: "Croquis provisoires. Couleurs et vêtements définitifs lors de la précommande.",
+    items: [
+      { name: "T-shirt Poisson Volant", detail: "Le logo complet sur la poitrine" },
+      { name: "Casquette Nordeste", detail: "Trucker avec écusson brodé du poisson" },
+      { name: "Sweat Bump", detail: "Pour l'attente à l'arrivée quand il fait frais" },
+    ],
+  },
+  coming: {
+    sticker: "À venir",
+    title: "Cours, pro runs et vidéo",
+    lead: "On prépare tout ça en club, avec assurance et moniteurs diplômés. Coche ce qui t'intéresse en t'inscrivant et tu seras prévenu avant tout le monde.",
+    soon: "Bientôt",
+    items: [
+      { title: "Sauvetage et bonnes pratiques", text: "Auto-sauvetage, remorquage, signaux et plan de parcours. Théorie et pratique en une matinée." },
+      {
+        title: "Initiation au SUP foil",
+        text: "Décoller à la rame dans le clapot et enchaîner tes premiers bumps, avec un coach pour deux riders.",
+      },
+      { title: "Cours de parawing", text: "Pour passer du wing au parawing avec quelqu'un à côté qui a déjà fait le chemin." },
+      { title: "Runs avec arrêts", text: "Des tronçons courts en groupe, avec des arrêts pour corriger la technique au fur et à mesure." },
+      { title: "Pro run", text: "Un rider professionnel fait le downwind avec toi d'un bout à l'autre et te montre sa trajectoire." },
+      { title: "Vidéo de ton run", text: "On te filme depuis l'eau ou depuis un jet ski pour que tu voies quoi corriger." },
+    ],
+  },
+  faq: {
+    sticker: "Questions fréquentes",
+    title: "Ce qu'on nous demande avant le premier downwind",
+    items: [
+      {
+        q: "Combien coûte un downwind ?",
+        a: "Les runs de la communauté sont gratuits. Chaque rider apporte son matériel et, si on partage la voiture, l'essence est répartie entre les passagers.",
+      },
+      {
+        q: "Quel niveau faut-il ?",
+        a: "Pour les runs ouverts, tu dois décoller sans aide et tenir de longues sessions sur l'eau. Si tu ne décolles pas encore dans le clapot, inscris-toi quand même : on te prévient à l'ouverture des sessions d'initiation.",
+      },
+      {
+        q: "Quel matériel faut-il ?",
+        a: "Ta planche et ton foil, un gilet ou un impact vest, un leash et ton téléphone dans une pochette étanche. On recommande un casque. Pour le parawing et le wing foil, ton aile.",
+      },
+      {
+        q: "Où se font les runs ?",
+        a: "On choisit le parcours selon la direction et la force de l'alizé et l'état de la mer. Parcours, point de rendez-vous et niveau sont annoncés dans le groupe avant chaque sortie.",
+      },
+      {
+        q: "Comment savoir quand a lieu le prochain ?",
+        a: "Par le groupe WhatsApp et sur Instagram. On prévient dès que la météo confirme le vent, en général un ou deux jours avant.",
+      },
+      {
+        q: "Je peux venir si je suis de passage sur l'île ?",
+        a: "Oui. Écris-nous quelques jours avant et on te dit quels runs correspondent à ton niveau et s'il reste une place en voiture.",
+      },
+      {
+        q: "Vous louez du matériel ?",
+        a: "Pas encore. Si tu en as besoin, on peut te conseiller des magasins de l'île avec qui on est en contact.",
+      },
+      {
+        q: "Qui est responsable sur l'eau ?",
+        a: "Sur les runs ouverts, chaque rider part sous sa propre responsabilité et décide selon son niveau et l'état de la mer. Les cours et activités encadrées que nous lancerons auront une assurance et des moniteurs diplômés.",
+      },
+      {
+        q: "Quand commencent les cours ?",
+        a: "On les prépare. Coche l'option cours en t'inscrivant et on te prévient avant d'ouvrir les places.",
+      },
+      {
+        q: "Que faites-vous de mes données ?",
+        a: "On les utilise uniquement pour te prévenir des runs et des nouvelles de la communauté. On ne les partage avec personne et tu peux te désinscrire quand tu veux.",
+      },
+    ],
+  },
+  join: {
+    title: "Inscris-toi au prochain downwind",
+    lead: "On te prévient par email de chaque downwind et on t'ajoute au groupe WhatsApp où tout s'organise.",
+    perks: ["Gratuit et sans cotisation", "Désinscription en un clic", "Pas de spam : seulement des runs et des nouvelles"],
+    name: "Prénom",
+    namePlaceholder: "Nayra",
+    email: "Email",
+    emailPlaceholder: "nayra@email.com",
+    modes: "Ta discipline",
+    level: "Ton niveau",
+    levelPlaceholder: "Choisis une option",
+    levels: {
+      aprendiendo: "J'apprends à décoller",
+      choppy: "Je décolle et je navigue dans le clapot",
+      soltura: "Je fais du downwind avec aisance",
+    },
+    interests: "Ce qui t'intéresse",
+    interestLabels: {
+      runs: "Runs ouverts",
+      cursos: "Cours et stages",
+      "pro-run-filmacion": "Pro runs et vidéo",
+      merch: "Merch",
+    },
+    honeypot: "Ne remplis pas ce champ",
+    consentBefore: "J'ai lu la",
+    consentLink: "politique de confidentialité",
+    consentAfter: "et j'accepte que vous m'écriviez au sujet de la communauté.",
+    successTitle: "Tu es dedans.",
+    successText: "On t'écrit dès qu'il y a un downwind. En attendant, rejoins le groupe, c'est là que tout s'organise.",
+    whatsapp: "Rejoindre le groupe WhatsApp",
+    follow: "Suivre",
+  },
+  client: {
+    nameRequired: "Écris ton prénom.",
+    emailRequired: "Écris ton email.",
+    emailInvalid: "Cet email ne semble pas valide. Vérifie qu'il contient un @ et un domaine.",
+    levelRequired: "Choisis ton niveau pour qu'on sache quels runs te conviennent.",
+    consentRequired: "On a besoin de ton accord pour t'écrire.",
+    review: "Vérifie les champs signalés.",
+    sending: "Envoi…",
+    submit: "Inscris-toi au prochain downwind",
+    sendError: "Impossible d'envoyer le formulaire. Réessaie ou écris-nous à",
+    mailtoTitle: "C'est presque fini.",
+    mailtoText: "On a ouvert ta messagerie avec tes informations déjà remplies. Envoie le message et on t'ajoute à la liste.",
+    openMenu: "Ouvrir le menu",
+    closeMenu: "Fermer le menu",
+  },
+  footer: {
+    blurb: "Communauté de downwind foil à Gran Canaria. Runs ouverts en SUP foil, parawing et wing foil.",
+    contact: "Des questions ? Écris-nous, on te répond dès qu'on sort de l'eau.",
+    community: "Communauté",
+    whatsapp: "Groupe WhatsApp",
+    legal: "Mentions",
+    privacy: "Politique de confidentialité",
+    legalNotice: "Mentions légales et cookies",
+    legalLangNote: "(en espagnol)",
+    madeIn: "Fait à Gran Canaria, avec l'alizé dans le dos",
+  },
+};
+
+export default fr;

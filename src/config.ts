@@ -22,10 +22,11 @@ export const site = {
   },
 } as const;
 
+// Secciones del menú (los textos de cada idioma están en src/i18n)
 export const nav = [
-  { href: "/#por-que", label: "Por qué", id: "por-que" },
-  { href: "/#modalidades", label: "Modalidades", id: "modalidades" },
-  { href: "/#como-funciona", label: "Cómo funciona", id: "como-funciona" },
-  { href: "/#merch", label: "Merch", id: "merch" },
-  { href: "/#faq", label: "Preguntas", id: "faq" },
+  { id: "por-que" },
+  { id: "modalidades" },
+  { id: "como-funciona" },
+  { id: "merch" },
+  { id: "faq" },
 ] as const;

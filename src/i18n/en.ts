@@ -1,0 +1,269 @@
+import type es from "./es";
+
+const en: typeof es = {
+  meta: {
+    title: "Alisios DW · Downwind foil community in Gran Canaria",
+    description:
+      "Downwind foil community in Gran Canaria. Open SUP foil, parawing and wing foil runs along the island's coast, as a group and with the logistics sorted.",
+    ogAlt: "Alisios DW logo, downwind foil community in Gran Canaria",
+    skip: "Skip to content",
+  },
+  nav: {
+    label: "Main",
+    home: "Alisios DW, go to home page",
+    items: {
+      "por-que": "Why",
+      modalidades: "Disciplines",
+      "como-funciona": "How it works",
+      merch: "Merch",
+      faq: "FAQ",
+    },
+    join: "Join",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    language: "Language",
+  },
+  hero: {
+    sticker: "Gran Canaria · Downwind foil",
+    title: ["Ride the downwind", "with the trade winds."],
+    titleAccent: "Never alone.",
+    lead: "We are a community of SUP foil, parawing and wing foil riders running open downwinds along the coast of Gran Canaria. We call it when the wind fills in, sort out cars between start and finish, and do the downwind together.",
+    cta: "Join the next downwind",
+    free: "Free, no fees",
+    proof: "Iballa Ruano, Foil Only, Moritz Mauch and Miguel Chapuis have already done downwinds with the community. Follow along on",
+    logoAlt: "Alisios DW logo: a crested fish flying on a foil inside a blue and yellow burst",
+    alertLabel: "What a call looks like in the group",
+    alert:
+      "Trade winds kick in tomorrow. Meet at 10:30 at the finish to drop cars, then we drive up to the start together. Intermediate level, 3 seats left.",
+  },
+  marquee: {
+    top: ["SUP foil", "Parawing", "Wing foil", "Gran Canaria", "Open runs"],
+    bottom: ["Join the group", "Free runs", "Never alone", "Northeast trades"],
+  },
+  why: {
+    sticker: "Why ride as a group",
+    title: "Doing downwind alone has three problems. In a group, none.",
+    alone: "On your own",
+    group: "As a group",
+    items: [
+      {
+        title: "Logistics",
+        problem: "A downwind starts in one place and ends in another. Without a second car waiting at the finish, there is no run.",
+        solution: "We sort out cars in the group: we leave some at the finish and drive up to the start together.",
+      },
+      {
+        title: "Safety",
+        problem: "Break a foil or run out of legs halfway and you are alone facing miles of coastline.",
+        solution: "We go out together, with a shared route and riders who know every way in and out of the water.",
+      },
+      {
+        title: "Progression",
+        problem: "Learning to read the swell by trial and error takes whole seasons.",
+        solution: "You ride next to people with more hours, see their line and copy what works.",
+      },
+    ],
+  },
+  tagline: {
+    label: "What drives us",
+    lines: [
+      { text: "In Gran Canaria", accent: false },
+      { text: "there is plenty of wind.", accent: false },
+      { text: "What was missing", accent: false },
+      { text: "was someone to ride with.", accent: true },
+    ],
+  },
+  modes: {
+    sticker: "Disciplines",
+    title: "Three ways to ride the same wind downwind",
+    lead: "Every call says which disciplines the route suits. Many runs mix riders from all three.",
+    needs: "What you need",
+    items: [
+      {
+        name: "SUP foil",
+        text: "The purest form. You paddle up on the chop and link bumps with no power but the ocean's.",
+        needs: ["Downwind board, foil and paddle", "Paddling up in choppy water"],
+      },
+      {
+        name: "Parawing",
+        text: "A boomless wing that gives you the push to get up, then packs away so you can surf the swell.",
+        needs: ["Board, foil and parawing", "Comfortable riding with a wing"],
+      },
+      {
+        name: "Wing foil",
+        text: "Constant power to link swells and get back up if you fall halfway down the route.",
+        needs: ["Board, foil and wing", "Riding downwind with ease"],
+      },
+    ],
+  },
+  how: {
+    sticker: "How it works",
+    title: "From the sofa to the finish in three steps",
+    steps: [
+      { title: "Join the community", text: "Leave us your email and join the WhatsApp group. That is where it all happens." },
+      {
+        title: "Get the call",
+        text: "When the forecast confirms wind we post the route, time, meeting point and level, usually one or two days ahead.",
+      },
+      {
+        title: "Ride as a group",
+        text: "We leave cars at the finish, drive up to the start together and ride the run with the trade wind at our backs.",
+      },
+    ],
+  },
+  community: {
+    sticker: "The community",
+    title: "It started with a few friends. Now even the pros show up.",
+    lead: "Alisios was born so nobody has to do downwind alone. Today it is an open group of riders from all over the island, and we share every run on Instagram.",
+    instagram: "See",
+    ridersLabel: "Who has ridden with us",
+    roles: {
+      "Iballa Ruano": "Pro rider from Gran Canaria",
+      "Foil Only": "Foil school and community from Tenerife",
+    } as Record<string, string>,
+    photos: [
+      {
+        caption: "On the water",
+        alt: "Two SUP foil riders mid downwind on blue water, one in a pink vest paddling and the other waving",
+      },
+      { caption: "Before the run", alt: "Group selfie by the van with boards and foils ready before heading out" },
+      { caption: "After the run", alt: "The group celebrating at the finish with a purple downwind board and beers in hand" },
+    ],
+  },
+  merch: {
+    sticker: "2026 collection",
+    title: "Community merch",
+    lead: "First limited run, on pre-order: we only make what gets reserved.",
+    cta: "Tell me about the pre-order",
+    tag: "Pre-order soon",
+    sketchOf: "Sketch of",
+    note: "Provisional sketches. Final colours and garments at pre-order.",
+    items: [
+      { name: "Flying Fish Tee", detail: "The full logo on the chest" },
+      { name: "Nordeste Cap", detail: "Trucker with an embroidered fish patch" },
+      { name: "Bump Hoodie", detail: "For the wait at the finish when it gets chilly" },
+    ],
+  },
+  coming: {
+    sticker: "Coming up",
+    title: "Courses, pro runs and filming",
+    lead: "We are setting it up as a club, with insurance and qualified instructors. Tick what interests you when you sign up and you will hear before anyone else.",
+    soon: "Coming soon",
+    items: [
+      { title: "Rescue and good practice", text: "Self-rescue, towing, signals and route planning. Theory and water in one morning." },
+      {
+        title: "Intro to SUP foil",
+        text: "Paddling up in chop and linking your first bumps, with one coach for every two riders.",
+      },
+      { title: "Parawing lessons", text: "Move from wing to parawing with someone beside you who has made the switch." },
+      { title: "Runs with stops", text: "Short group legs with stops to fix technique as you go." },
+      { title: "Pro run", text: "A pro rider does the downwind with you from start to finish and shows you their line." },
+      { title: "Filming your run", text: "We film you from the water or from a jet ski so you can see what to fix." },
+    ],
+  },
+  faq: {
+    sticker: "FAQ",
+    title: "What people ask us before their first downwind",
+    items: [
+      {
+        q: "How much does a downwind cost?",
+        a: "Community runs are free. Every rider brings their own gear and, if we share cars, fuel is split between the people in each car.",
+      },
+      {
+        q: "What level do I need?",
+        a: "For open runs you need to get up on foil without help and handle long sessions on the water. If you cannot get up in chop yet, sign up anyway: we will let you know when beginner sessions open.",
+      },
+      {
+        q: "What gear do I need?",
+        a: "Your board and foil, a buoyancy or impact vest, a leash and your phone in a waterproof case. We recommend a helmet. For parawing and wing foil, your wing.",
+      },
+      {
+        q: "Where are the runs?",
+        a: "We choose the route based on the direction and strength of the trade wind and the sea state. Route, meeting point and level are posted in the group before every session.",
+      },
+      {
+        q: "How do I hear about the next one?",
+        a: "Through the WhatsApp group and Instagram. We post as soon as the forecast confirms wind, usually one or two days ahead.",
+      },
+      {
+        q: "Can I join if I am just visiting the island?",
+        a: "Yes. Write to us a few days ahead and we will tell you which runs suit your level and whether there is a seat in a car.",
+      },
+      {
+        q: "Do you rent gear?",
+        a: "Not yet. If you need gear, we can point you to shops on the island we know.",
+      },
+      {
+        q: "Who is responsible on the water?",
+        a: "On open runs every rider goes out at their own risk and decides based on their level and the sea state. The courses and guided sessions we launch will have insurance and qualified instructors.",
+      },
+      {
+        q: "When do courses start?",
+        a: "We are working on them. Tick courses when you sign up and we will tell you before spots open.",
+      },
+      {
+        q: "What do you do with my data?",
+        a: "We only use it to tell you about runs and community news. We do not share it with anyone and you can unsubscribe at any time.",
+      },
+    ],
+  },
+  join: {
+    title: "Join the next downwind",
+    lead: "We email you about every downwind and add you to the WhatsApp group where everything gets organised.",
+    perks: ["Free, no fees", "Unsubscribe in one click", "No spam: only runs and news"],
+    name: "Name",
+    namePlaceholder: "Nayra",
+    email: "Email",
+    emailPlaceholder: "nayra@email.com",
+    modes: "What do you ride",
+    level: "Your level",
+    levelPlaceholder: "Choose an option",
+    levels: {
+      aprendiendo: "I am learning to get up on foil",
+      choppy: "I get up and ride in chop",
+      soltura: "I ride downwind with ease",
+    },
+    interests: "What are you interested in",
+    interestLabels: {
+      runs: "Open runs",
+      cursos: "Courses and clinics",
+      "pro-run-filmacion": "Pro runs and filming",
+      merch: "Merch",
+    },
+    honeypot: "Do not fill in this field",
+    consentBefore: "I have read the",
+    consentLink: "privacy policy",
+    consentAfter: "and agree to receive emails about the community.",
+    successTitle: "You are in.",
+    successText: "We will write as soon as there is a downwind. In the meantime, join the group, that is where everything gets organised.",
+    whatsapp: "Join the WhatsApp group",
+    follow: "Follow",
+  },
+  client: {
+    nameRequired: "Enter your name.",
+    emailRequired: "Enter your email.",
+    emailInvalid: "This email does not look valid. Check it has an @ and a domain.",
+    levelRequired: "Choose your level so we know which runs suit you.",
+    consentRequired: "We need your permission to email you.",
+    review: "Check the highlighted fields.",
+    sending: "Sending…",
+    submit: "Join the next downwind",
+    sendError: "We could not send the form. Try again or write to us at",
+    mailtoTitle: "Almost done.",
+    mailtoText: "We opened your email app with your details filled in. Send it and we will add you to the list.",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+  },
+  footer: {
+    blurb: "Downwind foil community in Gran Canaria. Open SUP foil, parawing and wing foil runs.",
+    contact: "Questions? Write to us and we will reply as soon as we are out of the water.",
+    community: "Community",
+    whatsapp: "WhatsApp group",
+    legal: "Legal",
+    privacy: "Privacy policy",
+    legalNotice: "Legal notice and cookies",
+    legalLangNote: "(in Spanish)",
+    madeIn: "Made in Gran Canaria, with the trade wind at our backs",
+  },
+};
+
+export default en;

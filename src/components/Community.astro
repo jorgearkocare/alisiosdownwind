@@ -2,42 +2,45 @@
 import Icon from "./Icon.astro";
 import { site } from "../config";
 import { btnSecondary, container, h2, stickerBase } from "../ui";
+import { useI18n } from "../i18n";
+
+const { t } = useI18n(Astro.url);
 
 // Riders que ya han hecho downwind con la comunidad. Añade aquí más nombres (con su permiso).
-const riders = [
-  { name: "Iballa Ruano", role: "Rider profesional de Gran Canaria" },
-  { name: "Foil Only", role: "Escuela y comunidad de foil de Tenerife" },
-  { name: "Moritz Mauch", role: "" },
-  { name: "Miguel Chapuis", role: "" },
-];
+// La descripción de cada uno está en los diccionarios (src/i18n), en community.roles.
+const riders = ["Iballa Ruano", "Foil Only", "Moritz Mauch", "Miguel Chapuis"].map((name) => ({
+  name,
+  role: t.community.roles[name] ?? "",
+}));
 
 // Fotos sacadas del Instagram de la comunidad. Para cambiarlas, sustituye los archivos de public/fotos/
-const photos = [
-  { src: "/fotos/run-en-el-agua.jpg", w: 388, h: 447, caption: "En el agua", alt: "Dos riders de SUP foil en pleno downwind sobre el mar azul, uno con chaleco rosa remando y otro saludando" },
-  { src: "/fotos/antes-del-run.jpg", w: 388, h: 447, caption: "Antes del run", alt: "Selfie del grupo junto a la furgoneta con las tablas y los foils preparados antes de salir" },
-  { src: "/fotos/despues-del-run.jpg", w: 385, h: 447, caption: "Después del run", alt: "El grupo celebrando en la llegada con una tabla de downwind morada y cervezas en la mano" },
+const files = [
+  { src: "/fotos/run-en-el-agua.jpg", w: 388, h: 447 },
+  { src: "/fotos/antes-del-run.jpg", w: 388, h: 447 },
+  { src: "/fotos/despues-del-run.jpg", w: 385, h: 447 },
 ];
+const photos = files.map((f, i) => ({ ...f, ...t.community.photos[i] }));
 ---
 
 <section aria-labelledby="comunidad-title" class="border-y-2 border-ink bg-sun py-24">
   <div class={container}>
     <div class="grid gap-12 lg:grid-cols-12 lg:items-end">
       <div class="lg:col-span-7">
-        <p data-reveal class={`${stickerBase} -rotate-2 bg-paper`}>La comunidad</p>
-        <h2 id="comunidad-title" data-reveal style="--d: 80ms" class={h2}>Empezamos unos pocos amigos. Ahora vienen hasta los pros.</h2>
+        <p data-reveal class={`${stickerBase} -rotate-2 bg-paper`}>{t.community.sticker}</p>
+        <h2 id="comunidad-title" data-reveal style="--d: 80ms" class={h2}>{t.community.title}</h2>
         <p data-reveal style="--d: 160ms" class="mt-6 max-w-[680px] text-lg text-ink/80">
-          Alisios nació para no hacer downwind solos. Hoy es un grupo abierto de riders de toda la isla, y cada run lo contamos en Instagram.
+          {t.community.lead}
         </p>
         <div data-reveal style="--d: 240ms" class="mt-8">
           <a href={site.instagram} target="_blank" rel="noopener" class={btnSecondary}>
             <Icon name="instagram" class="size-5" />
-            <span>Ver {site.instagramHandle}</span>
+            <span>{t.community.instagram} {site.instagramHandle}</span>
           </a>
         </div>
       </div>
 
       <div class="lg:col-span-5">
-        <p data-reveal class="text-sm font-semibold uppercase tracking-wide">Han hecho downwind con nosotros</p>
+        <p data-reveal class="text-sm font-semibold uppercase tracking-wide">{t.community.ridersLabel}</p>
         <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
           {
             riders.map((rider, i) => (

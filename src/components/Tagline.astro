@@ -1,15 +1,12 @@
 ---
+import { useI18n } from "../i18n";
 // Frase grande sobre negro: cada palabra se enciende una a una al entrar en pantalla (ver scripts/main.ts).
 // Cada elemento es un tramo con sentido propio; accent marca el remate en amarillo.
-const lines = [
-  { text: "En Gran Canaria", accent: false },
-  { text: "el viento no falta.", accent: false },
-  { text: "Lo que faltaba", accent: false },
-  { text: "era con quién hacer downwind.", accent: true },
-];
+const { t } = useI18n(Astro.url);
+const lines = t.tagline.lines;
 ---
 
-<section aria-label="Lo que nos mueve" class="bg-ink py-24">
+<section aria-label={t.tagline.label} class="bg-ink py-24">
   <div class="mx-auto w-full max-w-6xl px-4 md:px-6">
     <p class="max-w-[680px] font-display text-5xl uppercase leading-none md:text-7xl">
       {

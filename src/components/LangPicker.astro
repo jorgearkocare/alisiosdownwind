@@ -1,0 +1,42 @@
+---
+// Desplegable de idioma. Funciona sin JavaScript (details/summary); el script solo lo cierra al pulsar fuera.
+import Icon from "./Icon.astro";
+import { languages, localizePath, useI18n, type Lang } from "../i18n";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+const { lang, t } = useI18n(Astro.url);
+const options = (Object.keys(languages) as Lang[]).map((code) => ({ code, name: languages[code], href: localizePath(code) }));
+---
+
+<details data-lang-picker class={`group/lang relative ${className}`}>
+  <summary
+    class="flex cursor-pointer list-none items-center gap-1 rounded-full px-2 py-2 text-sm font-semibold uppercase transition-colors duration-700 ease-fluid hover:bg-ink/5 [&::-webkit-details-marker]:hidden"
+    aria-label={`${t.nav.language}: ${languages[lang]}`}
+  >
+    <Icon name="globe" class="size-5" />
+    <span>{lang}</span>
+    <Icon name="caretDown" class="size-3 transition-transform duration-700 ease-fluid group-open/lang:rotate-180" />
+  </summary>
+  <ul class="absolute right-0 top-full z-20 mt-2 w-44 rounded-2xl border-2 border-ink bg-paper p-2 shadow-hard-sm">
+    {
+      options.map((o) => (
+        <li>
+          <a
+            href={o.href}
+            hreflang={o.code}
+            lang={o.code}
+            aria-current={o.code === lang ? "true" : undefined}
+            class="flex items-center justify-between rounded-lg px-3 py-2 text-sm font-semibold transition-colors duration-700 ease-fluid hover:bg-sun aria-[current=true]:bg-ink aria-[current=true]:text-cream"
+          >
+            <span>{o.name}</span>
+            <span class="text-xs uppercase opacity-60">{o.code}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</details>
