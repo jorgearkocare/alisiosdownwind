@@ -7,6 +7,15 @@ import { btnSecondary, container, h2, stickerBase } from "../ui";
 const riders = [
   { name: "Iballa Ruano", role: "Rider profesional de Gran Canaria" },
   { name: "Foil Only", role: "Escuela y comunidad de foil de Tenerife" },
+  { name: "Moritz Mauch", role: "" },
+  { name: "Miguel Chapuis", role: "" },
+];
+
+// Fotos sacadas del Instagram de la comunidad. Para cambiarlas, sustituye los archivos de public/fotos/
+const photos = [
+  { src: "/fotos/run-en-el-agua.jpg", w: 388, h: 447, caption: "En el agua", alt: "Dos riders de SUP foil en pleno downwind sobre el mar azul, uno con chaleco rosa remando y otro saludando" },
+  { src: "/fotos/antes-del-run.jpg", w: 388, h: 447, caption: "Antes del run", alt: "Selfie del grupo junto a la furgoneta con las tablas y los foils preparados antes de salir" },
+  { src: "/fotos/despues-del-run.jpg", w: 385, h: 447, caption: "Después del run", alt: "El grupo celebrando en la llegada con una tabla de downwind morada y cervezas en la mano" },
 ];
 ---
 
@@ -29,7 +38,7 @@ const riders = [
 
       <div class="lg:col-span-5">
         <p data-reveal class="text-sm font-semibold uppercase tracking-wide">Han hecho downwind con nosotros</p>
-        <ul class="mt-4 space-y-4">
+        <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
           {
             riders.map((rider, i) => (
               <li data-reveal style={`--d: ${120 + i * 80}ms`} class={`flex items-center gap-4 rounded-2xl border-2 border-ink bg-paper p-4 shadow-hard ${i % 2 ? "rotate-1" : "-rotate-1"}`}>
@@ -38,7 +47,7 @@ const riders = [
                 </span>
                 <span>
                   <span class="block font-display text-2xl uppercase leading-none">{rider.name}</span>
-                  <span class="mt-1 block text-sm text-ink/60">{rider.role}</span>
+                  {rider.role && <span class="mt-1 block text-sm text-ink/60">{rider.role}</span>}
                 </span>
               </li>
             ))
@@ -46,5 +55,18 @@ const riders = [
         </ul>
       </div>
     </div>
+
+    <ul class="mt-16 grid gap-8 sm:grid-cols-3">
+      {
+        photos.map((photo, i) => (
+          <li data-reveal style={`--d: ${i * 100}ms`} class={`${["-rotate-2", "rotate-1", "-rotate-1"][i]} transition-transform duration-700 ease-fluid hover:rotate-0`}>
+            <figure class="rounded-2xl border-2 border-ink bg-paper p-2 shadow-hard">
+              <img src={photo.src} width={photo.w} height={photo.h} alt={photo.alt} loading="lazy" decoding="async" class="aspect-[4/5] h-auto w-full rounded-lg border-2 border-ink object-cover" />
+              <figcaption class="px-2 pb-1 pt-2 font-display text-xl uppercase leading-none">{photo.caption}</figcaption>
+            </figure>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
