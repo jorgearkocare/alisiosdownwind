@@ -9,6 +9,8 @@ import Community from "../components/Community.astro";
 import Coming from "../components/Coming.astro";
 import Faq from "../components/Faq.astro";
 import JoinForm from "../components/JoinForm.astro";
+import Marquee from "../components/Marquee.astro";
+import Merch from "../components/Merch.astro";
 import { faqs } from "../faqs";
 import { site } from "../config";
 
@@ -37,13 +39,16 @@ const schema = [
 
 <Layout>
   <Hero />
+  <Marquee items={["SUP foil", "Parawing", "Wing foil", "Gran Canaria", "Bajadas abiertas"]} tilt />
   <WhyGroup />
   <Tagline />
   <Modes />
   <HowItWorks />
   <Community />
+  <Merch />
   <Coming />
   <Faq />
   <JoinForm />
+  <Marquee items={["Únete al grupo", "Bajadas gratis", "Nunca solo", "Alisio del nordeste"]} tone="sun" size="sm" speed="30s" />
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 </Layout>

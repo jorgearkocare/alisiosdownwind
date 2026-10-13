@@ -1,7 +1,7 @@
 ---
 import Icon from "./Icon.astro";
 import type { IconName } from "../icons";
-import { container, eyebrow, h2, section } from "../ui";
+import { card, container, h2, section, sticker } from "../ui";
 
 const items: { icon: IconName; title: string; problem: string; solution: string }[] = [
   {
@@ -27,24 +27,24 @@ const items: { icon: IconName; title: string; problem: string; solution: string 
 
 <section id="por-que" aria-labelledby="por-que-title" class={section}>
   <div class={container}>
-    <p data-reveal class={eyebrow}>Por qué en grupo</p>
+    <p data-reveal class={`${sticker} rotate-1`}>Por qué en grupo</p>
     <h2 id="por-que-title" data-reveal style="--d: 80ms" class={h2}>
       Bajar solo tiene tres problemas. En grupo, ninguno.
     </h2>
 
-    <ul class="mt-12 grid gap-6 md:grid-cols-3">
+    <ul class="mt-12 grid gap-8 md:grid-cols-3">
       {
         items.map((item, i) => (
-          <li data-reveal style={`--d: ${120 + i * 80}ms`} class="flex flex-col rounded-3xl border border-white/10 bg-coal p-6">
-            <span class="flex size-10 items-center justify-center rounded-full bg-white/5 text-foam">
-              <Icon name={item.icon} class="size-5" />
+          <li data-reveal style={`--d: ${120 + i * 80}ms`} class={`${card} flex flex-col p-6`}>
+            <span class="flex size-12 items-center justify-center rounded-full border-2 border-ink bg-sun">
+              <Icon name={item.icon} class="size-6" />
             </span>
-            <h3 class="mt-6 text-xl font-semibold">{item.title}</h3>
-            <p class="mt-4 text-sm font-semibold text-white/50">Si bajas solo</p>
-            <p class="mt-2 text-base text-white/70">{item.problem}</p>
-            <div class="my-6 h-px bg-white/10" aria-hidden="true"></div>
-            <p class="text-sm font-semibold text-foam">En grupo</p>
-            <p class="mt-2 text-base text-white">{item.solution}</p>
+            <h3 class="mt-6 font-display text-3xl uppercase leading-none">{item.title}</h3>
+            <p class="mt-4 text-sm font-semibold uppercase tracking-wide text-ink/50">Si bajas solo</p>
+            <p class="mt-2 text-base text-ink/70">{item.problem}</p>
+            <div class="my-6 border-t-2 border-dashed border-ink/30" aria-hidden="true"></div>
+            <p class="text-sm font-semibold uppercase tracking-wide text-blue">En grupo</p>
+            <p class="mt-2 text-base font-medium">{item.solution}</p>
           </li>
         ))
       }

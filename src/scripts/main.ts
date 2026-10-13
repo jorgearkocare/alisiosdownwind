@@ -214,3 +214,11 @@ if (form) {
     }
   });
 }
+
+/* ---------- Enlaces que preseleccionan un interés en el formulario ---------- */
+document.querySelectorAll<HTMLAnchorElement>("[data-interest]").forEach((link) => {
+  link.addEventListener("click", () => {
+    const box = document.querySelector<HTMLInputElement>(`input[name="interes"][value="${link.dataset.interest}"]`);
+    if (box) box.checked = true;
+  });
+});

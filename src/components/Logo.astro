@@ -1,23 +1,15 @@
 ---
+// Marca del pez sobre el foil (recorte del logo completo). El logo entero está en /brand/logo.png
 interface Props {
   class?: string;
+  full?: boolean;
+  alt?: string;
+  eager?: boolean;
 }
 
-const { class: className = "size-6" } = Astro.props;
+const { class: className = "size-10", full = false, alt = "", eager = false } = Astro.props;
+const src = full ? "/brand/logo.png" : "/brand/mark.png";
+const [width, height] = full ? [960, 1004] : [512, 512];
 ---
 
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 32 32"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2.25"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  class={className}
-  aria-hidden="true"
->
-  <path d="M4 10h13a3 3 0 1 0-3-3" />
-  <path d="M4 15.5h19a3 3 0 1 1-3 3" />
-  <path d="M3 25c3 0 3-2 6-2s3 2 6 2 3-2 6-2 3 2 6 2" stroke="#7dd3c0" />
-</svg>
+<img src={src} width={width} height={height} alt={alt} class={className} loading={eager ? "eager" : "lazy"} decoding="async" />

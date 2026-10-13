@@ -23,8 +23,9 @@ export const site = {
 } as const;
 
 export const nav = [
-  { href: "/#por-que", label: "Por qué en grupo", id: "por-que" },
+  { href: "/#por-que", label: "Por qué", id: "por-que" },
   { href: "/#modalidades", label: "Modalidades", id: "modalidades" },
   { href: "/#como-funciona", label: "Cómo funciona", id: "como-funciona" },
+  { href: "/#merch", label: "Merch", id: "merch" },
   { href: "/#faq", label: "Preguntas", id: "faq" },
 ] as const;

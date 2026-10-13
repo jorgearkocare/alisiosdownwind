@@ -1,7 +1,7 @@
 ---
 import Icon from "./Icon.astro";
 import type { IconName } from "../icons";
-import { container, eyebrow, h2, section } from "../ui";
+import { container, h2, section, sticker } from "../ui";
 
 const steps: { icon: IconName; title: string; text: string }[] = [
   {
@@ -24,19 +24,21 @@ const steps: { icon: IconName; title: string; text: string }[] = [
 
 <section id="como-funciona" aria-labelledby="como-funciona-title" class={section}>
   <div class={container}>
-    <p data-reveal class={eyebrow}>Cómo funciona</p>
-    <h2 id="como-funciona-title" data-reveal style="--d: 80ms" class={h2}>De tu sofá a la llegada en tres pasos</h2>
+    <p data-reveal class={`${sticker} rotate-1`}>Cómo funciona</p>
+    <h2 id="como-funciona-title" data-reveal style="--d: 80ms" class={h2}>Del sofá a la llegada en tres pasos</h2>
 
-    <ol class="mt-12 grid gap-6 md:grid-cols-3">
+    <ol class="mt-12 grid gap-12 md:grid-cols-3 md:gap-8">
       {
         steps.map((step, i) => (
-          <li data-reveal style={`--d: ${120 + i * 80}ms`} class="rounded-3xl border border-white/10 p-6">
-            <div class="flex items-center justify-between">
-              <span class="text-sm font-semibold tabular-nums text-foam">{`0${i + 1}`}</span>
-              <Icon name={step.icon} class="size-6 text-white/50" />
+          <li data-reveal style={`--d: ${120 + i * 80}ms`}>
+            <div class="flex items-end justify-between border-b-2 border-ink pb-4">
+              <span class="text-outline font-display text-8xl leading-none tabular-nums">{`0${i + 1}`}</span>
+              <span class="flex size-12 items-center justify-center rounded-full border-2 border-ink bg-sun">
+                <Icon name={step.icon} class="size-6" />
+              </span>
             </div>
-            <h3 class="mt-8 text-xl font-semibold">{step.title}</h3>
-            <p class="mt-2 text-base text-white/70">{step.text}</p>
+            <h3 class="mt-6 font-display text-3xl uppercase leading-none">{step.title}</h3>
+            <p class="mt-4 text-base text-ink/70">{step.text}</p>
           </li>
         ))
       }

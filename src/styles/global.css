@@ -1,21 +1,22 @@
 @import "tailwindcss";
 
-/* Sistema visual: una sola tipografía (Geist), fondos planos de la paleta oscura,
-   un acento (espuma de mar) y una única curva de movimiento. */
+/* Identidad Alisios DW: papel crema del logo, tinta negra, azul eléctrico y amarillo sol.
+   Estética de fanzine surf: bordes gruesos, sombras duras sin difuminar y titulares condensados. */
 @theme {
   --font-sans: "Geist Variable", "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Anton", "Arial Narrow", "DejaVu Sans Condensed", Impact, sans-serif;
 
-  /* Fondos oscuros permitidos */
-  --color-night: #131209;
-  --color-ink: #000000;
-  --color-coal: #181818;
-  --color-slate: #1f1f1f;
-  --color-rock: #272727;
-  --color-basalt: #313131;
+  --color-cream: #f8f6ea;
+  --color-paper: #fffdf5;
+  --color-ink: #0b0b09;
+  --color-blue: #0035d5;
+  --color-blue-deep: #0029a8;
+  --color-sun: #ffc603;
+  --color-sun-soft: #ffe17a;
 
-  /* Acento */
-  --color-foam: #7dd3c0;
-  --color-foam-strong: #a4e4d5;
+  --shadow-hard: 6px 6px 0 0 var(--color-ink);
+  --shadow-hard-sm: 4px 4px 0 0 var(--color-ink);
+  --shadow-hard-sun: 4px 4px 0 0 var(--color-sun);
 
   --ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);
 }
@@ -23,13 +24,13 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 96px;
-    color-scheme: dark;
+    scroll-padding-top: 112px;
+    color-scheme: light;
   }
 
   body {
-    background-color: var(--color-night);
-    color: #ffffff;
+    background-color: var(--color-cream);
+    color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
@@ -48,15 +49,27 @@
   }
 
   ::selection {
-    background-color: var(--color-foam);
+    background-color: var(--color-sun);
     color: var(--color-ink);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-foam);
-    outline-offset: 4px;
+    outline: 3px solid var(--color-blue);
+    outline-offset: 3px;
     border-radius: 4px;
   }
+}
+
+/* Titular condensado: Anton solo tiene un peso, no se fuerza negrita */
+.font-display {
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* Texto con contorno para los números grandes */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-ink);
 }
 
 /* Aparición al hacer scroll: solo se oculta si hay JS (clase .js en <html>) */
@@ -73,45 +86,54 @@
 
 .js [data-reveal].is-in {
   opacity: 1;
-  transform: none;
+  transform: var(--rest, none);
   filter: none;
 }
 
-/* Frase grande: cada palabra pasa de apagada a encendida en orden de lectura */
+/* Frase grande sobre negro: cada palabra se enciende en orden de lectura */
 [data-word] {
-  color: rgb(255 255 255 / 0.3);
+  color: rgb(248 246 234 / 0.22);
   transition: color 700ms var(--ease-fluid);
 }
 
 [data-word].is-lit,
 html:not(.js) [data-word] {
-  color: #ffffff;
+  color: var(--color-cream);
 }
 
-/* Línea de la bajada en la ilustración del hero */
-@keyframes run-line {
+[data-word][data-accent].is-lit,
+html:not(.js) [data-word][data-accent] {
+  color: var(--color-sun);
+}
+
+/* Cintas de texto en movimiento */
+@keyframes marquee {
   to {
-    stroke-dashoffset: 0;
+    transform: translateX(-50%);
   }
 }
 
-.run-line {
-  stroke-dasharray: 1400;
-  stroke-dashoffset: 1400;
-  animation: run-line 3.2s var(--ease-fluid) 400ms forwards;
+.marquee-track {
+  animation: marquee var(--speed, 40s) linear infinite;
 }
 
-@keyframes drift {
-  from {
-    transform: translateX(0);
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* El logo flota como si fuera encima del foil */
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
   }
-  to {
-    transform: translateX(-120px);
+  50% {
+    transform: translateY(-12px) rotate(-1deg);
   }
 }
 
-.swell-drift {
-  animation: drift 14s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+.bob {
+  animation: bob 6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -121,22 +143,18 @@ html:not(.js) [data-word] {
 
   .js [data-reveal] {
     opacity: 1;
-    transform: none;
+    transform: var(--rest, none);
     filter: none;
     transition: none;
   }
 
   [data-word] {
-    color: #ffffff;
+    color: var(--color-cream);
     transition: none;
   }
 
-  .run-line {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
-
-  .swell-drift {
+  .marquee-track,
+  .bob {
     animation: none;
   }
 

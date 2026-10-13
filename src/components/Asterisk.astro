@@ -1,0 +1,14 @@
+---
+// Asterisco dibujado a mano, como el del logo
+interface Props {
+  class?: string;
+}
+
+const { class: className = "size-6" } = Astro.props;
+---
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" class={className} aria-hidden="true">
+  <path d="M16 3.5v25" />
+  <path d="M5 9.5l22 13" />
+  <path d="M27 9l-22 14" />
+</svg>

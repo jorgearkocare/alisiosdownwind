@@ -16,13 +16,13 @@ const { title, description, updated, current } = Astro.props;
 <Layout title={title} description={description} current={current}>
   <article class="pb-24 pt-24">
     <div class={`${container} mt-16`}>
-      <a href="/" class="inline-flex items-center gap-2 text-sm font-semibold text-white/70 transition-colors duration-700 ease-fluid hover:text-white">
+      <a href="/" class="inline-flex items-center gap-2 text-sm font-semibold text-ink/70 transition-colors duration-700 ease-fluid hover:text-blue">
         <Icon name="arrowLeft" class="size-4" />
         <span>Volver al inicio</span>
       </a>
-      <h1 class="mt-8 max-w-[680px] text-4xl font-semibold tracking-tight md:text-5xl">{title}</h1>
-      <p class="mt-4 text-sm text-white/50">Última actualización: {updated}</p>
-      <div class="mt-12 max-w-[680px] text-base text-white/70 [&_a]:font-semibold [&_a]:text-white [&_a]:underline [&_a]:decoration-white/30 [&_a]:underline-offset-4 [&_h2]:mt-12 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-white [&_li]:mt-2 [&_p]:mt-4 [&_strong]:text-white [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-6">
+      <h1 class="mt-8 max-w-[680px] font-display text-5xl uppercase leading-none md:text-7xl">{title}</h1>
+      <p class="mt-4 text-sm text-ink/50">Última actualización: {updated}</p>
+      <div class="mt-12 max-w-[680px] text-base text-ink/75 [&_a]:font-semibold [&_a]:text-ink [&_a]:underline [&_a]:decoration-sun [&_a]:decoration-2 [&_a]:underline-offset-4 [&_h2]:mt-12 [&_h2]:font-display [&_h2]:text-3xl [&_h2]:uppercase [&_h2]:leading-none [&_h2]:text-ink [&_li]:mt-2 [&_p]:mt-4 [&_strong]:text-ink [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-6">
         <slot />
       </div>
     </div>

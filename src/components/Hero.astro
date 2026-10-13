@@ -1,30 +1,25 @@
 ---
 import Icon from "./Icon.astro";
-import SwellArt from "./SwellArt.astro";
+import Logo from "./Logo.astro";
 import { site } from "../config";
-import { btnPrimary, container } from "../ui";
+import { btnPrimary, container, sticker } from "../ui";
 ---
 
-<section aria-labelledby="hero-title" class="relative overflow-hidden pb-24 pt-24">
+<section aria-labelledby="hero-title" class="relative overflow-x-clip pb-16 pt-24">
   <div class={`${container} mt-16`}>
     <div class="grid items-center gap-12 lg:grid-cols-12">
       <div class="lg:col-span-7">
-        <p data-reveal class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-white/70">
-          <Icon name="mapPin" class="size-4 text-foam" />
-          <span>Gran Canaria · SUP foil, parawing y wing foil</span>
+        <p data-reveal class={`${sticker} -rotate-2`}>
+          <Icon name="mapPin" class="size-4" />
+          <span>Gran Canaria · Downwind foil</span>
         </p>
 
-        <h1
-          id="hero-title"
-          data-reveal
-          style="--d: 80ms"
-          class="mt-6 max-w-[680px] bg-linear-to-r from-white to-[#9b9b9b] bg-clip-text pb-2 text-4xl font-semibold tracking-tight text-transparent sm:text-5xl"
-        >
-          Downwind en Gran Canaria,<br class="hidden sm:inline" /> con el alisio a favor<br class="hidden sm:inline" /> y nunca solo
+        <h1 id="hero-title" data-reveal style="--d: 80ms" class="mt-6 max-w-[680px] font-display text-6xl uppercase leading-none sm:text-7xl lg:text-8xl">
+          Baja con<br /> el alisio.<br /> <span class="text-blue">Nunca solo.</span>
         </h1>
 
-        <p data-reveal style="--d: 160ms" class="mt-6 max-w-[680px] text-lg text-white/70">
-          Somos una comunidad de riders que organiza bajadas abiertas por la costa de la isla. Avisamos cuando entra el viento, cuadramos coches entre salida y llegada y bajamos juntos.
+        <p data-reveal style="--d: 160ms" class="mt-6 max-w-[680px] text-lg text-ink/70">
+          Somos una comunidad de riders de SUP foil, parawing y wing foil que organiza bajadas abiertas por la costa de Gran Canaria. Avisamos cuando entra el viento, cuadramos coches entre salida y llegada y bajamos juntos.
         </p>
 
         <div data-reveal style="--d: 240ms" class="mt-8 flex flex-wrap items-center gap-4">
@@ -32,37 +27,28 @@ import { btnPrimary, container } from "../ui";
             <span>Apúntate a la próxima bajada</span>
             <Icon name="arrowRight" class="size-4" />
           </a>
-          <span class="text-sm text-white/50">Gratis y sin cuotas</span>
+          <span class="text-sm font-semibold text-ink/60">Gratis y sin cuotas</span>
         </div>
 
-        <div data-reveal style="--d: 320ms" class="mt-12 flex items-start gap-3 text-sm text-white/70">
-          <Icon name="users" class="mt-0.5 size-5 shrink-0 text-foam" />
+        <div data-reveal style="--d: 320ms" class="mt-12 flex items-start gap-3 text-sm text-ink/70">
+          <Icon name="users" class="mt-0.5 size-5 shrink-0 text-blue" />
           <p>
-            Iballa Ruano y Foil Only ya han bajado con la comunidad. Lo vas viendo en <a href={site.instagram} target="_blank" rel="noopener" class="font-semibold text-white underline decoration-white/30 underline-offset-4 transition-colors duration-700 ease-fluid hover:decoration-foam">{site.instagramHandle}</a>
+            Iballa Ruano y Foil Only ya han bajado con la comunidad. Lo vas viendo en <a href={site.instagram} target="_blank" rel="noopener" class="font-semibold text-ink underline decoration-sun decoration-2 underline-offset-4 transition-colors duration-700 ease-fluid hover:decoration-blue">{site.instagramHandle}</a>
           </p>
         </div>
       </div>
 
-      <div data-reveal style="--d: 200ms" class="lg:col-span-5">
-        <figure class="rounded-3xl border border-white/10 bg-coal p-2">
-          <div class="relative aspect-[4/5] overflow-hidden rounded-2xl bg-slate">
-            <SwellArt />
+      <div data-reveal style="--d: 200ms" class="relative lg:col-span-5">
+        <Logo full eager alt="Logo de Alisios DW: un pez con cresta volando sobre un foil, dentro de una explosión azul y amarilla" class="bob mx-auto h-auto w-full max-w-[460px]" />
 
-            <div class="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-night/80 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
-              <Icon name="wind" class="size-4 text-foam" />
-              <span>Alisio del nordeste</span>
-            </div>
-
-            <figcaption class="absolute inset-x-3 bottom-3 rounded-sm border border-white/10 bg-rock/90 p-4 backdrop-blur-md">
-              <span class="flex items-center gap-2 text-xs text-white/50">
-                <Icon name="whatsapp" class="size-4 text-foam" />
-                <span>Ejemplo de aviso en el grupo</span>
-              </span>
-              <span class="mt-2 block text-sm text-white">
-                Mañana entra el alisio. Quedamos a las 10:30 en la llegada para dejar coches y subimos juntos a la salida. Nivel intermedio, quedan 3 plazas.
-              </span>
-            </figcaption>
-          </div>
+        <figure class="relative mt-6 ml-auto max-w-[320px] rotate-2 rounded-2xl border-2 border-ink bg-paper p-4 shadow-hard">
+          <figcaption class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-ink/60">
+            <Icon name="whatsapp" class="size-4 text-blue" />
+            <span>Así llega un aviso al grupo</span>
+          </figcaption>
+          <p class="mt-2 text-sm">
+            Mañana entra el alisio. Quedamos a las 10:30 en la llegada para dejar coches y subimos juntos a la salida. Nivel intermedio, quedan 3 plazas.
+          </p>
         </figure>
       </div>
     </div>

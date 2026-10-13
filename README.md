@@ -47,7 +47,7 @@ src/
   icons.ts             Iconos Phosphor usados (SVG inline, sin dependencias)
   ui.ts                Clases compartidas de botones y títulos
   layouts/Layout.astro Head, SEO, Open Graph, nav y footer
-  components/          Una sección por archivo (Hero, WhyGroup, Tagline, Modes...)
+  components/          Una sección por archivo (Hero, Marquee, WhyGroup, Tagline, Modes, Merch...)
   pages/               index, privacidad, aviso-legal, 404
   scripts/main.ts      Menú, apariciones con IntersectionObserver, frase palabra a palabra, formulario
   styles/global.css    Tema de Tailwind (colores, fuente Geist, curva de movimiento)
@@ -62,6 +62,13 @@ public/                favicon, og.png (imagen al compartir), robots.txt
 - **Versión en inglés** para riders de paso por la isla.
 - **Sitemap**: `bunx astro add sitemap`.
 
+## Identidad visual
+
+- **Logo**: original en `brand/logo-original.jpg`; recortes sin fondo en `public/brand/logo.png` (completo) y `public/brand/mark.png` (solo el pez y la explosión, para nav, favicon y merch).
+- **Colores** (`src/styles/global.css`): crema `#f8f6ea`, tinta `#0b0b09`, azul `#0035d5`, amarillo `#ffc603`.
+- **Tipografías**: Anton para titulares (mayúsculas, condensada) y Geist para el texto.
+- **Estilo**: fanzine surf, inspirado en Voyager Foiler, Volcom y Hurst. Bordes gruesos, sombras duras, pegatinas giradas y cintas de texto en movimiento.
+
 ## Reglas de diseño que sigue (de la skill)
 
-Una sola acción principal (apuntarse), tipografía única Geist sin cursivas, tamaños solo de la escala de Tailwind, espaciados solo de la escala permitida, radios anidados (`interior = exterior − separación`), fondos planos sin degradados (el degradado solo va en el texto del título), iconos Phosphor, todas las transiciones con `cubic-bezier(0.32, 0.72, 0, 1)` y apariciones con IntersectionObserver (nunca listeners de scroll).
+Una sola acción principal (apuntarse), sin cursivas, tamaños solo de la escala de Tailwind, espaciados solo de la escala permitida, radios anidados (`interior = exterior − separación`), fondos planos sin degradados, iconos Phosphor, todas las transiciones con `cubic-bezier(0.32, 0.72, 0, 1)` y apariciones con IntersectionObserver (nunca listeners de scroll).

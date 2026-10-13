@@ -10,24 +10,28 @@ interface Props {
 
 const { current = "" } = Astro.props;
 const year = new Date().getFullYear();
-const link = "rounded-sm text-sm text-white/70 transition-colors duration-700 ease-fluid hover:text-white aria-[current=page]:text-white";
+const link =
+  "inline-flex items-center gap-2 rounded-sm text-sm text-cream/70 transition-colors duration-700 ease-fluid hover:text-sun aria-[current=page]:text-sun";
 ---
 
-<footer class="border-t border-white/10 py-16">
+<footer class="bg-ink pt-16 text-cream">
   <div class={`${container} grid gap-12 md:grid-cols-12`}>
     <div class="md:col-span-6">
-      <a href="/" class="inline-flex items-center gap-2 text-base font-semibold">
-        <Logo class="size-6" />
-        <span>Alisios Downwind</span>
+      <a href="/" class="inline-flex items-center gap-4" aria-label="Alisios DW, ir al inicio">
+        <Logo class="size-16 shrink-0" />
+        <span class="font-display text-4xl uppercase leading-none">Alisios DW</span>
       </a>
-      <p class="mt-4 max-w-[680px] text-sm text-white/50">Comunidad de downwind foil en Gran Canaria. Bajadas abiertas de SUP foil, parawing y wing foil.</p>
+      <p class="mt-6 max-w-[680px] text-sm text-cream/60">
+        Comunidad de downwind foil en Gran Canaria. Bajadas abiertas de SUP foil, parawing y wing foil.
+      </p>
+      <p class="mt-2 text-sm text-cream/60">¿Dudas? Escríbenos y te contestamos en cuanto salgamos del agua.</p>
     </div>
 
     <nav aria-label="Comunidad" class="md:col-span-3">
-      <p class="text-sm font-semibold text-white">Comunidad</p>
+      <p class="text-sm font-semibold uppercase tracking-wide text-sun">Comunidad</p>
       <ul class="mt-4 space-y-2">
         <li>
-          <a href={site.instagram} target="_blank" rel="noopener" class={`${link} inline-flex items-center gap-2`}>
+          <a href={site.instagram} target="_blank" rel="noopener" class={link}>
             <Icon name="instagram" class="size-4" />
             <span>Instagram</span>
           </a>
@@ -35,7 +39,7 @@ const link = "rounded-sm text-sm text-white/70 transition-colors duration-700 ea
         {
           site.whatsappGroup && (
             <li>
-              <a href={site.whatsappGroup} target="_blank" rel="noopener" class={`${link} inline-flex items-center gap-2`}>
+              <a href={site.whatsappGroup} target="_blank" rel="noopener" class={link}>
                 <Icon name="whatsapp" class="size-4" />
                 <span>Grupo de WhatsApp</span>
               </a>
@@ -43,7 +47,7 @@ const link = "rounded-sm text-sm text-white/70 transition-colors duration-700 ea
           )
         }
         <li>
-          <a href={`mailto:${site.email}`} class={`${link} inline-flex items-center gap-2`}>
+          <a href={`mailto:${site.email}`} class={link}>
             <Icon name="envelope" class="size-4" />
             <span>{site.email}</span>
           </a>
@@ -52,7 +56,7 @@ const link = "rounded-sm text-sm text-white/70 transition-colors duration-700 ea
     </nav>
 
     <nav aria-label="Legal" class="md:col-span-3">
-      <p class="text-sm font-semibold text-white">Legal</p>
+      <p class="text-sm font-semibold uppercase tracking-wide text-sun">Legal</p>
       <ul class="mt-4 space-y-2">
         <li><a href="/privacidad" aria-current={current === "privacidad" ? "page" : undefined} class={link}>Política de privacidad</a></li>
         <li><a href="/aviso-legal" aria-current={current === "aviso-legal" ? "page" : undefined} class={link}>Aviso legal y cookies</a></li>
@@ -60,8 +64,14 @@ const link = "rounded-sm text-sm text-white/70 transition-colors duration-700 ea
     </nav>
   </div>
 
-  <div class={`${container} mt-12 flex flex-wrap items-center justify-between gap-4 text-xs text-white/50`}>
+  <div class={`${container} mt-12 flex flex-wrap items-center justify-between gap-4 text-xs text-cream/50`}>
     <p>© {year} Alisios Downwind</p>
     <p>Hecho en Gran Canaria, con el alisio de espalda</p>
+  </div>
+
+  <div class="mt-12 overflow-hidden" aria-hidden="true">
+    <svg viewBox="0 0 1000 170" class="block w-full translate-y-6 text-sun">
+      <text x="500" y="160" text-anchor="middle" textLength="980" lengthAdjust="spacingAndGlyphs" font-family="Anton, 'Arial Narrow', Impact, sans-serif" font-size="190" fill="currentColor">ALISIOS DW</text>
+    </svg>
   </div>
 </footer>

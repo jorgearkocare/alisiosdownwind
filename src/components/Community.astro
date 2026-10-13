@@ -1,7 +1,7 @@
 ---
 import Icon from "./Icon.astro";
 import { site } from "../config";
-import { btnGhost, container, eyebrow, h2, lead, section } from "../ui";
+import { btnSecondary, container, h2, stickerBase } from "../ui";
 
 // Riders que ya han bajado con la comunidad. Añade aquí más nombres (con su permiso).
 const riders = [
@@ -10,17 +10,17 @@ const riders = [
 ];
 ---
 
-<section aria-labelledby="comunidad-title" class={section}>
+<section aria-labelledby="comunidad-title" class="border-y-2 border-ink bg-sun py-24">
   <div class={container}>
     <div class="grid gap-12 lg:grid-cols-12 lg:items-end">
       <div class="lg:col-span-7">
-        <p data-reveal class={eyebrow}>La comunidad</p>
-        <h2 id="comunidad-title" data-reveal style="--d: 80ms" class={h2}>Empezamos unos pocos amigos.<br class="hidden md:inline" /> Ahora bajan hasta los pros.</h2>
-        <p data-reveal style="--d: 160ms" class={lead}>
+        <p data-reveal class={`${stickerBase} -rotate-2 bg-paper`}>La comunidad</p>
+        <h2 id="comunidad-title" data-reveal style="--d: 80ms" class={h2}>Empezamos unos pocos amigos. Ahora bajan hasta los pros.</h2>
+        <p data-reveal style="--d: 160ms" class="mt-6 max-w-[680px] text-lg text-ink/80">
           Alisios nació para no bajar solos. Hoy es un grupo abierto de riders de toda la isla, y cada bajada la contamos en Instagram.
         </p>
         <div data-reveal style="--d: 240ms" class="mt-8">
-          <a href={site.instagram} target="_blank" rel="noopener" class={btnGhost}>
+          <a href={site.instagram} target="_blank" rel="noopener" class={btnSecondary}>
             <Icon name="instagram" class="size-5" />
             <span>Ver {site.instagramHandle}</span>
           </a>
@@ -28,17 +28,17 @@ const riders = [
       </div>
 
       <div class="lg:col-span-5">
-        <p data-reveal class="text-sm font-semibold text-white/50">Han bajado con nosotros</p>
+        <p data-reveal class="text-sm font-semibold uppercase tracking-wide">Han bajado con nosotros</p>
         <ul class="mt-4 space-y-4">
           {
             riders.map((rider, i) => (
-              <li data-reveal style={`--d: ${120 + i * 80}ms`} class="flex items-center gap-4 rounded-3xl border border-white/10 bg-coal p-4">
-                <span class="flex size-12 shrink-0 items-center justify-center rounded-full bg-rock text-base font-semibold text-foam" aria-hidden="true">
+              <li data-reveal style={`--d: ${120 + i * 80}ms`} class={`flex items-center gap-4 rounded-2xl border-2 border-ink bg-paper p-4 shadow-hard ${i % 2 ? "rotate-1" : "-rotate-1"}`}>
+                <span class="flex size-12 shrink-0 items-center justify-center rounded-full border-2 border-ink bg-blue font-display text-xl text-cream" aria-hidden="true">
                   {rider.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
                 </span>
                 <span>
-                  <span class="block text-base font-semibold">{rider.name}</span>
-                  <span class="block text-sm text-white/50">{rider.role}</span>
+                  <span class="block font-display text-2xl uppercase leading-none">{rider.name}</span>
+                  <span class="mt-1 block text-sm text-ink/60">{rider.role}</span>
                 </span>
               </li>
             ))

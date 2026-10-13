@@ -1,0 +1,43 @@
+---
+import Asterisk from "./Asterisk.astro";
+
+interface Props {
+  items: string[];
+  tone?: "blue" | "sun" | "ink";
+  size?: "lg" | "sm";
+  tilt?: boolean;
+  speed?: string;
+}
+
+const { items, tone = "blue", size = "lg", tilt = false, speed = "40s" } = Astro.props;
+const tones = {
+  blue: "bg-blue text-cream",
+  sun: "bg-sun text-ink",
+  ink: "bg-ink text-cream",
+};
+const star = { blue: "text-sun", sun: "text-blue", ink: "text-sun" }[tone];
+const text = size === "lg" ? "font-display text-5xl uppercase md:text-7xl" : "text-sm font-semibold uppercase tracking-wide";
+const pad = size === "lg" ? "py-6" : "py-2";
+const gap = size === "lg" ? "gap-8 pr-8" : "gap-4 pr-4";
+// Se repite la lista para que la cinta nunca se quede vacía al desplazarse
+const loop = [...items, ...items, ...items];
+---
+
+<div class={`overflow-x-clip ${tilt ? "py-4" : ""}`}>
+  <div class={`marquee border-y-2 border-ink ${tones[tone]} ${pad} ${tilt ? "-rotate-1" : ""}`} aria-label={items.join(", ")} role="marquee">
+    <div class="marquee-track flex w-max" style={`--speed: ${speed}`}>
+      {
+        [0, 1].map((copy) => (
+          <div class={`flex shrink-0 items-center ${gap}`} aria-hidden={copy === 1 ? "true" : undefined}>
+            {loop.map((item) => (
+              <>
+                <span class={`whitespace-nowrap ${text}`}>{item}</span>
+                <Asterisk class={`shrink-0 ${size === "lg" ? "size-8 md:size-12" : "size-4"} ${star}`} />
+              </>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
