@@ -1,0 +1,145 @@
+---
+import Icon from "./Icon.astro";
+import { site } from "../config";
+import { btnPrimary, container } from "../ui";
+
+const modes = ["SUP foil", "Parawing", "Wing foil"];
+const interests = [
+  { value: "bajadas", label: "Bajadas abiertas", checked: true },
+  { value: "cursos", label: "Cursos y clínics", checked: false },
+  { value: "pro-run-filmacion", label: "Pro runs y filmación", checked: false },
+  { value: "merch", label: "Merch", checked: false },
+];
+const levels = ["Estoy aprendiendo a despegar", "Despego y navego con choppy", "Bajo con soltura"];
+
+const field =
+  "mt-2 block w-full rounded-xl border border-white/10 bg-night px-4 py-3 text-base text-white placeholder:text-white/30 transition-colors duration-700 ease-fluid hover:border-white/20 focus:border-foam focus:outline-none aria-[invalid=true]:border-red-400";
+const chip =
+  "inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/15 px-3 py-2 text-sm font-medium text-white/70 transition-all duration-700 ease-fluid hover:border-white/30 hover:text-white peer-checked:border-foam peer-checked:bg-foam peer-checked:text-ink peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-foam peer-active:scale-[0.98]";
+const label = "text-sm font-semibold text-white";
+const error = "mt-2 hidden text-sm text-red-300";
+const joinUrl = site.whatsappGroup || site.instagram;
+---
+
+<section id="unete" aria-labelledby="unete-title" class="py-24">
+  <div class={container}>
+    <div class="grid gap-12 rounded-3xl border border-white/10 bg-coal p-6 md:p-12 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <h2 id="unete-title" data-reveal class="bg-linear-to-r from-white to-[#9b9b9b] bg-clip-text pb-1 text-3xl font-semibold tracking-tight text-transparent md:text-5xl">
+          Apúntate a la próxima bajada
+        </h2>
+        <p data-reveal style="--d: 80ms" class="mt-6 text-lg text-white/70">
+          Te avisamos por email de cada bajada y te pasamos el grupo de WhatsApp donde se cuadra todo.
+        </p>
+        <ul data-reveal style="--d: 160ms" class="mt-8 space-y-4">
+          {
+            ["Gratis y sin cuotas", "Te das de baja con un clic", "Sin spam: solo bajadas y novedades"].map((t) => (
+              <li class="flex items-center gap-2 text-base text-white">
+                <Icon name="check" class="size-5 shrink-0 text-foam" />
+                <span>{t}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="lg:col-span-7">
+        <form
+          data-join-form
+          data-endpoint={site.formEndpoint}
+          data-email={site.email}
+          action={site.formEndpoint || undefined}
+          method="post"
+          novalidate
+          class="space-y-6"
+        >
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div>
+              <label for="nombre" class={label}>Nombre</label>
+              <input id="nombre" name="nombre" type="text" autocomplete="given-name" required placeholder="Nayra" aria-describedby="nombre-error" class={field} />
+              <p id="nombre-error" data-error-for="nombre" class={error}></p>
+            </div>
+            <div>
+              <label for="email" class={label}>Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="nayra@correo.com" aria-describedby="email-error" class={field} />
+              <p id="email-error" data-error-for="email" class={error}></p>
+            </div>
+          </div>
+
+          <fieldset>
+            <legend class={label}>Qué bajas</legend>
+            <div class="mt-2 flex flex-wrap gap-2">
+              {
+                modes.map((m) => (
+                  <label>
+                    <input type="checkbox" name="modalidad" value={m} class="peer sr-only" />
+                    <span class={chip}>{m}</span>
+                  </label>
+                ))
+              }
+            </div>
+          </fieldset>
+
+          <div>
+            <label for="nivel" class={label}>Tu nivel</label>
+            <div class="relative">
+              <select id="nivel" name="nivel" required aria-describedby="nivel-error" class={`${field} appearance-none pr-12`}>
+                <option value="" disabled selected>Elige una opción</option>
+                {levels.map((l) => <option value={l}>{l}</option>)}
+              </select>
+              <Icon name="caretDown" class="pointer-events-none absolute right-4 top-1/2 mt-1 size-4 -translate-y-1/2 text-white/50" />
+            </div>
+            <p id="nivel-error" data-error-for="nivel" class={error}></p>
+          </div>
+
+          <fieldset>
+            <legend class={label}>Qué te interesa</legend>
+            <div class="mt-2 flex flex-wrap gap-2">
+              {
+                interests.map((it) => (
+                  <label>
+                    <input type="checkbox" name="interes" value={it.value} checked={it.checked} class="peer sr-only" />
+                    <span class={chip}>{it.label}</span>
+                  </label>
+                ))
+              }
+            </div>
+          </fieldset>
+
+          <div class="hidden" aria-hidden="true">
+            <label for="empresa">No rellenes este campo</label>
+            <input id="empresa" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div>
+            <label class="flex items-start gap-3 text-sm text-white/70">
+              <input id="privacidad" name="privacidad" type="checkbox" required aria-describedby="privacidad-error" class="mt-0.5 size-4 shrink-0 accent-foam" />
+              <span>He leído la <a href="/privacidad" class="font-semibold text-white underline decoration-white/30 underline-offset-4 hover:decoration-foam">política de privacidad</a> y acepto que me escribáis sobre la comunidad.</span>
+            </label>
+            <p id="privacidad-error" data-error-for="privacidad" class={error}></p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-4">
+            <button type="submit" data-submit class={btnPrimary}>
+              <span data-submit-label>Apúntate a la próxima bajada</span>
+              <Icon name="arrowRight" class="size-4" />
+            </button>
+            <p data-status role="status" aria-live="polite" class="text-sm text-white/70"></p>
+          </div>
+        </form>
+
+        <div data-join-success hidden class="rounded-2xl border border-white/10 bg-slate p-6">
+          <span class="flex size-12 items-center justify-center rounded-full bg-foam text-ink">
+            <Icon name="check" class="size-6" />
+          </span>
+          <h3 data-success-title class="mt-6 text-2xl font-semibold" tabindex="-1">Estás dentro.</h3>
+          <p data-success-text class="mt-2 text-base text-white/70">Te escribimos en cuanto haya bajada. Mientras tanto, entra al grupo, que es donde se cuadra todo.</p>
+          <a href={joinUrl} target="_blank" rel="noopener" class={`${btnPrimary} mt-6`}>
+            <Icon name={site.whatsappGroup ? "whatsapp" : "instagram"} class="size-5" />
+            <span>{site.whatsappGroup ? "Entrar al grupo de WhatsApp" : `Seguir ${site.instagramHandle}`}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+---
+// Ilustración generativa del swell: líneas de mar a favor del viento y la línea de una bajada.
+// Determinista (sin aleatorios) para que el HTML sea siempre el mismo.
+
+const W = 400;
+const H = 500;
+const rows = 24;
+
+const lines = Array.from({ length: rows }, (_, i) => {
+  const y = 24 + i * 19;
+  const amp = 3 + (i % 5) * 1.4 + i * 0.22;
+  const len = 70 + (i % 4) * 14;
+  const phase = i * 0.9;
+  let d = `M -160 ${y.toFixed(1)}`;
+  for (let x = -160; x <= W + 160; x += 8) {
+    const yy = y + Math.sin(x / len + phase) * amp + Math.sin(x / (len * 0.37) + phase * 2) * (amp * 0.25);
+    d += ` L ${x} ${yy.toFixed(1)}`;
+  }
+  const opacity = 0.06 + (i / rows) * 0.26;
+  return { d, opacity: opacity.toFixed(2) };
+});
+
+// Línea de la bajada: de la salida (arriba a la izquierda) a la llegada (abajo a la derecha)
+const run = "M 48 72 C 112 100, 96 146, 160 172 S 228 218, 228 258 S 292 290, 340 300";
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox={`0 0 ${W} ${H}`}
+  class="h-full w-full"
+  role="img"
+  aria-label="Ilustración de las líneas del swell y la ruta de una bajada de salida a llegada"
+>
+  <g class="swell-drift" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round">
+    {lines.map((l) => <path d={l.d} stroke-opacity={l.opacity} />)}
+  </g>
+  <path d={run} fill="none" stroke="#7dd3c0" stroke-opacity="0.18" stroke-width="10" stroke-linecap="round" />
+  <path class="run-line" d={run} fill="none" stroke="#7dd3c0" stroke-width="2.5" stroke-linecap="round" />
+  <g font-family="inherit" font-size="12" font-weight="600">
+    <circle cx="48" cy="72" r="6" fill="#131209" stroke="#ffffff" stroke-width="2" />
+    <text x="64" y="64" fill="#ffffff">Salida</text>
+    <circle cx="340" cy="300" r="6" fill="#7dd3c0" />
+    <text x="326" y="286" fill="#7dd3c0" text-anchor="end">Llegada</text>
+  </g>
+</svg>

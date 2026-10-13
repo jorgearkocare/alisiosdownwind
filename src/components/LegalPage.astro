@@ -1,0 +1,30 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "./Icon.astro";
+import { container } from "../ui";
+
+interface Props {
+  title: string;
+  description: string;
+  updated: string;
+  current: string;
+}
+
+const { title, description, updated, current } = Astro.props;
+---
+
+<Layout title={title} description={description} current={current}>
+  <article class="pb-24 pt-24">
+    <div class={`${container} mt-16`}>
+      <a href="/" class="inline-flex items-center gap-2 text-sm font-semibold text-white/70 transition-colors duration-700 ease-fluid hover:text-white">
+        <Icon name="arrowLeft" class="size-4" />
+        <span>Volver al inicio</span>
+      </a>
+      <h1 class="mt-8 max-w-[680px] text-4xl font-semibold tracking-tight md:text-5xl">{title}</h1>
+      <p class="mt-4 text-sm text-white/50">Última actualización: {updated}</p>
+      <div class="mt-12 max-w-[680px] text-base text-white/70 [&_a]:font-semibold [&_a]:text-white [&_a]:underline [&_a]:decoration-white/30 [&_a]:underline-offset-4 [&_h2]:mt-12 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-white [&_li]:mt-2 [&_p]:mt-4 [&_strong]:text-white [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-6">
+        <slot />
+      </div>
+    </div>
+  </article>
+</Layout>

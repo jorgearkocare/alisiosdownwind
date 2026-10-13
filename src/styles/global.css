@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+/* Sistema visual: una sola tipografía (Geist), fondos planos de la paleta oscura,
+   un acento (espuma de mar) y una única curva de movimiento. */
+@theme {
+  --font-sans: "Geist Variable", "Geist", ui-sans-serif, system-ui, sans-serif;
+
+  /* Fondos oscuros permitidos */
+  --color-night: #131209;
+  --color-ink: #000000;
+  --color-coal: #181818;
+  --color-slate: #1f1f1f;
+  --color-rock: #272727;
+  --color-basalt: #313131;
+
+  /* Acento */
+  --color-foam: #7dd3c0;
+  --color-foam-strong: #a4e4d5;
+
+  --ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-night);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd,
+  summary {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-foam);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-foam);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+}
+
+/* Aparición al hacer scroll: solo se oculta si hay JS (clase .js en <html>) */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(4rem);
+  filter: blur(12px);
+  transition:
+    opacity 900ms var(--ease-fluid),
+    transform 900ms var(--ease-fluid),
+    filter 900ms var(--ease-fluid);
+  transition-delay: var(--d, 0ms);
+}
+
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Frase grande: cada palabra pasa de apagada a encendida en orden de lectura */
+[data-word] {
+  color: rgb(255 255 255 / 0.3);
+  transition: color 700ms var(--ease-fluid);
+}
+
+[data-word].is-lit,
+html:not(.js) [data-word] {
+  color: #ffffff;
+}
+
+/* Línea de la bajada en la ilustración del hero */
+@keyframes run-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.run-line {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: run-line 3.2s var(--ease-fluid) 400ms forwards;
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-120px);
+  }
+}
+
+.swell-drift {
+  animation: drift 14s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  [data-word] {
+    color: #ffffff;
+    transition: none;
+  }
+
+  .run-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .swell-drift {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 1ms !important;
+  }
+}

@@ -1,0 +1,35 @@
+---
+import LegalPage from "../components/LegalPage.astro";
+import { site } from "../config";
+---
+
+<LegalPage
+  title="Aviso legal y cookies"
+  description="Datos del titular de la web de Alisios Downwind, condiciones de uso y uso de cookies."
+  updated="octubre de 2026"
+  current="aviso-legal"
+>
+  <h2>Titular de la web</h2>
+  <p>En cumplimiento de la Ley 34/2002 de servicios de la sociedad de la información (LSSI), estos son los datos del titular:</p>
+  <ul>
+    <li><strong>Titular:</strong> {site.legal.owner}</li>
+    <li><strong>NIF:</strong> {site.legal.taxId}</li>
+    <li><strong>Domicilio:</strong> {site.legal.address}</li>
+    <li><strong>Contacto:</strong> <a href={`mailto:${site.email}`}>{site.email}</a></li>
+  </ul>
+
+  <h2>Uso de la web</h2>
+  <p>Esta web informa sobre la comunidad Alisios Downwind y permite apuntarse para recibir avisos de bajadas. Al usarla te comprometes a hacerlo de forma lícita y a no enviar datos de terceros sin su permiso.</p>
+
+  <h2>Actividad en el agua</h2>
+  <p>Las bajadas abiertas de la comunidad son encuentros entre riders. Cada participante sale bajo su propia responsabilidad, decide si su nivel y su material son adecuados y respeta las normas de navegación y de las autoridades marítimas. La información de rutas y avisos es orientativa y no sustituye a tu propio criterio ni a la consulta del parte.</p>
+
+  <h2>Propiedad intelectual</h2>
+  <p>Los textos, el logotipo y el diseño de esta web pertenecen a Alisios Downwind. Las fotos y vídeos pertenecen a sus autores. No se pueden reutilizar sin permiso.</p>
+
+  <h2>Enlaces externos</h2>
+  <p>La web enlaza a Instagram, WhatsApp y otros servicios. No somos responsables de sus contenidos ni de sus políticas de privacidad.</p>
+
+  <h2>Cookies</h2>
+  <p>Esta web no usa cookies de análisis, publicidad ni seguimiento, y las fuentes tipográficas se sirven desde nuestro propio dominio. Por eso no te mostramos un aviso de cookies. Si en el futuro añadimos herramientas de medición, actualizaremos esta página y te pediremos permiso antes de activarlas.</p>
+</LegalPage>

@@ -1,0 +1,34 @@
+---
+import Icon from "./Icon.astro";
+import { faqs } from "../faqs";
+import { container, eyebrow, h2, section } from "../ui";
+---
+
+<section id="faq" aria-labelledby="faq-title" class={section}>
+  <div class={`${container} grid gap-12 lg:grid-cols-12`}>
+    <div class="lg:col-span-4">
+      <div class="lg:sticky lg:top-24">
+        <p data-reveal class={eyebrow}>Preguntas frecuentes</p>
+        <h2 id="faq-title" data-reveal style="--d: 80ms" class={`${h2} lg:text-4xl`}>Lo que nos preguntáis antes de la primera bajada</h2>
+      </div>
+    </div>
+
+    <div class="lg:col-span-8">
+      <div class="space-y-4">
+        {
+          faqs.map((faq) => (
+            <details data-reveal class="group rounded-3xl border border-white/10 bg-coal transition-colors duration-700 ease-fluid open:bg-slate">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-6 rounded-3xl p-6 text-lg font-semibold transition-colors duration-700 ease-fluid hover:text-foam [&::-webkit-details-marker]:hidden">
+                <span>{faq.q}</span>
+                <span class="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/5 transition-transform duration-700 ease-fluid group-open:rotate-45">
+                  <Icon name="plus" class="size-4" />
+                </span>
+              </summary>
+              <p class="px-6 pb-6 text-base text-white/70">{faq.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

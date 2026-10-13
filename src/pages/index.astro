@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import WhyGroup from "../components/WhyGroup.astro";
+import Tagline from "../components/Tagline.astro";
+import Modes from "../components/Modes.astro";
+import HowItWorks from "../components/HowItWorks.astro";
+import Community from "../components/Community.astro";
+import Coming from "../components/Coming.astro";
+import Faq from "../components/Faq.astro";
+import JoinForm from "../components/JoinForm.astro";
+import { faqs } from "../faqs";
+import { site } from "../config";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    name: site.name,
+    url: site.url,
+    sport: "Downwind foil",
+    description: site.description,
+    areaServed: "Gran Canaria",
+    sameAs: [site.instagram],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+];
+---
+
+<Layout>
+  <Hero />
+  <WhyGroup />
+  <Tagline />
+  <Modes />
+  <HowItWorks />
+  <Community />
+  <Coming />
+  <Faq />
+  <JoinForm />
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</Layout>

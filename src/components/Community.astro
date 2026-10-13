@@ -1,0 +1,50 @@
+---
+import Icon from "./Icon.astro";
+import { site } from "../config";
+import { btnGhost, container, eyebrow, h2, lead, section } from "../ui";
+
+// Riders que ya han bajado con la comunidad. Añade aquí más nombres (con su permiso).
+const riders = [
+  { name: "Iballa Ruano", role: "Rider profesional de Gran Canaria" },
+  { name: "Foil Only", role: "Escuela y comunidad de foil de Tenerife" },
+];
+---
+
+<section aria-labelledby="comunidad-title" class={section}>
+  <div class={container}>
+    <div class="grid gap-12 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-7">
+        <p data-reveal class={eyebrow}>La comunidad</p>
+        <h2 id="comunidad-title" data-reveal style="--d: 80ms" class={h2}>Empezamos unos pocos amigos.<br class="hidden md:inline" /> Ahora bajan hasta los pros.</h2>
+        <p data-reveal style="--d: 160ms" class={lead}>
+          Alisios nació para no bajar solos. Hoy es un grupo abierto de riders de toda la isla, y cada bajada la contamos en Instagram.
+        </p>
+        <div data-reveal style="--d: 240ms" class="mt-8">
+          <a href={site.instagram} target="_blank" rel="noopener" class={btnGhost}>
+            <Icon name="instagram" class="size-5" />
+            <span>Ver {site.instagramHandle}</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5">
+        <p data-reveal class="text-sm font-semibold text-white/50">Han bajado con nosotros</p>
+        <ul class="mt-4 space-y-4">
+          {
+            riders.map((rider, i) => (
+              <li data-reveal style={`--d: ${120 + i * 80}ms`} class="flex items-center gap-4 rounded-3xl border border-white/10 bg-coal p-4">
+                <span class="flex size-12 shrink-0 items-center justify-center rounded-full bg-rock text-base font-semibold text-foam" aria-hidden="true">
+                  {rider.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
+                </span>
+                <span>
+                  <span class="block text-base font-semibold">{rider.name}</span>
+                  <span class="block text-sm text-white/50">{rider.role}</span>
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

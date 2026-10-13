@@ -1,0 +1,67 @@
+---
+import Logo from "./Logo.astro";
+import Icon from "./Icon.astro";
+import { site } from "../config";
+import { container } from "../ui";
+
+interface Props {
+  current?: string;
+}
+
+const { current = "" } = Astro.props;
+const year = new Date().getFullYear();
+const link = "rounded-sm text-sm text-white/70 transition-colors duration-700 ease-fluid hover:text-white aria-[current=page]:text-white";
+---
+
+<footer class="border-t border-white/10 py-16">
+  <div class={`${container} grid gap-12 md:grid-cols-12`}>
+    <div class="md:col-span-6">
+      <a href="/" class="inline-flex items-center gap-2 text-base font-semibold">
+        <Logo class="size-6" />
+        <span>Alisios Downwind</span>
+      </a>
+      <p class="mt-4 max-w-[680px] text-sm text-white/50">Comunidad de downwind foil en Gran Canaria. Bajadas abiertas de SUP foil, parawing y wing foil.</p>
+    </div>
+
+    <nav aria-label="Comunidad" class="md:col-span-3">
+      <p class="text-sm font-semibold text-white">Comunidad</p>
+      <ul class="mt-4 space-y-2">
+        <li>
+          <a href={site.instagram} target="_blank" rel="noopener" class={`${link} inline-flex items-center gap-2`}>
+            <Icon name="instagram" class="size-4" />
+            <span>Instagram</span>
+          </a>
+        </li>
+        {
+          site.whatsappGroup && (
+            <li>
+              <a href={site.whatsappGroup} target="_blank" rel="noopener" class={`${link} inline-flex items-center gap-2`}>
+                <Icon name="whatsapp" class="size-4" />
+                <span>Grupo de WhatsApp</span>
+              </a>
+            </li>
+          )
+        }
+        <li>
+          <a href={`mailto:${site.email}`} class={`${link} inline-flex items-center gap-2`}>
+            <Icon name="envelope" class="size-4" />
+            <span>{site.email}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <nav aria-label="Legal" class="md:col-span-3">
+      <p class="text-sm font-semibold text-white">Legal</p>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/privacidad" aria-current={current === "privacidad" ? "page" : undefined} class={link}>Política de privacidad</a></li>
+        <li><a href="/aviso-legal" aria-current={current === "aviso-legal" ? "page" : undefined} class={link}>Aviso legal y cookies</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class={`${container} mt-12 flex flex-wrap items-center justify-between gap-4 text-xs text-white/50`}>
+    <p>© {year} Alisios Downwind</p>
+    <p>Hecho en Gran Canaria, con el alisio de espalda</p>
+  </div>
+</footer>

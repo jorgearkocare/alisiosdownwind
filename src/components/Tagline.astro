@@ -1,0 +1,23 @@
+---
+// Frase grande: cada palabra se enciende una a una al entrar en pantalla (ver scripts/main.ts)
+// Cada elemento es un tramo con sentido propio, para que el corte de línea nunca parta una idea
+const lines = ["En Gran Canaria", "el viento no falta.", "Lo que faltaba", "era con quién bajarlo."];
+---
+
+<section aria-label="Lo que nos mueve" class="py-24">
+  <div class="mx-auto w-full max-w-6xl px-4 md:px-6">
+    <p class="max-w-[680px] text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
+      {
+        lines.map((line) => (
+          <span class="block">
+            {line.split(" ").map((word) => (
+              <>
+                <span data-word>{word}</span>{" "}
+              </>
+            ))}
+          </span>
+        ))
+      }
+    </p>
+  </div>
+</section>

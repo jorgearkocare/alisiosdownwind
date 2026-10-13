@@ -1,0 +1,70 @@
+---
+import Icon from "./Icon.astro";
+import SwellArt from "./SwellArt.astro";
+import { site } from "../config";
+import { btnPrimary, container } from "../ui";
+---
+
+<section aria-labelledby="hero-title" class="relative overflow-hidden pb-24 pt-24">
+  <div class={`${container} mt-16`}>
+    <div class="grid items-center gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <p data-reveal class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-white/70">
+          <Icon name="mapPin" class="size-4 text-foam" />
+          <span>Gran Canaria · SUP foil, parawing y wing foil</span>
+        </p>
+
+        <h1
+          id="hero-title"
+          data-reveal
+          style="--d: 80ms"
+          class="mt-6 max-w-[680px] bg-linear-to-r from-white to-[#9b9b9b] bg-clip-text pb-2 text-4xl font-semibold tracking-tight text-transparent sm:text-5xl"
+        >
+          Downwind en Gran Canaria,<br class="hidden sm:inline" /> con el alisio a favor<br class="hidden sm:inline" /> y nunca solo
+        </h1>
+
+        <p data-reveal style="--d: 160ms" class="mt-6 max-w-[680px] text-lg text-white/70">
+          Somos una comunidad de riders que organiza bajadas abiertas por la costa de la isla. Avisamos cuando entra el viento, cuadramos coches entre salida y llegada y bajamos juntos.
+        </p>
+
+        <div data-reveal style="--d: 240ms" class="mt-8 flex flex-wrap items-center gap-4">
+          <a href="#unete" class={btnPrimary}>
+            <span>Apúntate a la próxima bajada</span>
+            <Icon name="arrowRight" class="size-4" />
+          </a>
+          <span class="text-sm text-white/50">Gratis y sin cuotas</span>
+        </div>
+
+        <div data-reveal style="--d: 320ms" class="mt-12 flex items-start gap-3 text-sm text-white/70">
+          <Icon name="users" class="mt-0.5 size-5 shrink-0 text-foam" />
+          <p>
+            Iballa Ruano y Foil Only ya han bajado con la comunidad. Lo vas viendo en <a href={site.instagram} target="_blank" rel="noopener" class="font-semibold text-white underline decoration-white/30 underline-offset-4 transition-colors duration-700 ease-fluid hover:decoration-foam">{site.instagramHandle}</a>
+          </p>
+        </div>
+      </div>
+
+      <div data-reveal style="--d: 200ms" class="lg:col-span-5">
+        <figure class="rounded-3xl border border-white/10 bg-coal p-2">
+          <div class="relative aspect-[4/5] overflow-hidden rounded-2xl bg-slate">
+            <SwellArt />
+
+            <div class="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-night/80 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
+              <Icon name="wind" class="size-4 text-foam" />
+              <span>Alisio del nordeste</span>
+            </div>
+
+            <figcaption class="absolute inset-x-3 bottom-3 rounded-sm border border-white/10 bg-rock/90 p-4 backdrop-blur-md">
+              <span class="flex items-center gap-2 text-xs text-white/50">
+                <Icon name="whatsapp" class="size-4 text-foam" />
+                <span>Ejemplo de aviso en el grupo</span>
+              </span>
+              <span class="mt-2 block text-sm text-white">
+                Mañana entra el alisio. Quedamos a las 10:30 en la llegada para dejar coches y subimos juntos a la salida. Nivel intermedio, quedan 3 plazas.
+              </span>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>

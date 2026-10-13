@@ -1,0 +1,79 @@
+---
+import Icon from "./Icon.astro";
+import type { IconName } from "../icons";
+import { container, eyebrow, h2, lead, section } from "../ui";
+
+const services: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: "lifebuoy",
+    title: "Rescate y buenas prácticas",
+    text: "Autorescate, remolque, señales y plan de ruta. Teoría y agua en una mañana.",
+  },
+  {
+    icon: "waves",
+    title: "Iniciación a SUP foil",
+    text: "Despegar a remo con choppy y enlazar tus primeros bumps, con un coach para cada dos riders.",
+  },
+  {
+    icon: "wind",
+    title: "Clases de parawing",
+    text: "Para pasar del wing al parawing con alguien al lado que ya ha recorrido ese camino.",
+  },
+  {
+    icon: "path",
+    title: "Bajadas con paradas",
+    text: "Tramos cortos en grupo, con paradas para corregir técnica sobre la marcha.",
+  },
+  {
+    icon: "compass",
+    title: "Pro run",
+    text: "Un rider profesional baja contigo de punta a punta y te enseña su línea.",
+  },
+  {
+    icon: "video",
+    title: "Filmación de tu bajada",
+    text: "Te grabamos desde el agua o desde moto de agua para que veas qué corregir.",
+  },
+];
+---
+
+<section id="lo-que-viene" aria-labelledby="lo-que-viene-title" class={section}>
+  <div class={container}>
+    <p data-reveal class={eyebrow}>Lo que viene</p>
+    <h2 id="lo-que-viene-title" data-reveal style="--d: 80ms" class={h2}>Cursos, pro runs y la primera tirada de merch</h2>
+    <p data-reveal style="--d: 160ms" class={lead}>
+      Lo estamos preparando como club, con seguro y monitores titulados. Marca lo que te interesa al apuntarte y te avisamos antes que a nadie.
+    </p>
+
+    <ul class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {
+        services.map((item, i) => (
+          <li data-reveal style={`--d: ${80 + (i % 3) * 80}ms`} class="flex flex-col rounded-3xl border border-white/10 bg-coal p-6">
+            <div class="flex items-center justify-between">
+              <Icon name={item.icon} class="size-6 text-foam" />
+              <span class="rounded-full border border-white/10 px-2 py-0.5 text-xs text-white/50">Próximamente</span>
+            </div>
+            <h3 class="mt-6 text-lg font-semibold">{item.title}</h3>
+            <p class="mt-2 text-base text-white/70">{item.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div data-reveal class="mt-6 flex flex-col gap-6 rounded-3xl border border-white/10 bg-slate p-6 md:flex-row md:items-center md:justify-between">
+      <div class="flex items-start gap-4">
+        <span class="flex size-12 shrink-0 items-center justify-center rounded-full bg-rock text-foam">
+          <Icon name="tshirt" class="size-6" />
+        </span>
+        <div>
+          <h3 class="text-lg font-semibold">Merch de la comunidad</h3>
+          <p class="mt-2 max-w-[680px] text-base text-white/70">Primera tirada limitada de camisetas y gorras, en preventa. Solo se fabrica lo que se reserva.</p>
+        </div>
+      </div>
+      <a href="#unete" class="inline-flex shrink-0 items-center gap-2 text-base font-semibold text-foam transition-all duration-700 ease-fluid hover:translate-x-1 hover:text-foam-strong">
+        <span>Quiero enterarme</span>
+        <Icon name="arrowRight" class="size-4" />
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon.astro";
+import { btnPrimary, container } from "../ui";
+---
+
+<Layout title="Página no encontrada" noindex>
+  <section class="flex min-h-[80dvh] items-center pb-24 pt-24">
+    <div class={`${container} mt-16`}>
+      <p class="text-sm font-semibold tabular-nums text-foam">Error 404</p>
+      <h1 class="mt-4 max-w-[680px] bg-linear-to-r from-white to-[#9b9b9b] bg-clip-text pb-2 text-4xl font-semibold tracking-tight text-transparent md:text-6xl">
+        Esta página se la ha llevado el viento
+      </h1>
+      <p class="mt-6 max-w-[680px] text-lg text-white/70">
+        Puede que el enlace esté mal escrito o que la página ya no exista. Vuelve al inicio y sigue desde la salida.
+      </p>
+      <a href="/" class={`${btnPrimary} mt-8`}>
+        <Icon name="arrowLeft" class="size-4" />
+        <span>Volver al inicio</span>
+      </a>
+    </div>
+  </section>
+</Layout>

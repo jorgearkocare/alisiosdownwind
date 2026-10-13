@@ -1,0 +1,73 @@
+---
+import Logo from "./Logo.astro";
+import { nav } from "../config";
+import { btnSmall } from "../ui";
+
+const menu = [...nav, { href: "/#unete", label: "Únete a la comunidad", id: "unete" }];
+const fluid = "transition-all duration-700 ease-fluid";
+---
+
+<a
+  href="#contenido"
+  class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-foam focus:px-3 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink"
+>Saltar al contenido</a>
+
+<header data-nav data-open="false" class="group/nav fixed inset-x-0 top-0 z-50 px-4">
+  <nav
+    aria-label="Principal"
+    class="relative z-10 mx-auto mt-6 flex w-max max-w-full items-center gap-4 rounded-full border border-white/10 bg-coal/70 py-2 pl-4 pr-2 backdrop-blur-xl md:gap-6"
+  >
+    <a href="/" class="flex items-center gap-2 text-sm font-semibold text-white" aria-label="Alisios Downwind, ir al inicio">
+      <Logo class="size-6" />
+      <span>Alisios Downwind</span>
+    </a>
+
+    <ul class="hidden items-center gap-1 lg:flex">
+      {
+        nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              data-spy={item.id}
+              class={`rounded-full px-3 py-2 text-sm font-medium text-white/70 ${fluid} hover:bg-white/5 hover:text-white aria-[current=true]:bg-white/10 aria-[current=true]:text-white`}
+            >{item.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <a href="/#unete" class={`${btnSmall} hidden sm:inline-flex`}>Únete</a>
+
+    <button
+      type="button"
+      data-nav-toggle
+      aria-expanded="false"
+      aria-controls="menu-movil"
+      aria-label="Abrir menú"
+      class={`group relative size-10 shrink-0 rounded-full ${fluid} hover:bg-white/10 active:scale-[0.98] lg:hidden`}
+    >
+      <span class={`absolute inset-0 m-auto block h-0.5 w-4 -translate-y-1 rounded-full bg-white ${fluid} group-aria-expanded:translate-y-0 group-aria-expanded:rotate-45`}></span>
+      <span class={`absolute inset-0 m-auto block h-0.5 w-4 translate-y-1 rounded-full bg-white ${fluid} group-aria-expanded:translate-y-0 group-aria-expanded:-rotate-45`}></span>
+    </button>
+  </nav>
+
+  <div
+    id="menu-movil"
+    class={`invisible fixed inset-0 bg-black/80 opacity-0 backdrop-blur-3xl ${fluid} group-data-[open=true]/nav:visible group-data-[open=true]/nav:opacity-100 lg:hidden`}
+  >
+    <ul class="flex h-full flex-col justify-center gap-6 px-6">
+      {
+        menu.map((item, i) => (
+          <li class="overflow-hidden">
+            <a
+              href={item.href}
+              data-menu-link
+              style={`transition-delay: ${100 + i * 50}ms`}
+              class={`block translate-y-12 text-4xl font-semibold tracking-tight text-white opacity-0 ${fluid} hover:text-foam group-data-[open=true]/nav:translate-y-0 group-data-[open=true]/nav:opacity-100`}
+            >{item.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>

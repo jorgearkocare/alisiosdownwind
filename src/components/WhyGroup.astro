@@ -1,0 +1,53 @@
+---
+import Icon from "./Icon.astro";
+import type { IconName } from "../icons";
+import { container, eyebrow, h2, section } from "../ui";
+
+const items: { icon: IconName; title: string; problem: string; solution: string }[] = [
+  {
+    icon: "car",
+    title: "Logística",
+    problem: "Un downwind empieza en un sitio y termina en otro. Sin un segundo coche esperando en la llegada, no hay bajada.",
+    solution: "Cuadramos coches en el grupo: dejamos unos en la llegada y subimos juntos a la salida.",
+  },
+  {
+    icon: "lifebuoy",
+    title: "Seguridad",
+    problem: "Si rompes un foil o te quedas sin piernas a mitad de ruta, estás solo frente a kilómetros de costa.",
+    solution: "Salimos juntos, con la ruta compartida y riders que conocen cada entrada y salida del mar.",
+  },
+  {
+    icon: "trend",
+    title: "Progresión",
+    problem: "Aprender a leer el swell a base de prueba y error lleva temporadas enteras.",
+    solution: "Bajas al lado de riders con más horas, ves su línea y copias lo que funciona.",
+  },
+];
+---
+
+<section id="por-que" aria-labelledby="por-que-title" class={section}>
+  <div class={container}>
+    <p data-reveal class={eyebrow}>Por qué en grupo</p>
+    <h2 id="por-que-title" data-reveal style="--d: 80ms" class={h2}>
+      Bajar solo tiene tres problemas. En grupo, ninguno.
+    </h2>
+
+    <ul class="mt-12 grid gap-6 md:grid-cols-3">
+      {
+        items.map((item, i) => (
+          <li data-reveal style={`--d: ${120 + i * 80}ms`} class="flex flex-col rounded-3xl border border-white/10 bg-coal p-6">
+            <span class="flex size-10 items-center justify-center rounded-full bg-white/5 text-foam">
+              <Icon name={item.icon} class="size-5" />
+            </span>
+            <h3 class="mt-6 text-xl font-semibold">{item.title}</h3>
+            <p class="mt-4 text-sm font-semibold text-white/50">Si bajas solo</p>
+            <p class="mt-2 text-base text-white/70">{item.problem}</p>
+            <div class="my-6 h-px bg-white/10" aria-hidden="true"></div>
+            <p class="text-sm font-semibold text-foam">En grupo</p>
+            <p class="mt-2 text-base text-white">{item.solution}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
