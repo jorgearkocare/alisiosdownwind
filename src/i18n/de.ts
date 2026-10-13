@@ -129,6 +129,13 @@ const de: typeof es = {
       { caption: "Nach dem Run", alt: "Die Gruppe feiert am Ziel mit einem lila Downwind-Board und Bier in der Hand" },
     ],
   },
+  team: {
+    sticker: "Hinter dem Projekt",
+    title: "Vier Freunde, süchtig nach Downwind",
+    lead: "Alisios haben vier Freunde gestartet, die einfach nicht mehr mit dem Downwind aufhören konnten. Wir wollten mit mehr Leuten Spaß haben und diesen Adrenalinkick teilen, wenn man Bumps verbindet und der Passat von hinten schiebt.",
+    role: "Alisios Crew",
+    profile: "Profil ansehen von",
+  },
   merch: {
     sticker: "Kollektion 2026",
     title: "Merch der Community",

@@ -129,6 +129,13 @@ const fr: typeof es = {
       { caption: "Après le run", alt: "Le groupe qui fête l'arrivée avec une planche de downwind violette et des bières à la main" },
     ],
   },
+  team: {
+    sticker: "Derrière le projet",
+    title: "Quatre potes accros au downwind",
+    lead: "Alisios, c'est quatre potes qui ne pouvaient plus s'arrêter de faire du downwind. On voulait s'amuser avec plus de monde et partager cette montée d'adrénaline quand on enchaîne les bumps avec l'alizé qui pousse derrière.",
+    role: "Équipe Alisios",
+    profile: "Voir le profil de",
+  },
   merch: {
     sticker: "Collection 2026",
     title: "Le merch de la communauté",

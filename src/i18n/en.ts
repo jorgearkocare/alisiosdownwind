@@ -129,6 +129,13 @@ const en: typeof es = {
       { caption: "After the run", alt: "The group celebrating at the finish with a purple downwind board and beers in hand" },
     ],
   },
+  team: {
+    sticker: "Behind the project",
+    title: "Four friends hooked on downwind",
+    lead: "Alisios was started by four friends who could not stop doing downwinds. We wanted to have fun with more people and share that adrenaline rush of linking bumps with the trade wind pushing from behind.",
+    role: "Alisios crew",
+    profile: "See profile of",
+  },
   merch: {
     sticker: "2026 collection",
     title: "Community merch",

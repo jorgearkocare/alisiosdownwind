@@ -129,6 +129,13 @@ const es = {
       { caption: "Después del run", alt: "El grupo celebrando en la llegada con una tabla de downwind morada y cervezas en la mano" },
     ],
   },
+  team: {
+    sticker: "Detrás del proyecto",
+    title: "Cuatro amigos enganchados al downwind",
+    lead: "Alisios lo empezamos cuatro amigos que no podíamos parar de hacer downwind. Queríamos divertirnos con más gente y compartir esa adrenalina de enlazar bumps con el alisio empujando por detrás.",
+    role: "Equipo Alisios",
+    profile: "Ver perfil de",
+  },
   merch: {
     sticker: "Colección 2026",
     title: "Merch de la comunidad",
