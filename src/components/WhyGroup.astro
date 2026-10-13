@@ -7,7 +7,7 @@ const items: { icon: IconName; title: string; problem: string; solution: string 
   {
     icon: "car",
     title: "Logística",
-    problem: "Un downwind empieza en un sitio y termina en otro. Sin un segundo coche esperando en la llegada, no hay bajada.",
+    problem: "Un downwind empieza en un sitio y termina en otro. Sin un segundo coche esperando en la llegada, no hay run.",
     solution: "Cuadramos coches en el grupo: dejamos unos en la llegada y subimos juntos a la salida.",
   },
   {
@@ -20,7 +20,7 @@ const items: { icon: IconName; title: string; problem: string; solution: string 
     icon: "trend",
     title: "Progresión",
     problem: "Aprender a leer el swell a base de prueba y error lleva temporadas enteras.",
-    solution: "Bajas al lado de riders con más horas, ves su línea y copias lo que funciona.",
+    solution: "Haces el run al lado de riders con más horas, ves su línea y copias lo que funciona.",
   },
 ];
 ---
@@ -29,7 +29,7 @@ const items: { icon: IconName; title: string; problem: string; solution: string 
   <div class={container}>
     <p data-reveal class={`${sticker} rotate-1`}>Por qué en grupo</p>
     <h2 id="por-que-title" data-reveal style="--d: 80ms" class={h2}>
-      Bajar solo tiene tres problemas. En grupo, ninguno.
+      Hacer downwind solo tiene tres problemas. En grupo, ninguno.
     </h2>
 
     <ul class="mt-12 grid gap-8 md:grid-cols-3">
@@ -40,7 +40,7 @@ const items: { icon: IconName; title: string; problem: string; solution: string 
               <Icon name={item.icon} class="size-6" />
             </span>
             <h3 class="mt-6 font-display text-3xl uppercase leading-none">{item.title}</h3>
-            <p class="mt-4 text-sm font-semibold uppercase tracking-wide text-ink/50">Si bajas solo</p>
+            <p class="mt-4 text-sm font-semibold uppercase tracking-wide text-ink/50">Si vas solo</p>
             <p class="mt-2 text-base text-ink/70">{item.problem}</p>
             <div class="my-6 border-t-2 border-dashed border-ink/30" aria-hidden="true"></div>
             <p class="text-sm font-semibold uppercase tracking-wide text-blue">En grupo</p>

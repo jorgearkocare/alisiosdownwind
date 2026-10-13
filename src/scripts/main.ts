@@ -118,7 +118,7 @@ if (form) {
       if (!v) return "Escribe tu email.";
       return emailPattern.test(v) ? "" : "Este email no parece válido. Revisa que tenga @ y dominio.";
     },
-    nivel: (el) => (el.value ? "" : "Elige tu nivel para saber qué bajadas te encajan."),
+    nivel: (el) => (el.value ? "" : "Elige tu nivel para saber qué runs te encajan."),
     privacidad: (el) => ((el as HTMLInputElement).checked ? "" : "Necesitamos tu permiso para escribirte."),
   };
 
@@ -151,7 +151,7 @@ if (form) {
     if (!submit || !submitLabel) return;
     submit.disabled = loading;
     submit.setAttribute("aria-busy", String(loading));
-    submitLabel.textContent = loading ? "Enviando…" : "Apúntate a la próxima bajada";
+    submitLabel.textContent = loading ? "Enviando…" : "Apúntate al próximo downwind";
   }
 
   function showSuccess(text?: string, title?: string) {

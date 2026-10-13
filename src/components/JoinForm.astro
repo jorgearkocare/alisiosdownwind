@@ -5,12 +5,12 @@ import { btnPrimary, container } from "../ui";
 
 const modes = ["SUP foil", "Parawing", "Wing foil"];
 const interests = [
-  { value: "bajadas", label: "Bajadas abiertas", checked: true },
+  { value: "runs", label: "Runs abiertos", checked: true },
   { value: "cursos", label: "Cursos y clínics", checked: false },
   { value: "pro-run-filmacion", label: "Pro runs y filmación", checked: false },
   { value: "merch", label: "Merch", checked: false },
 ];
-const levels = ["Estoy aprendiendo a despegar", "Despego y navego con choppy", "Bajo con soltura"];
+const levels = ["Estoy aprendiendo a despegar", "Despego y navego con choppy", "Hago downwind con soltura"];
 
 const field =
   "mt-2 block w-full rounded-xl border-2 border-ink bg-paper px-4 py-3 text-base text-ink placeholder:text-ink/30 transition-all duration-700 ease-fluid hover:bg-white focus:shadow-hard-sm focus:outline-none aria-[invalid=true]:border-red-600 aria-[invalid=true]:bg-red-50";
@@ -26,14 +26,14 @@ const joinUrl = site.whatsappGroup || site.instagram;
     <div class="grid gap-12 rounded-2xl border-2 border-ink bg-cream p-6 shadow-hard md:p-12 lg:grid-cols-12">
       <div class="lg:col-span-5">
         <h2 id="unete-title" data-reveal class="font-display text-5xl uppercase leading-none md:text-7xl">
-          Apúntate a la próxima bajada
+          Apúntate al próximo downwind
         </h2>
         <p data-reveal style="--d: 80ms" class="mt-6 text-lg text-ink/70">
-          Te avisamos por email de cada bajada y te pasamos el grupo de WhatsApp donde se cuadra todo.
+          Te avisamos por email de cada downwind y te pasamos el grupo de WhatsApp donde se cuadra todo.
         </p>
         <ul data-reveal style="--d: 160ms" class="mt-8 space-y-4">
           {
-            ["Gratis y sin cuotas", "Te das de baja con un clic", "Sin spam: solo bajadas y novedades"].map((t) => (
+            ["Gratis y sin cuotas", "Te das de baja con un clic", "Sin spam: solo runs y novedades"].map((t) => (
               <li class="flex items-center gap-2 text-base font-medium">
                 <Icon name="check" class="size-5 shrink-0 text-blue" />
                 <span>{t}</span>
@@ -67,7 +67,7 @@ const joinUrl = site.whatsappGroup || site.instagram;
           </div>
 
           <fieldset>
-            <legend class={label}>Qué bajas</legend>
+            <legend class={label}>Qué modalidad haces</legend>
             <div class="mt-2 flex flex-wrap gap-2">
               {
                 modes.map((m) => (
@@ -121,7 +121,7 @@ const joinUrl = site.whatsappGroup || site.instagram;
 
           <div class="flex flex-wrap items-center gap-4">
             <button type="submit" data-submit class={btnPrimary}>
-              <span data-submit-label>Apúntate a la próxima bajada</span>
+              <span data-submit-label>Apúntate al próximo downwind</span>
               <Icon name="arrowRight" class="size-4" />
             </button>
             <p data-status role="status" aria-live="polite" class="text-sm font-medium text-ink/70"></p>
@@ -133,7 +133,7 @@ const joinUrl = site.whatsappGroup || site.instagram;
             <Icon name="check" class="size-6" />
           </span>
           <h3 data-success-title class="mt-6 font-display text-4xl uppercase leading-none" tabindex="-1">Estás dentro.</h3>
-          <p data-success-text class="mt-2 text-base text-ink/80">Te escribimos en cuanto haya bajada. Mientras tanto, entra al grupo, que es donde se cuadra todo.</p>
+          <p data-success-text class="mt-2 text-base text-ink/80">Te escribimos en cuanto haya downwind. Mientras tanto, entra al grupo, que es donde se cuadra todo.</p>
           <a href={joinUrl} target="_blank" rel="noopener" class={`${btnPrimary} mt-6`}>
             <Icon name={site.whatsappGroup ? "whatsapp" : "instagram"} class="size-5" />
             <span>{site.whatsappGroup ? "Entrar al grupo de WhatsApp" : `Seguir ${site.instagramHandle}`}</span>

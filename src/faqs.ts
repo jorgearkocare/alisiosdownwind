@@ -2,19 +2,19 @@
 
 export const faqs = [
   {
-    q: "¿Cuánto cuesta venir a una bajada?",
-    a: "Las bajadas de la comunidad son gratis. Cada rider trae su material y, si compartimos coche, la gasolina se reparte entre quienes van.",
+    q: "¿Cuánto cuesta venir a un downwind?",
+    a: "Los runs de la comunidad son gratis. Cada rider trae su material y, si compartimos coche, la gasolina se reparte entre quienes van.",
   },
   {
     q: "¿Qué nivel necesito?",
-    a: "Para las bajadas abiertas tienes que despegar sin ayuda y aguantar sesiones largas en el agua. Si todavía no despegas con choppy, apúntate igualmente: te avisamos cuando abramos las sesiones de iniciación.",
+    a: "Para los runs abiertos tienes que despegar sin ayuda y aguantar sesiones largas en el agua. Si todavía no despegas con choppy, apúntate igualmente: te avisamos cuando abramos las sesiones de iniciación.",
   },
   {
     q: "¿Qué material hace falta?",
     a: "Tu tabla y tu foil, chaleco o impact vest, leash y el móvil en una funda estanca. Recomendamos casco. Para parawing y wing foil, tu ala.",
   },
   {
-    q: "¿Por dónde son las bajadas?",
+    q: "¿Por dónde son los runs?",
     a: "Elegimos la ruta según la dirección y la fuerza del alisio y el estado del mar. La ruta, el punto de encuentro y el nivel se anuncian en el grupo antes de cada salida.",
   },
   {
@@ -23,7 +23,7 @@ export const faqs = [
   },
   {
     q: "¿Puedo venir si estoy de paso por la isla?",
-    a: "Sí. Escríbenos con unos días de antelación y te decimos qué bajadas encajan con tu nivel y si queda sitio en algún coche.",
+    a: "Sí. Escríbenos con unos días de antelación y te decimos qué runs encajan con tu nivel y si queda sitio en algún coche.",
   },
   {
     q: "¿Alquiláis material?",
@@ -31,7 +31,7 @@ export const faqs = [
   },
   {
     q: "¿Quién se hace responsable en el agua?",
-    a: "En las bajadas abiertas cada rider sale bajo su propia responsabilidad y decide según su nivel y el estado del mar. Los cursos y actividades guiadas que lancemos tendrán seguro y monitores titulados.",
+    a: "En los runs abiertos cada rider sale bajo su propia responsabilidad y decide según su nivel y el estado del mar. Los cursos y actividades guiadas que lancemos tendrán seguro y monitores titulados.",
   },
   {
     q: "¿Cuándo empiezan los cursos?",
@@ -39,6 +39,6 @@ export const faqs = [
   },
   {
     q: "¿Qué hacéis con mis datos?",
-    a: "Solo los usamos para avisarte de bajadas y novedades de la comunidad. No los compartimos con nadie y puedes darte de baja cuando quieras.",
+    a: "Solo los usamos para avisarte de runs y novedades de la comunidad. No los compartimos con nadie y puedes darte de baja cuando quieras.",
   },
 ];

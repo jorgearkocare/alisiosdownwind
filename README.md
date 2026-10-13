@@ -56,7 +56,7 @@ public/                favicon, og.png (imagen al compartir), robots.txt
 
 ## Siguientes mejoras recomendadas
 
-- **Fotos reales**: la ilustración del hero es provisional. Una foto o un vídeo corto de una bajada (GoPro o dron) convierte mucho mejor. Pon la imagen en `src/assets/` y usa el componente `<Image />` de Astro en `Hero.astro`.
+- **Fotos reales**: el hero solo lleva el logo. Una foto o un vídeo corto de un downwind (GoPro o dron) convierte mucho mejor. Pon la imagen en `src/assets/` y usa el componente `<Image />` de Astro en `Hero.astro`.
 - **Testimonios reales**: cuando tengáis frases de riders (con su permiso), añadid una sección de testimonios junto a `Community.astro`.
 - **Riders invitados**: confirmad con Iballa Ruano y Foil Only que os parece bien nombrarlos (aparecen en el hero y en la sección de comunidad).
 - **Versión en inglés** para riders de paso por la isla.
