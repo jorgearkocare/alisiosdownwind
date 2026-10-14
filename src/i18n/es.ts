@@ -122,7 +122,7 @@ const es = {
       "Foil Only": "Escuela y comunidad de foil de Tenerife",
       "Moritz Mauch": "Windsurfista y rider de SUP profesional",
       "Miguel Chapuis": "Windsurfista profesional",
-      "@ramonfoil": "Parawinger local",
+      "Ramón Sánchez": "Parawinger local",
     } as Record<string, string>,
     photos: [
       {

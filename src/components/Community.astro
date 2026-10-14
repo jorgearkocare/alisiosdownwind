@@ -13,12 +13,14 @@ const riderList = [
   { name: "Foil Only", instagram: "foilonly" },
   { name: "Moritz Mauch", instagram: "moritzmauch" },
   { name: "Miguel Chapuis", instagram: "miguelitochapuis" },
-  { name: "@ramonfoil", instagram: "ramonfoil" },
+  { name: "Ramón Sánchez", instagram: "ramonfoil" },
 ];
 const riders = riderList.map((r) => ({
   ...r,
   role: t.community.roles[r.name] ?? "",
   url: r.instagram ? `https://www.instagram.com/${r.instagram}/` : "",
+  // Foto de perfil de Instagram (96x96) en public/riders/{instagram}.webp
+  photo: r.instagram ? `/riders/${r.instagram}.webp` : "",
   initials: r.name.replace("@", "").split(" ").map((w) => w[0]).join("").slice(0, 2),
 }));
 
@@ -62,11 +64,15 @@ const photos = files.map((f, i) => ({ ...f, ...t.community.photos[i] }));
                     aria-label={`${rider.name}, Instagram @${rider.instagram}`}
                     class="group flex items-center gap-4 rounded-2xl border-2 border-ink bg-paper p-4 shadow-hard transition-all duration-700 ease-fluid hover:-translate-y-0.5 hover:bg-white"
                   >
-                    <span class="flex size-12 shrink-0 items-center justify-center rounded-full border-2 border-ink bg-blue font-display text-xl uppercase text-cream" aria-hidden="true">{rider.initials}</span>
+                    {rider.photo ? (
+                      <img src={rider.photo} width="96" height="96" alt="" loading="lazy" decoding="async" class="size-12 shrink-0 rounded-full border-2 border-ink bg-blue object-cover" />
+                    ) : (
+                      <span class="flex size-12 shrink-0 items-center justify-center rounded-full border-2 border-ink bg-blue font-display text-xl uppercase text-cream" aria-hidden="true">{rider.initials}</span>
+                    )}
                     <span class="min-w-0 flex-1">
                       <span class="block font-display text-2xl uppercase leading-none">{rider.name}</span>
                       {rider.role && <span class="mt-1 block text-sm text-ink/60">{rider.role}</span>}
-                      {!rider.name.startsWith("@") && <span class="mt-1 block truncate text-sm font-semibold text-blue">@{rider.instagram}</span>}
+                      <span class="mt-1 block truncate text-sm font-semibold text-blue">@{rider.instagram}</span>
                     </span>
                     <Icon name="instagram" class="size-5 shrink-0 transition-transform duration-700 ease-fluid group-hover:-rotate-12" />
                   </a>

@@ -122,7 +122,7 @@ const fr: typeof es = {
       "Foil Only": "École et communauté de foil de Tenerife",
       "Moritz Mauch": "Windsurfeur et rider SUP professionnel",
       "Miguel Chapuis": "Windsurfeur professionnel",
-      "@ramonfoil": "Parawinger local",
+      "Ramón Sánchez": "Parawinger local",
     } as Record<string, string>,
     photos: [
       {

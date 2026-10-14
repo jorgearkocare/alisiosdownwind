@@ -122,7 +122,7 @@ const en: typeof es = {
       "Foil Only": "Foil school and community from Tenerife",
       "Moritz Mauch": "Pro windsurfer and SUP rider",
       "Miguel Chapuis": "Pro windsurfer",
-      "@ramonfoil": "Local parawinger",
+      "Ramón Sánchez": "Local parawinger",
     } as Record<string, string>,
     photos: [
       {
