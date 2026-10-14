@@ -6,14 +6,20 @@ import { useI18n } from "../i18n";
 const { t } = useI18n(Astro.url);
 
 // Los cuatro amigos que empezaron Alisios. Para cambiar el orden o añadir a alguien, edita esta lista.
-const handles = ["joorgee_z", "liamdm11", "marinito959", "mike_e255"];
+// Las fotos están en public/equipo/ con el nombre de usuario de Instagram.
+const people = [
+  { name: "Jorge", handle: "joorgee_z" },
+  { name: "Liam", handle: "liamdm11" },
+  { name: "Mike", handle: "mike_e255" },
+  { name: "Marino", handle: "marinito959" },
+];
 const looks = [
   { card: "bg-sun", badge: "bg-paper text-ink", tilt: "-rotate-2" },
   { card: "bg-blue text-cream", badge: "bg-sun text-ink", tilt: "rotate-1" },
   { card: "bg-ink text-cream", badge: "bg-blue text-cream", tilt: "-rotate-1" },
   { card: "bg-paper", badge: "bg-ink text-cream", tilt: "rotate-2" },
 ];
-const crew = handles.map((handle, i) => ({ handle, url: `https://www.instagram.com/${handle}/`, ...looks[i] }));
+const crew = people.map((p, i) => ({ ...p, photo: `/equipo/${p.handle}.jpg`, url: `https://www.instagram.com/${p.handle}/`, ...looks[i] }));
 // Se repiten las tarjetas para que el carrusel cubra pantallas anchas sin huecos
 const loop = [...crew, ...crew, ...crew];
 ---
@@ -39,18 +45,27 @@ const loop = [...crew, ...crew, ...crew];
                   target="_blank"
                   rel="noopener"
                   tabindex={copy === 1 || i >= crew.length ? "-1" : undefined}
-                  aria-label={`${t.team.profile} @${person.handle} (Instagram)`}
-                  class={`group flex h-full flex-col rounded-2xl border-2 border-ink p-6 shadow-hard transition-all duration-700 ease-fluid hover:-translate-y-1 hover:rotate-0 ${person.card} ${person.tilt}`}
+                  aria-label={`${t.team.profile} ${person.name}, @${person.handle} (Instagram)`}
+                  class={`group flex h-full flex-col rounded-2xl border-2 border-ink p-2 shadow-hard transition-all duration-700 ease-fluid hover:-translate-y-1 hover:rotate-0 ${person.card} ${person.tilt}`}
                 >
-                  <span class={`flex size-16 items-center justify-center rounded-full border-2 border-ink font-display text-4xl uppercase ${person.badge}`} aria-hidden="true">
-                    {person.handle[0]}
-                  </span>
-                  <span class="mt-6 block break-all font-display text-3xl leading-none">@{person.handle}</span>
-                  <span class="mt-2 block text-sm font-semibold uppercase tracking-wide opacity-70">{t.team.role}</span>
-                  <span class="mt-auto flex items-center gap-2 pt-6 text-sm font-semibold">
-                    <Icon name="instagram" class="size-5" />
-                    <span>Instagram</span>
-                    <Icon name="arrowUpRight" class="size-4 transition-transform duration-700 ease-fluid group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  <img
+                    src={person.photo}
+                    width="640"
+                    height="800"
+                    alt={person.name}
+                    loading="lazy"
+                    decoding="async"
+                    class="aspect-[4/5] h-auto w-full rounded-lg border-2 border-ink object-cover"
+                  />
+                  <span class="flex flex-1 flex-col px-2 pb-2 pt-4">
+                    <span class="block font-display text-4xl uppercase leading-none">{person.name}</span>
+                    <span class="mt-2 block break-all text-base font-semibold">@{person.handle}</span>
+                    <span class="mt-1 block text-xs font-semibold uppercase tracking-wide opacity-70">{t.team.role}</span>
+                    <span class="mt-auto flex items-center gap-2 pt-4 text-sm font-semibold">
+                      <Icon name="instagram" class="size-5" />
+                      <span>Instagram</span>
+                      <Icon name="arrowUpRight" class="size-4 transition-transform duration-700 ease-fluid group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </span>
                   </span>
                 </a>
               </li>
