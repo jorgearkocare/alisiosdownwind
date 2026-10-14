@@ -117,6 +117,10 @@ html:not(.js) [data-word][data-accent] {
   animation: marquee var(--speed, 40s) linear infinite;
 }
 
+.marquee-reverse .marquee-track {
+  animation-direction: reverse;
+}
+
 .marquee:hover .marquee-track,
 .marquee:focus-within .marquee-track {
   animation-play-state: paused;

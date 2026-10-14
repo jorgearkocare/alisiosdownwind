@@ -111,6 +111,21 @@ const en: typeof es = {
       },
     ],
   },
+  gallery: {
+    sticker: "Gallery",
+    title: "This is what a run looks like",
+    lead: "From the slipway to the last bump: a trade-wind day with the crew.",
+    more: "More photos on Instagram",
+    items: [
+      { caption: "Briefing before the run", alt: "Four riders by a van going over the plan, with boards and foils on the ground" },
+      { caption: "Heading to the water", alt: "A rider walks to the water with a foil on his shoulder, followed by two more riders" },
+      { caption: "Mid-run", alt: "Rider flying on the foil in open water, filmed with a handheld camera" },
+      { caption: "Van, boards and laughs", alt: "Three smiling riders next to a van with boards and foils after the run" },
+      { caption: "Launching from the shore", alt: "Several riders getting into the water with their foil boards from the shore" },
+      { caption: "Flying with the trades", alt: "Rider on the foil in open water with the paddle raised" },
+      { caption: "Chasing the first bump", alt: "Two riders paddling out to sea; one points the way with his paddle" },
+    ],
+  },
   community: {
     sticker: "The community",
     title: "It started with a few friends. Now even the pros show up.",

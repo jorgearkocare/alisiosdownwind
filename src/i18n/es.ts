@@ -111,6 +111,21 @@ const es = {
       },
     ],
   },
+  gallery: {
+    sticker: "Galería",
+    title: "Así se vive un run",
+    lead: "De la rampa al último bump: así son nuestros días de alisio con la comunidad.",
+    more: "Más fotos en Instagram",
+    items: [
+      { caption: "Briefing antes del run", alt: "Cuatro riders junto a una furgoneta repasando el plan, con tablas y foils en el suelo" },
+      { caption: "Rumbo al agua", alt: "Un rider camina hacia el agua con el foil al hombro, seguido de dos riders más" },
+      { caption: "En pleno run", alt: "Rider volando sobre el foil en mar abierto, grabado con cámara en mano" },
+      { caption: "Furgo, tablas y risas", alt: "Tres riders sonrientes junto a una furgoneta con tablas y foils después del run" },
+      { caption: "Salida desde la orilla", alt: "Varios riders entrando al agua con sus tablas de foil desde la orilla" },
+      { caption: "Volando con el alisio", alt: "Rider sobre el foil en mar abierto con el remo en alto" },
+      { caption: "A por el primer bump", alt: "Dos riders remando mar adentro; uno señala con el remo hacia dónde ir" },
+    ],
+  },
   community: {
     sticker: "La comunidad",
     title: "Empezamos unos pocos amigos. Ahora vienen hasta los pros.",

@@ -1,0 +1,82 @@
+---
+import Icon from "./Icon.astro";
+import { site } from "../config";
+import { container, h2, lead, section, sticker } from "../ui";
+import { useI18n } from "../i18n";
+
+const { t } = useI18n(Astro.url);
+
+// Fotos de runs con la comunidad. Están en public/galeria/ (640 px de alto).
+// Los pies de foto y los textos alternativos están en los diccionarios (src/i18n), en gallery.items, en este mismo orden.
+const files = [
+  { src: "/galeria/briefing-en-la-rampa.jpg", w: 405 },
+  { src: "/galeria/rumbo-al-agua.jpg", w: 499 },
+  { src: "/galeria/en-pleno-run.jpg", w: 456 },
+  { src: "/galeria/furgo-tablas-y-risas.jpg", w: 1036 },
+  { src: "/galeria/salida-desde-la-orilla.jpg", w: 575 },
+  { src: "/galeria/volando-con-el-alisio.jpg", w: 871 },
+  { src: "/galeria/remando-al-bump.jpg", w: 585 },
+];
+const looks = [
+  { frame: "bg-paper", tilt: "-rotate-2" },
+  { frame: "bg-sun", tilt: "rotate-1" },
+  { frame: "bg-blue text-cream", tilt: "-rotate-1" },
+  { frame: "bg-paper", tilt: "rotate-2" },
+  { frame: "bg-ink text-cream", tilt: "-rotate-2" },
+  { frame: "bg-sun", tilt: "rotate-1" },
+  { frame: "bg-paper", tilt: "-rotate-1" },
+];
+const photos = files.map((f, i) => ({ ...f, h: 640, ...t.gallery.items[i], ...looks[i] }));
+---
+
+<section id="galeria" aria-labelledby="galeria-title" class={section}>
+  <div class={container}>
+    <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p data-reveal class={`${sticker} rotate-1`}>{t.gallery.sticker}</p>
+        <h2 id="galeria-title" data-reveal style="--d: 80ms" class={h2}>{t.gallery.title}</h2>
+        <p data-reveal style="--d: 160ms" class={lead}>{t.gallery.lead}</p>
+      </div>
+      <a
+        data-reveal
+        style="--d: 240ms"
+        href={site.instagram}
+        target="_blank"
+        rel="noopener"
+        class="group inline-flex shrink-0 items-center gap-2 self-start font-semibold underline decoration-2 underline-offset-4 transition-colors duration-700 ease-fluid hover:text-blue md:self-auto"
+      >
+        <Icon name="instagram" class="size-5" />
+        <span>{t.gallery.more}</span>
+        <Icon name="arrowUpRight" class="size-4 transition-transform duration-700 ease-fluid group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+      </a>
+    </div>
+  </div>
+
+  <!-- Cinta de fotos: va en sentido contrario a la del equipo y se para al pasar el ratón -->
+  <div data-reveal style="--d: 120ms" class="marquee marquee-scroll marquee-reverse mt-8 overflow-hidden py-8">
+    <div class="marquee-track flex w-max" style="--speed: 110s">
+      {
+        [0, 1].map((copy) => (
+          <ul class="flex shrink-0 items-start gap-8 pr-8" aria-hidden={copy === 1 ? "true" : undefined} data-dup={copy === 1 ? "" : undefined}>
+            {photos.map((photo) => (
+              <li class="shrink-0">
+                <figure class={`w-min rounded-2xl border-2 border-ink p-2 shadow-hard transition-transform duration-700 ease-fluid md:hover:rotate-0 ${photo.frame} ${photo.tilt}`}>
+                  <img
+                    src={photo.src}
+                    width={photo.w}
+                    height={photo.h}
+                    alt={copy === 1 ? "" : photo.alt}
+                    loading="lazy"
+                    decoding="async"
+                    class="h-56 w-auto max-w-none rounded-lg border-2 border-ink object-cover sm:h-72"
+                  />
+                  <figcaption class="px-2 pb-1 pt-3 font-display text-xl uppercase leading-none">{photo.caption}</figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        ))
+      }
+    </div>
+  </div>
+</section>

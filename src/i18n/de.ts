@@ -111,6 +111,21 @@ const de: typeof es = {
       },
     ],
   },
+  gallery: {
+    sticker: "Galerie",
+    title: "So sieht ein Run aus",
+    lead: "Von der Slipanlage bis zum letzten Bump: ein Passat-Tag mit der Crew.",
+    more: "Mehr Fotos auf Instagram",
+    items: [
+      { caption: "Briefing vor dem Run", alt: "Vier Rider an einem Van besprechen den Plan, Boards und Foils liegen am Boden" },
+      { caption: "Ab ins Wasser", alt: "Ein Rider geht mit dem Foil auf der Schulter zum Wasser, gefolgt von zwei weiteren Ridern" },
+      { caption: "Mitten im Run", alt: "Rider fliegt auf dem Foil auf offenem Meer, mit der Handkamera gefilmt" },
+      { caption: "Van, Boards und gute Laune", alt: "Drei lachende Rider neben einem Van mit Boards und Foils nach dem Run" },
+      { caption: "Start vom Ufer", alt: "Mehrere Rider gehen mit ihren Foilboards vom Ufer aus ins Wasser" },
+      { caption: "Mit dem Passat fliegen", alt: "Rider auf dem Foil auf offenem Meer mit erhobenem Paddel" },
+      { caption: "Auf zum ersten Bump", alt: "Zwei Rider paddeln aufs Meer hinaus; einer zeigt mit dem Paddel die Richtung" },
+    ],
+  },
   community: {
     sticker: "Die Community",
     title: "Angefangen haben ein paar Freunde. Jetzt kommen sogar die Profis.",

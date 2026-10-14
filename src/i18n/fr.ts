@@ -111,6 +111,21 @@ const fr: typeof es = {
       },
     ],
   },
+  gallery: {
+    sticker: "Galerie",
+    title: "Voilà à quoi ressemble un run",
+    lead: "De la cale à la dernière bosse : une journée d'alizés avec la bande.",
+    more: "Plus de photos sur Instagram",
+    items: [
+      { caption: "Briefing avant le run", alt: "Quatre riders près d'un van font le point, planches et foils posés au sol" },
+      { caption: "Direction l'eau", alt: "Un rider marche vers l'eau, le foil sur l'épaule, suivi de deux autres riders" },
+      { caption: "En plein run", alt: "Rider en vol sur son foil en pleine mer, filmé caméra à la main" },
+      { caption: "Van, planches et fous rires", alt: "Trois riders souriants à côté d'un van avec planches et foils après le run" },
+      { caption: "Départ depuis le bord", alt: "Plusieurs riders entrent dans l'eau avec leurs planches de foil depuis le bord" },
+      { caption: "En vol avec les alizés", alt: "Rider sur son foil en pleine mer, la pagaie levée" },
+      { caption: "Vers la première bosse", alt: "Deux riders pagaient vers le large ; l'un montre la direction avec sa pagaie" },
+    ],
+  },
   community: {
     sticker: "La communauté",
     title: "On a commencé à quelques potes. Maintenant même les pros viennent.",
