@@ -1,0 +1,18 @@
+---
+// Borde de papel rasgado. Se coloca pegado arriba (o abajo, con flip) de una franja de color.
+interface Props {
+  class?: string;
+  flip?: boolean;
+}
+
+const { class: className = "text-ink", flip = false } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 1200 24"
+  preserveAspectRatio="none"
+  aria-hidden="true"
+  class={`pointer-events-none absolute inset-x-0 z-10 block h-5 w-full md:h-6 ${flip ? "top-full -mt-px rotate-180" : "bottom-full -mb-px"} ${className}`}
+>
+  <path fill="currentColor" d="M0 24 L0 10.8 L26 17.1 L57 3.1 L72 14.6 L88 12.3 L109 3.7 L124 14.4 L145 18.9 L160 15.8 L175 5.1 L193 9.3 L224 3.7 L255 17.5 L287 15.9 L312 3.6 L328 14.2 L348 13.0 L375 9.4 L403 8.9 L422 19.3 L438 14.9 L467 10.2 L490 16.9 L507 15.3 L545 8.5 L574 11.1 L609 4.3 L641 9.0 L666 15.5 L694 4.5 L716 13.1 L732 4.2 L755 18.7 L790 11.9 L816 18.0 L844 8.5 L861 11.2 L899 8.4 L920 12.2 L949 2.5 L975 14.8 L993 13.6 L1015 18.2 L1040 19.7 L1061 5.2 L1079 7.0 L1093 13.5 L1112 8.8 L1130 12.6 L1163 15.0 L1181 19.6 L1200 8.0 L1200 24 Z" />
+</svg>

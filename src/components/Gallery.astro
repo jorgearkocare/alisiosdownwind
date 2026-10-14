@@ -1,5 +1,6 @@
 ---
 import Icon from "./Icon.astro";
+import Sticker from "./Sticker.astro";
 import { site } from "../config";
 import { container, h2, lead, section, sticker } from "../ui";
 import { useI18n } from "../i18n";
@@ -31,7 +32,8 @@ const photos = files.map((f, i) => ({ ...f, h: 640, ...t.gallery.items[i], ...lo
 
 <section id="galeria" aria-labelledby="galeria-title" class={section}>
   <div class={container}>
-    <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+    <div class="relative flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+      <Sticker text="Bump hunters" tone="ink" class="absolute right-2 top-0 hidden rotate-6 md:inline-block" />
       <div>
         <p data-reveal class={`${sticker} rotate-1`}>{t.gallery.sticker}</p>
         <h2 id="galeria-title" data-reveal style="--d: 80ms" class={h2}>{t.gallery.title}</h2>
@@ -60,7 +62,7 @@ const photos = files.map((f, i) => ({ ...f, h: 640, ...t.gallery.items[i], ...lo
           <ul class="flex shrink-0 items-start gap-8 pr-8" aria-hidden={copy === 1 ? "true" : undefined} data-dup={copy === 1 ? "" : undefined}>
             {photos.map((photo) => (
               <li class="shrink-0">
-                <figure class={`w-min rounded-2xl border-2 border-ink p-2 shadow-hard transition-transform duration-700 ease-fluid md:hover:rotate-0 ${photo.frame} ${photo.tilt}`}>
+                <figure class={`tape w-min rounded-2xl border-2 border-ink p-2 shadow-hard transition-transform duration-700 ease-fluid md:hover:rotate-0 ${photo.frame} ${photo.tilt}`}>
                   <img
                     src={photo.src}
                     width={photo.w}

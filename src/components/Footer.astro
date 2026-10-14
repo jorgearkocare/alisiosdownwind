@@ -1,6 +1,8 @@
 ---
 import Logo from "./Logo.astro";
 import Icon from "./Icon.astro";
+import Sticker from "./Sticker.astro";
+import Torn from "./Torn.astro";
 import { site } from "../config";
 import { container } from "../ui";
 import { useI18n } from "../i18n";
@@ -17,7 +19,9 @@ const link =
   "inline-flex items-center gap-2 rounded-sm text-sm text-cream/70 transition-colors duration-700 ease-fluid hover:text-sun aria-[current=page]:text-sun";
 ---
 
-<footer class="bg-ink pt-16 text-cream">
+<footer class="relative mt-6 bg-ink pt-16 text-cream">
+  <Torn />
+  <Sticker text="Never ride alone" class="absolute -top-5 right-4 z-20 rotate-3 md:right-12" />
   <div class={`${container} grid gap-12 md:grid-cols-12`}>
     <div class="md:col-span-6">
       <a href={home} class="inline-flex items-center gap-4" aria-label={t.nav.home}>

@@ -1,0 +1,22 @@
+---
+import Asterisk from "./Asterisk.astro";
+// Sello redondo con texto girando, como los de las marcas de surf. Se para si el usuario prefiere menos movimiento.
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+const text = "Alisios downwind • Gran Canaria • 28°N 15°W • ";
+---
+
+<div aria-hidden="true" class={`relative size-28 select-none rounded-full border-2 border-ink bg-sun shadow-hard-sm md:size-32 ${className}`}>
+  <svg viewBox="0 0 120 120" class="spin absolute inset-0 size-full">
+    <defs>
+      <path id="badge-circle" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0" />
+    </defs>
+    <text font-family="Anton, 'Arial Narrow', Impact, sans-serif" font-size="12.6" letter-spacing="1.2" fill="currentColor" class="uppercase">
+      <textPath href="#badge-circle" textLength="274" lengthAdjust="spacing">{text.toUpperCase()}</textPath>
+    </text>
+  </svg>
+  <Asterisk class="absolute inset-0 m-auto size-9 text-blue" />
+</div>

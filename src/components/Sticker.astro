@@ -1,0 +1,18 @@
+---
+// Pegatina troquelada: borde blanco, sombra dura y un poco torcida. Es decoración, los lectores de pantalla la ignoran.
+interface Props {
+  text: string;
+  tone?: "sun" | "blue" | "ink" | "paper";
+  class?: string;
+}
+
+const { text, tone = "sun", class: className = "" } = Astro.props;
+const tones = {
+  sun: "bg-sun text-ink",
+  blue: "bg-blue text-cream",
+  ink: "bg-ink text-sun",
+  paper: "bg-paper text-ink",
+};
+---
+
+<span aria-hidden="true" class={`sticker-slap inline-block select-none whitespace-nowrap rounded-lg border-2 border-ink px-3 py-1.5 font-display text-lg uppercase leading-none md:text-xl ${tones[tone]} ${className}`}>{text}</span>

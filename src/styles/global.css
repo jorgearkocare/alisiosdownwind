@@ -106,6 +106,101 @@ html:not(.js) [data-word][data-accent] {
   color: var(--color-sun);
 }
 
+/* ---------- Detalles de fanzine: grano, puntos, pegatinas, cinta y garabatos ---------- */
+
+/* Grano de fotocopia sobre toda la página */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3.2 -1.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Trama de puntos de imprenta, se difumina hacia los bordes */
+.halftone {
+  background-image: radial-gradient(var(--dot, var(--color-blue)) 1.6px, transparent 1.8px);
+  background-size: 14px 14px;
+  -webkit-mask-image: radial-gradient(closest-side, #000 35%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 35%, transparent 100%);
+}
+
+/* Pegatina troquelada: borde blanco alrededor y sombra dura */
+.sticker-slap {
+  box-shadow:
+    0 0 0 4px var(--color-paper),
+    6px 6px 0 4px var(--color-ink);
+  transition: transform 700ms var(--ease-fluid);
+}
+
+.sticker-slap:hover {
+  transform: rotate(0deg) scale(1.06);
+}
+
+/* Trozo de cinta adhesiva sujetando una foto */
+.tape {
+  position: relative;
+}
+
+.tape::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  z-index: 2;
+  width: 92px;
+  height: 28px;
+  translate: -50% 0;
+  rotate: var(--tape, -4deg);
+  background: rgb(255 225 122 / 0.78);
+  box-shadow: 0 1px 0 rgb(11 11 9 / 0.15);
+  clip-path: polygon(0 8%, 6% 0, 12% 10%, 18% 0, 82% 0, 88% 10%, 94% 0, 100% 8%, 100% 92%, 94% 100%, 88% 90%, 82% 100%, 18% 100%, 12% 90%, 6% 100%, 0 92%);
+}
+
+.tape:nth-child(even)::before,
+li:nth-child(even) > .tape::before {
+  --tape: 5deg;
+  left: 62%;
+}
+
+li:nth-child(3n) > .tape::before {
+  --tape: -9deg;
+  left: 38%;
+}
+
+/* Subrayado a mano que se dibuja al aparecer el titular */
+.scribble path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.js .is-in .scribble path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 900ms var(--ease-fluid) 700ms;
+}
+
+.js .is-in .scribble path + path {
+  transition-delay: 1100ms;
+}
+
+html:not(.js) .scribble path {
+  stroke-dashoffset: 0;
+}
+
+/* Sello que gira */
+@keyframes badge-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.spin {
+  animation: badge-spin 24s linear infinite;
+}
+
 /* Cintas de texto en movimiento */
 @keyframes marquee {
   to {
@@ -159,8 +254,13 @@ html:not(.js) [data-word][data-accent] {
   }
 
   .marquee-track,
-  .bob {
+  .bob,
+  .spin {
     animation: none;
+  }
+
+  .scribble path {
+    stroke-dashoffset: 0;
   }
 
   /* Sin movimiento, el carrusel de tarjetas pasa a deslizarse a mano */
