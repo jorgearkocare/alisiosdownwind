@@ -20,7 +20,7 @@ export const site = {
   legal: {
     owner: "Alisios Downwind (comunidad en proceso de constitución como club deportivo)",
     taxId: "Pendiente de alta",
-    address: "35200 Gran Canaria, Islas Canarias, España",
+    address: "Calle Ciudad de Moguer, 35200 Gran Canaria, Las Palmas, España",
   },
 } as const;
 
