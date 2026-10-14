@@ -331,6 +331,19 @@ document.querySelectorAll<HTMLFormElement>("[data-simple-form]").forEach((form) 
       label.textContent = text.sending;
     }
     try {
+      // Kit (antes ConvertKit): su formulario espera el campo "email_address" y no permite leer la respuesta
+      // desde otra web, así que se envía en modo "no-cors" y se da por recibido
+      const host = new URL(endpoint).hostname;
+      if (/(^|\.)(kit\.com|convertkit\.com)$/.test(host)) {
+        const email = data.get("email");
+        if (email) {
+          data.delete("email");
+          data.set("email_address", String(email));
+        }
+        await fetch(endpoint, { method: "POST", body: data, mode: "no-cors" });
+        done();
+        return;
+      }
       const res = await fetch(endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
       if (!res.ok) throw new Error(String(res.status));
       done();
