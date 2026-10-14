@@ -120,6 +120,9 @@ const es = {
     roles: {
       "Iballa Ruano": "Rider profesional de Gran Canaria",
       "Foil Only": "Escuela y comunidad de foil de Tenerife",
+      "Moritz Mauch": "Windsurfista y rider de SUP profesional",
+      "Miguel Chapuis": "Windsurfista profesional",
+      "@ramonfoil": "Parawinger local",
     } as Record<string, string>,
     photos: [
       {

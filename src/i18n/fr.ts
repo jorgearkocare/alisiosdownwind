@@ -120,6 +120,9 @@ const fr: typeof es = {
     roles: {
       "Iballa Ruano": "Rideuse professionnelle de Gran Canaria",
       "Foil Only": "École et communauté de foil de Tenerife",
+      "Moritz Mauch": "Windsurfeur et rider SUP professionnel",
+      "Miguel Chapuis": "Windsurfeur professionnel",
+      "@ramonfoil": "Parawinger local",
     } as Record<string, string>,
     photos: [
       {
