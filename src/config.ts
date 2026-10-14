@@ -9,7 +9,7 @@ export const site = {
   instagram: "https://www.instagram.com/alisios.downwind/",
   instagramHandle: "@alisios.downwind",
   // PENDIENTE: enlace de invitación al grupo de WhatsApp (https://chat.whatsapp.com/...). Si se deja vacío se muestra Instagram.
-  whatsappGroup: "",
+  whatsappGroup: "https://chat.whatsapp.com/H6bp2U6VDbB1QXEuHy1s0r",
   email: "alisios.downwind@gmail.com",
   // PENDIENTE: endpoint del formulario (Formspree, Web3Forms, Basin...). Si se deja vacío, el formulario abre el correo del usuario con los datos.
   formEndpoint: "",

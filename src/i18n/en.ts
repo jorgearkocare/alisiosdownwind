@@ -100,7 +100,7 @@ const en: typeof es = {
     sticker: "How it works",
     title: "From the sofa to the finish in three steps",
     steps: [
-      { title: "Join the community", text: "Leave us your email and join the WhatsApp group. That is where it all happens." },
+      { title: "Join the community", text: "Join the WhatsApp group. We announce every run there and sort everything out." },
       {
         title: "Get the call",
         text: "When the forecast confirms wind we post the route, time, meeting point and level, usually one or two days ahead.",
@@ -227,7 +227,7 @@ const en: typeof es = {
   coming: {
     sticker: "Coming up",
     title: "Courses, pro runs and filming",
-    lead: "We are setting it up as a club, with insurance and qualified instructors. Tick what interests you when you sign up and you will hear before anyone else.",
+    lead: "We are setting it up as a club, with insurance and qualified instructors. We will announce it in the WhatsApp group first.",
     soon: "Coming soon",
     items: [
       { title: "Rescue and good practice", text: "Self-rescue, towing, signals and route planning. Theory and water in one morning." },
@@ -279,7 +279,7 @@ const en: typeof es = {
       },
       {
         q: "When do courses start?",
-        a: "We are working on them. Tick courses when you sign up and we will tell you before spots open.",
+        a: "We are working on them. We will post in the WhatsApp group before spots open.",
       },
       {
         q: "What do you do with my data?",
@@ -288,36 +288,17 @@ const en: typeof es = {
     ],
   },
   join: {
-    title: "Join the next downwind",
-    lead: "We email you about every downwind and add you to the WhatsApp group where everything gets organised.",
-    perks: ["Free, no fees", "Unsubscribe in one click", "No spam: only runs and news"],
-    name: "Name",
-    namePlaceholder: "Nayra",
-    email: "Email",
-    emailPlaceholder: "nayra@email.com",
-    modes: "What do you ride",
-    level: "Your level",
-    levelPlaceholder: "Choose an option",
-    levels: {
-      aprendiendo: "I am learning to get up on foil",
-      choppy: "I get up and ride in chop",
-      soltura: "I ride downwind with ease",
-    },
-    interests: "What are you interested in",
-    interestLabels: {
-      runs: "Open runs",
-      cursos: "Courses and clinics",
-      "pro-run-filmacion": "Pro runs and filming",
-      merch: "Merch",
-    },
-    honeypot: "Do not fill in this field",
-    consentBefore: "I have read the",
-    consentLink: "privacy policy",
-    consentAfter: "and agree to receive emails about the community.",
-    successTitle: "You are in.",
-    successText: "We will write as soon as there is a downwind. In the meantime, join the group, that is where everything gets organised.",
-    whatsapp: "Join the WhatsApp group",
-    follow: "Follow",
+    title: "Join the next downwind runs in Gran Canaria",
+    lead: "To join a run, all you need is our WhatsApp group. That is where we call it when the trade winds fill in, share start, finish and level, and sort out cars together.",
+    perks: ["Free, no fees", "Messages only when there is wind", "Leave the group whenever you like"],
+    stepsLabel: "How to join",
+    steps: [
+      "Join the WhatsApp group with the button below.",
+      "When the forecast confirms wind, we post the run with time, start, finish and level.",
+      "Reply in the group to sign up and we meet at the finish to sort out cars.",
+    ],
+    cta: "Join the WhatsApp group",
+    note: "WhatsApp opens. On a computer you can join from WhatsApp Web.",
   },
   client: {
     required: "Fill in this field.",

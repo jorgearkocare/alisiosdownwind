@@ -100,7 +100,7 @@ const de: typeof es = {
     sticker: "So läuft's",
     title: "Vom Sofa ins Ziel in drei Schritten",
     steps: [
-      { title: "Werde Teil der Community", text: "Hinterlass uns deine Email und komm in die WhatsApp-Gruppe. Dort passiert alles." },
+      { title: "Werde Teil der Community", text: "Komm in die WhatsApp-Gruppe. Dort kündigen wir jeden Run an und organisieren alles." },
       {
         title: "Hol dir die Ansage",
         text: "Wenn die Vorhersage Wind bestätigt, posten wir Route, Uhrzeit, Treffpunkt und Niveau, meist ein bis zwei Tage vorher.",
@@ -227,7 +227,7 @@ const de: typeof es = {
   coming: {
     sticker: "Was kommt",
     title: "Kurse, Pro Runs und Filmen",
-    lead: "Wir bauen das als Verein auf, mit Versicherung und ausgebildeten Lehrern. Kreuz beim Anmelden an, was dich interessiert, und du erfährst es vor allen anderen.",
+    lead: "Wir bauen das als Verein auf, mit Versicherung und ausgebildeten Lehrern. Wir kündigen es zuerst in der WhatsApp-Gruppe an.",
     soon: "Demnächst",
     items: [
       { title: "Rettung und Sicherheit", text: "Selbstrettung, Abschleppen, Signale und Routenplanung. Theorie und Praxis an einem Vormittag." },
@@ -279,7 +279,7 @@ const de: typeof es = {
       },
       {
         q: "Wann starten die Kurse?",
-        a: "Wir arbeiten daran. Kreuz beim Anmelden Kurse an, und wir sagen dir Bescheid, bevor die Plätze freigeschaltet werden.",
+        a: "Wir arbeiten daran. Wir sagen in der WhatsApp-Gruppe Bescheid, bevor die Plätze freigeschaltet werden.",
       },
       {
         q: "Was macht ihr mit meinen Daten?",
@@ -288,36 +288,17 @@ const de: typeof es = {
     ],
   },
   join: {
-    title: "Sei beim nächsten Downwind dabei",
-    lead: "Wir schreiben dir zu jedem Downwind eine Email und nehmen dich in die WhatsApp-Gruppe auf, in der alles organisiert wird.",
-    perks: ["Kostenlos, ohne Beitrag", "Mit einem Klick abmelden", "Kein Spam: nur Runs und Neuigkeiten"],
-    name: "Vorname",
-    namePlaceholder: "Nayra",
-    email: "Email",
-    emailPlaceholder: "nayra@email.com",
-    modes: "Was fährst du",
-    level: "Dein Niveau",
-    levelPlaceholder: "Wähle eine Option",
-    levels: {
-      aprendiendo: "Ich lerne gerade abzuheben",
-      choppy: "Ich hebe ab und fahre im Kabbelwasser",
-      soltura: "Ich fahre sicher Downwind",
-    },
-    interests: "Was interessiert dich",
-    interestLabels: {
-      runs: "Offene Runs",
-      cursos: "Kurse und Clinics",
-      "pro-run-filmacion": "Pro Runs und Filmen",
-      merch: "Merch",
-    },
-    honeypot: "Dieses Feld nicht ausfüllen",
-    consentBefore: "Ich habe die",
-    consentLink: "Datenschutzerklärung",
-    consentAfter: "gelesen und bin einverstanden, Emails über die Community zu bekommen.",
-    successTitle: "Du bist dabei.",
-    successText: "Wir schreiben dir, sobald ein Downwind ansteht. Komm in der Zwischenzeit in die Gruppe, dort wird alles organisiert.",
-    whatsapp: "Zur WhatsApp-Gruppe",
-    follow: "Folge",
+    title: "Sei bei den nächsten Downwind-Runs auf Gran Canaria dabei",
+    lead: "Um bei einem Run mitzumachen, musst du nur in unsere WhatsApp-Gruppe kommen. Dort sagen wir Bescheid, wenn der Passat kommt, nennen Start, Ziel und Level und organisieren gemeinsam die Autos.",
+    perks: ["Kostenlos, ohne Beiträge", "Nachrichten nur, wenn Wind ist", "Du kannst die Gruppe jederzeit verlassen"],
+    stepsLabel: "So machst du mit",
+    steps: [
+      "Komm über den Button unten in die WhatsApp-Gruppe.",
+      "Wenn die Vorhersage Wind bestätigt, posten wir den Run mit Uhrzeit, Start, Ziel und Level.",
+      "Antworte in der Gruppe, um dich anzumelden, und wir treffen uns am Ziel, um die Autos zu organisieren.",
+    ],
+    cta: "Zur WhatsApp-Gruppe",
+    note: "WhatsApp öffnet sich. Am Computer kannst du über WhatsApp Web beitreten.",
   },
   client: {
     required: "Füll dieses Feld aus.",

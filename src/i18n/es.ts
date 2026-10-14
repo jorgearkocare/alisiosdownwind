@@ -100,7 +100,7 @@ const es = {
     sticker: "Cómo funciona",
     title: "Del sofá a la llegada en tres pasos",
     steps: [
-      { title: "Únete a la comunidad", text: "Déjanos tu email y entra al grupo de WhatsApp. Ahí se mueve todo." },
+      { title: "Únete a la comunidad", text: "Entra en el grupo de WhatsApp. Ahí avisamos de cada run y se cuadra todo." },
       {
         title: "Recibe el aviso",
         text: "Cuando el parte confirma viento anunciamos ruta, hora, punto de encuentro y nivel, normalmente con uno o dos días de margen.",
@@ -227,7 +227,7 @@ const es = {
   coming: {
     sticker: "Lo que viene",
     title: "Cursos, pro runs y filmación",
-    lead: "Lo estamos preparando como club, con seguro y monitores titulados. Marca lo que te interesa al apuntarte y te avisamos antes que a nadie.",
+    lead: "Lo estamos preparando como club, con seguro y monitores titulados. Lo anunciaremos primero en el grupo de WhatsApp.",
     soon: "Próximamente",
     items: [
       { title: "Rescate y buenas prácticas", text: "Autorescate, remolque, señales y plan de ruta. Teoría y agua en una mañana." },
@@ -279,7 +279,7 @@ const es = {
       },
       {
         q: "¿Cuándo empiezan los cursos?",
-        a: "Los estamos preparando. Marca la opción de cursos al apuntarte y te avisamos antes de abrir plazas.",
+        a: "Los estamos preparando. Avisaremos en el grupo de WhatsApp antes de abrir plazas.",
       },
       {
         q: "¿Qué hacéis con mis datos?",
@@ -288,36 +288,17 @@ const es = {
     ],
   },
   join: {
-    title: "Apúntate al próximo downwind",
-    lead: "Te avisamos por email de cada downwind y te pasamos el grupo de WhatsApp donde se cuadra todo.",
-    perks: ["Gratis y sin cuotas", "Te das de baja con un clic", "Sin spam: solo runs y novedades"],
-    name: "Nombre",
-    namePlaceholder: "Nayra",
-    email: "Email",
-    emailPlaceholder: "nayra@correo.com",
-    modes: "Qué modalidad haces",
-    level: "Tu nivel",
-    levelPlaceholder: "Elige una opción",
-    levels: {
-      aprendiendo: "Estoy aprendiendo a despegar",
-      choppy: "Despego y navego con choppy",
-      soltura: "Hago downwind con soltura",
-    },
-    interests: "Qué te interesa",
-    interestLabels: {
-      runs: "Runs abiertos",
-      cursos: "Cursos y clínics",
-      "pro-run-filmacion": "Pro runs y filmación",
-      merch: "Merch",
-    },
-    honeypot: "No rellenes este campo",
-    consentBefore: "He leído la",
-    consentLink: "política de privacidad",
-    consentAfter: "y acepto que me escribáis sobre la comunidad.",
-    successTitle: "Estás dentro.",
-    successText: "Te escribimos en cuanto haya downwind. Mientras tanto, entra al grupo, que es donde se cuadra todo.",
-    whatsapp: "Entrar al grupo de WhatsApp",
-    follow: "Seguir",
+    title: "Únete a los próximos runs de downwind en Gran Canaria",
+    lead: "Para apuntarte a un run solo tienes que entrar en nuestro grupo de WhatsApp. Ahí avisamos cuando entra el alisio, decimos salida, llegada y nivel, y cuadramos los coches entre todos.",
+    perks: ["Gratis y sin cuotas", "Avisos solo cuando hay viento", "Sales del grupo cuando quieras"],
+    stepsLabel: "Cómo te apuntas",
+    steps: [
+      "Entra en el grupo de WhatsApp con el botón de aquí abajo.",
+      "Cuando el parte confirma viento, publicamos el run con hora, salida, llegada y nivel.",
+      "Responde en el grupo para apuntarte y quedamos en la llegada para cuadrar coches.",
+    ],
+    cta: "Entrar al grupo de WhatsApp",
+    note: "Se abre WhatsApp. Si estás en el ordenador, puedes entrar desde WhatsApp Web.",
   },
   client: {
     required: "Rellena este campo.",

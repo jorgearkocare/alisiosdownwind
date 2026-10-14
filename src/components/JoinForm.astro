@@ -1,29 +1,19 @@
 ---
 import Icon from "./Icon.astro";
+import Sticker from "./Sticker.astro";
 import { site } from "../config";
 import { btnPrimary, container } from "../ui";
 import { useI18n } from "../i18n";
 
-const { t, lang } = useI18n(Astro.url);
+// Para apuntarse a un run basta con entrar al grupo de WhatsApp (enlace en src/config.ts, whatsappGroup).
+const { t } = useI18n(Astro.url);
 const j = t.join;
-const modes = ["SUP foil", "Parawing", "Wing foil"];
-// Los valores (value) se envían siempre igual en todos los idiomas; solo cambia el texto
-const interests = Object.entries(j.interestLabels).map(([value, label]) => ({ value, label, checked: value === "runs" }));
-const levels = Object.entries(j.levels).map(([value, label]) => ({ value, label }));
-
-const field =
-  "mt-2 block w-full rounded-xl border-2 border-ink bg-paper px-4 py-3 text-base text-ink placeholder:text-ink/30 transition-all duration-700 ease-fluid hover:bg-white focus:shadow-hard-sm focus:outline-none aria-[invalid=true]:border-red-600 aria-[invalid=true]:bg-red-50";
-const chip =
-  "inline-flex cursor-pointer items-center gap-2 rounded-full border-2 border-ink bg-paper px-3 py-2 text-sm font-semibold text-ink transition-all duration-700 ease-fluid hover:bg-sun-soft peer-checked:bg-sun peer-checked:shadow-hard-sm peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-blue peer-active:scale-[0.98]";
-const label = "text-sm font-semibold uppercase tracking-wide text-ink";
-const error = "mt-2 hidden text-sm font-medium text-red-700";
-const joinUrl = site.whatsappGroup || site.instagram;
 ---
 
 <section id="unete" aria-labelledby="unete-title" class="border-y-2 border-ink bg-blue py-24">
   <div class={container}>
     <div class="grid gap-12 rounded-2xl border-2 border-ink bg-cream p-6 shadow-hard md:p-12 lg:grid-cols-12">
-      <div class="lg:col-span-5">
+      <div class="lg:col-span-6">
         <h2 id="unete-title" data-reveal class="font-display text-5xl uppercase leading-none md:text-7xl">
           {j.title}
         </h2>
@@ -42,102 +32,28 @@ const joinUrl = site.whatsappGroup || site.instagram;
         </ul>
       </div>
 
-      <div class="lg:col-span-7">
-        <form
-          data-join-form
-          data-endpoint={site.formEndpoint}
-          data-email={site.email}
-          action={site.formEndpoint || undefined}
-          method="post"
-          novalidate
-          class="space-y-6"
-        >
-          <div class="grid gap-6 sm:grid-cols-2">
-            <div>
-              <label for="nombre" class={label}>{j.name}</label>
-              <input id="nombre" name="nombre" type="text" autocomplete="given-name" required placeholder={j.namePlaceholder} aria-describedby="nombre-error" class={field} />
-              <p id="nombre-error" data-error-for="nombre" class={error}></p>
-            </div>
-            <div>
-              <label for="email" class={label}>{j.email}</label>
-              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder={j.emailPlaceholder} aria-describedby="email-error" class={field} />
-              <p id="email-error" data-error-for="email" class={error}></p>
-            </div>
-          </div>
-
-          <fieldset>
-            <legend class={label}>{j.modes}</legend>
-            <div class="mt-2 flex flex-wrap gap-2">
-              {
-                modes.map((m) => (
-                  <label>
-                    <input type="checkbox" name="modalidad" value={m} class="peer sr-only" />
-                    <span class={chip}>{m}</span>
-                  </label>
-                ))
-              }
-            </div>
-          </fieldset>
-
-          <div>
-            <label for="nivel" class={label}>{j.level}</label>
-            <div class="relative">
-              <select id="nivel" name="nivel" required aria-describedby="nivel-error" class={`${field} appearance-none pr-12`}>
-                <option value="" disabled selected>{j.levelPlaceholder}</option>
-                {levels.map((l) => <option value={l.value}>{l.label}</option>)}
-              </select>
-              <Icon name="caretDown" class="pointer-events-none absolute right-4 top-1/2 mt-1 size-4 -translate-y-1/2 text-ink/60" />
-            </div>
-            <p id="nivel-error" data-error-for="nivel" class={error}></p>
-          </div>
-
-          <fieldset>
-            <legend class={label}>{j.interests}</legend>
-            <div class="mt-2 flex flex-wrap gap-2">
-              {
-                interests.map((it) => (
-                  <label>
-                    <input type="checkbox" name="interes" value={it.value} checked={it.checked} class="peer sr-only" />
-                    <span class={chip}>{it.label}</span>
-                  </label>
-                ))
-              }
-            </div>
-          </fieldset>
-
-          <div class="hidden" aria-hidden="true">
-            <label for="empresa">{j.honeypot}</label>
-            <input id="empresa" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
-          </div>
-          <input type="hidden" name="idioma" value={lang} />
-
-          <div>
-            <label class="flex items-start gap-3 text-sm text-ink/70">
-              <input id="privacidad" name="privacidad" type="checkbox" required aria-describedby="privacidad-error" class="mt-0.5 size-4 shrink-0 accent-blue" />
-              <span>{j.consentBefore} <a href="/privacidad" class="font-semibold text-ink underline decoration-sun decoration-2 underline-offset-4 hover:decoration-blue">{j.consentLink}</a> {t.footer.legalLangNote && <span>{t.footer.legalLangNote} </span>}{j.consentAfter}</span>
-            </label>
-            <p id="privacidad-error" data-error-for="privacidad" class={error}></p>
-          </div>
-
-          <div class="flex flex-wrap items-center gap-4">
-            <button type="submit" data-submit class={btnPrimary}>
-              <span data-submit-label>{t.client.submit}</span>
-              <Icon name="arrowRight" class="size-4" />
-            </button>
-            <p data-status role="status" aria-live="polite" class="text-sm font-medium text-ink/70"></p>
-          </div>
-        </form>
-
-        <div data-join-success hidden class="rounded-2xl border-2 border-ink bg-sun p-6 shadow-hard">
-          <span class="flex size-12 items-center justify-center rounded-full border-2 border-ink bg-paper text-ink">
-            <Icon name="check" class="size-6" />
-          </span>
-          <h3 data-success-title class="mt-6 font-display text-4xl uppercase leading-none" tabindex="-1">{j.successTitle}</h3>
-          <p data-success-text class="mt-2 text-base text-ink/80">{j.successText}</p>
-          <a href={joinUrl} target="_blank" rel="noopener" class={`${btnPrimary} mt-6`}>
-            <Icon name={site.whatsappGroup ? "whatsapp" : "instagram"} class="size-5" />
-            <span>{site.whatsappGroup ? j.whatsapp : `${j.follow} ${site.instagramHandle}`}</span>
+      <div data-reveal style="--d: 200ms" class="lg:col-span-6">
+        <div class="relative rounded-2xl border-2 border-ink bg-sun p-5 shadow-hard md:p-8">
+          <Sticker text="Join the crew" tone="paper" class="absolute -right-3 -top-5 rotate-6" />
+          <p class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide">
+            <Icon name="whatsapp" class="size-5" />
+            <span>{j.stepsLabel}</span>
+          </p>
+          <ol class="mt-6 space-y-6">
+            {
+              j.steps.map((step, i) => (
+                <li class="flex items-start gap-4">
+                  <span class="flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-ink bg-paper font-display text-xl leading-none" aria-hidden="true">{i + 1}</span>
+                  <p class="pt-2 text-base font-medium">{step}</p>
+                </li>
+              ))
+            }
+          </ol>
+          <a href={site.whatsappGroup} target="_blank" rel="noopener" class={`${btnPrimary.replace("px-3 py-2", "px-5 py-4").replace("text-base", "text-base sm:text-lg")} mt-8 w-full sm:w-auto`}>
+            <Icon name="whatsapp" class="size-6" />
+            <span>{j.cta}</span>
           </a>
+          <p class="mt-4 text-sm text-ink/70">{j.note}</p>
         </div>
       </div>
     </div>
