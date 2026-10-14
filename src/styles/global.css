@@ -201,6 +201,38 @@ html:not(.js) .scribble path {
   animation: badge-spin 24s linear infinite;
 }
 
+/* Desplegables del formulario: se abren al marcar "Cursos" o "Merch" */
+.sub-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  margin-top: 0 !important;
+  transition:
+    grid-template-rows 700ms var(--ease-fluid),
+    opacity 700ms var(--ease-fluid),
+    margin-top 700ms var(--ease-fluid),
+    visibility 0s 700ms;
+}
+
+.sub-panel > div {
+  min-height: 0;
+  overflow: hidden;
+}
+
+form:has(input[name="interes"][value="cursos"]:checked) [data-sub="cursos"],
+form:has(input[name="interes"][value="merch"]:checked) [data-sub="merch"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  margin-top: 1.5rem !important;
+  transition:
+    grid-template-rows 700ms var(--ease-fluid),
+    opacity 700ms var(--ease-fluid),
+    margin-top 700ms var(--ease-fluid),
+    visibility 0s;
+}
+
 /* Cintas de texto en movimiento */
 @keyframes marquee {
   to {

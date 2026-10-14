@@ -5,13 +5,14 @@ import { container, h2, lead, section, sticker } from "../ui";
 import { useI18n } from "../i18n";
 
 const { t, home } = useI18n(Astro.url);
-const meta: { icon: IconName; interest: string }[] = [
-  { icon: "lifebuoy", interest: "cursos" },
-  { icon: "waves", interest: "cursos" },
-  { icon: "wind", interest: "cursos" },
-  { icon: "path", interest: "cursos" },
-  { icon: "compass", interest: "pro-run-filmacion" },
-  { icon: "video", interest: "pro-run-filmacion" },
+// activity coincide con las opciones del desplegable de cursos del formulario (CommunityForm)
+const meta: { icon: IconName; activity: string }[] = [
+  { icon: "lifebuoy", activity: "rescate" },
+  { icon: "waves", activity: "iniciacion-sup-foil" },
+  { icon: "wind", activity: "parawing" },
+  { icon: "path", activity: "runs-con-paradas" },
+  { icon: "compass", activity: "pro-run" },
+  { icon: "video", activity: "filmacion" },
 ];
 const services = t.coming.items.map((item, i) => ({ ...item, ...meta[i] }));
 ---
@@ -28,7 +29,7 @@ const services = t.coming.items.map((item, i) => ({ ...item, ...meta[i] }));
       {
         services.map((item) => (
           <li data-reveal class="border-b-2 border-ink">
-            <a href={`${home}#unete`} data-interest={item.interest} class="group grid items-center gap-4 px-2 py-6 transition-colors duration-700 ease-fluid hover:bg-sun md:grid-cols-12 md:px-4">
+            <a href={`${home}#formar-parte`} data-interest="cursos" data-activity={item.activity} class="group grid items-center gap-4 px-2 py-6 transition-colors duration-700 ease-fluid hover:bg-sun md:grid-cols-12 md:px-4">
               <span class="flex items-center gap-4 md:col-span-5">
                 <Icon name={item.icon} class="size-8 shrink-0 text-blue transition-transform duration-700 ease-fluid group-hover:-rotate-12" />
                 <span class="font-display text-3xl uppercase leading-none md:text-4xl">{item.title}</span>

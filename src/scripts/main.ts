@@ -189,6 +189,10 @@ if (form) {
     }
 
     const data = new FormData(form);
+    // Si se desmarca "Cursos" o "Merch", no se envía lo elegido dentro de su desplegable
+    const interests = data.getAll("interes");
+    if (!interests.includes("cursos")) data.delete("actividad");
+    if (!interests.includes("merch")) data.delete("prenda");
     // Trampa para bots: si se rellena el campo oculto, fingimos el envío y no hacemos nada
     if (String(data.get("_gotcha") ?? "")) {
       showSuccess();
@@ -203,6 +207,8 @@ if (form) {
         `Modalidad: ${data.getAll("modalidad").join(", ") || "Sin indicar"}`,
         `Nivel: ${data.get("nivel")}`,
         `Me interesa: ${data.getAll("interes").join(", ") || "Sin indicar"}`,
+        `Actividades: ${data.getAll("actividad").join(", ") || "-"}`,
+        `Merch: ${data.getAll("prenda").join(", ") || "-"}`,
         `Idioma: ${data.get("idioma")}`,
       ].join("\n");
       window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent("Quiero unirme a Alisios Downwind")}&body=${encodeURIComponent(body)}`;
@@ -210,14 +216,34 @@ if (form) {
       return;
     }
 
+    // Con Kit: se envía email y nombre, y cada opción marcada se convierte en una etiqueta del suscriptor
+    let body: FormData = data;
+    const tagMap = form.dataset.kitTags ? (JSON.parse(form.dataset.kitTags) as Record<string, number>) : null;
+    if (tagMap) {
+      body = new FormData();
+      body.append("email_address", String(data.get("email") ?? "").trim());
+      body.append("fields[first_name]", String(data.get("nombre") ?? "").trim());
+      const keys = ["comunidad"];
+      for (const name of ["nivel", "modalidad", "interes", "actividad", "prenda", "idioma"]) {
+        data.getAll(name).forEach((value) => keys.push(`${name}:${value}`));
+      }
+      keys.forEach((key) => {
+        if (tagMap[key]) body.append("tags[]", String(tagMap[key]));
+      });
+    }
+
     setLoading(true);
     try {
       const res = await fetch(endpoint, {
         method: "POST",
-        body: data,
+        body,
         headers: { Accept: "application/json" },
       });
       if (!res.ok) throw new Error(String(res.status));
+      if (tagMap) {
+        const json = await res.json().catch(() => ({}));
+        if (json.status && json.status !== "success") throw new Error(String(json.status));
+      }
       showSuccess();
     } catch {
       if (status) {
@@ -234,6 +260,9 @@ document.querySelectorAll<HTMLAnchorElement>("[data-interest]").forEach((link) =
   link.addEventListener("click", () => {
     const box = document.querySelector<HTMLInputElement>(`input[name="interes"][value="${link.dataset.interest}"]`);
     if (box) box.checked = true;
+    // Además marca la actividad concreta dentro del desplegable de cursos
+    const activity = document.querySelector<HTMLInputElement>(`input[name="actividad"][value="${link.dataset.activity}"]`);
+    if (activity) activity.checked = true;
   });
 });
 

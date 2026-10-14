@@ -1,0 +1,202 @@
+---
+import Icon from "./Icon.astro";
+import Sticker from "./Sticker.astro";
+import { kitTags, site } from "../config";
+import { btnPrimary, container } from "../ui";
+import { useI18n } from "../i18n";
+
+// Formulario "Quiero formar parte": recoge email, nivel e intereses (cursos y merch) para saber qué montar.
+// Los valores (value) se envían siempre igual en todos los idiomas; solo cambia el texto.
+const { t, lang } = useI18n(Astro.url);
+const f = t.signup;
+const modes = ["SUP foil", "Parawing", "Wing foil"];
+const levels = Object.entries(f.levels).map(([value, label]) => ({ value, label }));
+const interests = Object.entries(f.interestLabels).map(([value, label]) => ({ value, label }));
+// Actividades: mismas que en "Lo que viene", en el mismo orden
+const activityKeys = ["rescate", "iniciacion-sup-foil", "parawing", "runs-con-paradas", "pro-run", "filmacion"];
+const activities = t.coming.items.map((item, i) => ({ value: activityKeys[i], label: item.title }));
+// Prendas: mismas que en la sección de merch, en el mismo orden
+const garmentKeys = ["gorra-de-agua", "trucker", "lycra", "camiseta"];
+const garments = t.merch.items.map((item, i) => ({ value: garmentKeys[i], label: item.name }));
+
+const field =
+  "mt-2 block w-full rounded-xl border-2 border-ink bg-paper px-4 py-3 text-base text-ink placeholder:text-ink/30 transition-all duration-700 ease-fluid hover:bg-white focus:shadow-hard-sm focus:outline-none aria-[invalid=true]:border-red-600 aria-[invalid=true]:bg-red-50";
+const chip =
+  "inline-flex cursor-pointer items-center gap-2 rounded-full border-2 border-ink bg-paper px-3 py-2 text-sm font-semibold text-ink transition-all duration-700 ease-fluid hover:bg-sun-soft peer-checked:bg-sun peer-checked:shadow-hard-sm peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-blue peer-active:scale-[0.98]";
+const subChip = chip.replace("hover:bg-sun-soft", "hover:-translate-y-0.5").replace("peer-checked:bg-sun", "peer-checked:bg-blue peer-checked:text-cream");
+const label = "text-sm font-semibold uppercase tracking-wide text-ink";
+const error = "mt-2 hidden text-sm font-medium text-red-700";
+---
+
+<section id="formar-parte" aria-labelledby="formar-parte-title" class="border-y-2 border-ink bg-sun py-24">
+  <div class={container}>
+    <div class="relative grid gap-12 rounded-2xl border-2 border-ink bg-cream p-6 shadow-hard md:p-12 lg:grid-cols-12">
+      <Sticker text="Stay stoked" tone="blue" class="absolute -top-5 right-6 rotate-3" />
+      <div class="lg:col-span-5">
+        <h2 id="formar-parte-title" data-reveal class="font-display text-5xl uppercase leading-none md:text-7xl">
+          {f.title}
+        </h2>
+        <p data-reveal style="--d: 80ms" class="mt-6 text-lg text-ink/70">
+          {f.lead}
+        </p>
+        <ul data-reveal style="--d: 160ms" class="mt-8 space-y-4">
+          {
+            f.perks.map((perk) => (
+              <li class="flex items-center gap-2 text-base font-medium">
+                <Icon name="check" class="size-5 shrink-0 text-blue" />
+                <span>{perk}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="lg:col-span-7">
+        <form
+          data-join-form
+          data-endpoint={site.formEndpoint}
+          data-kit-tags={JSON.stringify(kitTags)}
+          data-email={site.email}
+          action={site.formEndpoint || undefined}
+          method="post"
+          novalidate
+          class="space-y-6"
+        >
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div>
+              <label for="nombre" class={label}>{f.name}</label>
+              <input id="nombre" name="nombre" type="text" autocomplete="given-name" required placeholder={f.namePlaceholder} aria-describedby="nombre-error" class={field} />
+              <p id="nombre-error" data-error-for="nombre" class={error}></p>
+            </div>
+            <div>
+              <label for="email" class={label}>{f.email}</label>
+              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder={f.emailPlaceholder} aria-describedby="email-error" class={field} />
+              <p id="email-error" data-error-for="email" class={error}></p>
+            </div>
+          </div>
+
+          <fieldset>
+            <legend class={label}>{f.modes}</legend>
+            <div class="mt-2 flex flex-wrap gap-2">
+              {
+                modes.map((m) => (
+                  <label>
+                    <input type="checkbox" name="modalidad" value={m} class="peer sr-only" />
+                    <span class={chip}>{m}</span>
+                  </label>
+                ))
+              }
+            </div>
+          </fieldset>
+
+          <div>
+            <label for="nivel" class={label}>{f.level}</label>
+            <div class="relative">
+              <select id="nivel" name="nivel" required aria-describedby="nivel-error" class={`${field} appearance-none pr-12`}>
+                <option value="" disabled selected>{f.levelPlaceholder}</option>
+                {levels.map((l) => <option value={l.value}>{l.label}</option>)}
+              </select>
+              <Icon name="caretDown" class="pointer-events-none absolute right-4 top-1/2 mt-1 size-4 -translate-y-1/2 text-ink/60" />
+            </div>
+            <p id="nivel-error" data-error-for="nivel" class={error}></p>
+          </div>
+
+          <fieldset>
+            <legend class={label}>{f.interests}</legend>
+            <div class="mt-2 flex flex-wrap gap-2">
+              {
+                interests.map((it) => (
+                  <label>
+                    <input type="checkbox" name="interes" value={it.value} aria-controls={it.value === "runs" ? undefined : `sub-${it.value}`} class="peer sr-only" />
+                    <span class={chip}>
+                      {it.label}
+                      {it.value !== "runs" && <Icon name="caretDown" class="size-3.5 transition-transform duration-700 ease-fluid [label:has(:checked)_&]:rotate-180" />}
+                    </span>
+                  </label>
+                ))
+              }
+            </div>
+          </fieldset>
+
+          <!-- Se despliega al marcar "Cursos y actividades" -->
+          <div id="sub-cursos" data-sub="cursos" class="sub-panel">
+            <div>
+              <div class="pt-3">
+              <fieldset class="rounded-2xl border-2 border-dashed border-ink bg-paper p-4">
+                <legend class={`${label} px-2`}>{f.activitiesLabel}</legend>
+                <p class="text-sm text-ink/60">{f.activitiesHint}</p>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  {
+                    activities.map((a) => (
+                      <label>
+                        <input type="checkbox" name="actividad" value={a.value} class="peer sr-only" />
+                        <span class={subChip}>{a.label}</span>
+                      </label>
+                    ))
+                  }
+                </div>
+              </fieldset>
+              </div>
+            </div>
+          </div>
+
+          <!-- Se despliega al marcar "Merch" -->
+          <div id="sub-merch" data-sub="merch" class="sub-panel">
+            <div>
+              <div class="pt-3">
+              <fieldset class="rounded-2xl border-2 border-dashed border-ink bg-paper p-4">
+                <legend class={`${label} px-2`}>{f.garmentsLabel}</legend>
+                <p class="text-sm text-ink/60">{f.garmentsHint}</p>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  {
+                    garments.map((g) => (
+                      <label>
+                        <input type="checkbox" name="prenda" value={g.value} class="peer sr-only" />
+                        <span class={subChip}>{g.label}</span>
+                      </label>
+                    ))
+                  }
+                </div>
+              </fieldset>
+              </div>
+            </div>
+          </div>
+
+          <div class="hidden" aria-hidden="true">
+            <label for="empresa">{f.honeypot}</label>
+            <input id="empresa" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="idioma" value={lang} />
+
+          <div>
+            <label class="flex items-start gap-3 text-sm text-ink/70">
+              <input id="privacidad" name="privacidad" type="checkbox" required aria-describedby="privacidad-error" class="mt-0.5 size-4 shrink-0 accent-blue" />
+              <span>{f.consentBefore} <a href="/privacidad" class="font-semibold text-ink underline decoration-sun decoration-2 underline-offset-4 hover:decoration-blue">{f.consentLink}</a> {t.footer.legalLangNote && <span>{t.footer.legalLangNote} </span>}{f.consentAfter}</span>
+            </label>
+            <p id="privacidad-error" data-error-for="privacidad" class={error}></p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-4">
+            <button type="submit" data-submit class={btnPrimary}>
+              <span data-submit-label>{t.client.submit}</span>
+              <Icon name="arrowRight" class="size-4" />
+            </button>
+            <p data-status role="status" aria-live="polite" class="text-sm font-medium text-ink/70"></p>
+          </div>
+        </form>
+
+        <div data-join-success hidden class="rounded-2xl border-2 border-ink bg-blue p-6 text-cream shadow-hard">
+          <span class="flex size-12 items-center justify-center rounded-full border-2 border-ink bg-sun text-ink">
+            <Icon name="check" class="size-6" />
+          </span>
+          <h3 data-success-title class="mt-6 font-display text-4xl uppercase leading-none" tabindex="-1">{f.successTitle}</h3>
+          <p data-success-text class="mt-2 text-base text-cream/80">{f.successText}</p>
+          <a href={site.whatsappGroup} target="_blank" rel="noopener" class={`${btnPrimary} mt-6`}>
+            <Icon name="whatsapp" class="size-5" />
+            <span>{t.join.cta}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
