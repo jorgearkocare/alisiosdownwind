@@ -8,12 +8,14 @@ const { t } = useI18n(Astro.url);
 // Los cuatro amigos que empezaron Alisios. Para cambiar el orden o añadir a alguien, edita esta lista.
 const handles = ["joorgee_z", "liamdm11", "marinito959", "mike_e255"];
 const looks = [
-  { card: "bg-sun", badge: "bg-paper text-ink", tilt: "sm:-rotate-2" },
-  { card: "bg-blue text-cream", badge: "bg-sun text-ink", tilt: "sm:rotate-1" },
-  { card: "bg-ink text-cream", badge: "bg-blue text-cream", tilt: "sm:-rotate-1" },
-  { card: "bg-paper", badge: "bg-ink text-cream", tilt: "sm:rotate-2" },
+  { card: "bg-sun", badge: "bg-paper text-ink", tilt: "-rotate-2" },
+  { card: "bg-blue text-cream", badge: "bg-sun text-ink", tilt: "rotate-1" },
+  { card: "bg-ink text-cream", badge: "bg-blue text-cream", tilt: "-rotate-1" },
+  { card: "bg-paper", badge: "bg-ink text-cream", tilt: "rotate-2" },
 ];
 const crew = handles.map((handle, i) => ({ handle, url: `https://www.instagram.com/${handle}/`, ...looks[i] }));
+// Se repiten las tarjetas para que el carrusel cubra pantallas anchas sin huecos
+const loop = [...crew, ...crew, ...crew];
 ---
 
 <section id="equipo" aria-labelledby="equipo-title" class={section}>
@@ -22,31 +24,40 @@ const crew = handles.map((handle, i) => ({ handle, url: `https://www.instagram.c
     <h2 id="equipo-title" data-reveal style="--d: 80ms" class={h2}>{t.team.title}</h2>
     <p data-reveal style="--d: 160ms" class={lead}>{t.team.lead}</p>
 
-    <ul class="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
+  </div>
+
+  <!-- Carrusel: la lista se repite para que la cinta nunca se quede vacía; se para al pasar el ratón o con el teclado -->
+  <div data-reveal style="--d: 120ms" class="marquee marquee-scroll mt-8 overflow-hidden py-8">
+    <div class="marquee-track flex w-max" style="--speed: 100s">
       {
-        crew.map((person, i) => (
-          <li data-reveal style={`--d: ${120 + i * 80}ms`}>
-            <a
-              href={person.url}
-              target="_blank"
-              rel="noopener"
-              aria-label={`${t.team.profile} @${person.handle} (Instagram)`}
-              class={`group grid h-full grid-cols-[auto_1fr] items-center gap-x-4 rounded-2xl border-2 border-ink p-4 shadow-hard sm:flex sm:flex-col sm:items-start sm:p-6 transition-all duration-700 ease-fluid sm:hover:rotate-0 hover:-translate-y-1 ${person.card} ${person.tilt}`}
-            >
-              <span class={`row-span-3 flex size-12 items-center justify-center rounded-full border-2 border-ink font-display text-3xl uppercase sm:size-16 sm:text-4xl ${person.badge}`} aria-hidden="true">
-                {person.handle[0]}
-              </span>
-              <span class="block break-all font-display text-2xl leading-none sm:mt-6 sm:text-3xl">@{person.handle}</span>
-              <span class="mt-1 block text-xs font-semibold uppercase tracking-wide opacity-70 sm:mt-2 sm:text-sm">{t.team.role}</span>
-              <span class="mt-2 flex items-center gap-2 text-sm font-semibold sm:mt-auto sm:pt-6">
-                <Icon name="instagram" class="size-5" />
-                <span>Instagram</span>
-                <Icon name="arrowUpRight" class="size-4 transition-transform duration-700 ease-fluid group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </span>
-            </a>
-          </li>
+        [0, 1].map((copy) => (
+          <ul class="flex shrink-0 gap-8 pr-8" aria-hidden={copy === 1 ? "true" : undefined} data-dup={copy === 1 ? "" : undefined}>
+            {loop.map((person, i) => (
+              <li class="w-64 shrink-0 sm:w-72">
+                <a
+                  href={person.url}
+                  target="_blank"
+                  rel="noopener"
+                  tabindex={copy === 1 || i >= crew.length ? "-1" : undefined}
+                  aria-label={`${t.team.profile} @${person.handle} (Instagram)`}
+                  class={`group flex h-full flex-col rounded-2xl border-2 border-ink p-6 shadow-hard transition-all duration-700 ease-fluid hover:-translate-y-1 hover:rotate-0 ${person.card} ${person.tilt}`}
+                >
+                  <span class={`flex size-16 items-center justify-center rounded-full border-2 border-ink font-display text-4xl uppercase ${person.badge}`} aria-hidden="true">
+                    {person.handle[0]}
+                  </span>
+                  <span class="mt-6 block break-all font-display text-3xl leading-none">@{person.handle}</span>
+                  <span class="mt-2 block text-sm font-semibold uppercase tracking-wide opacity-70">{t.team.role}</span>
+                  <span class="mt-auto flex items-center gap-2 pt-6 text-sm font-semibold">
+                    <Icon name="instagram" class="size-5" />
+                    <span>Instagram</span>
+                    <Icon name="arrowUpRight" class="size-4 transition-transform duration-700 ease-fluid group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
         ))
       }
-    </ul>
+    </div>
   </div>
 </section>

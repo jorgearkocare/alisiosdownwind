@@ -117,7 +117,8 @@ html:not(.js) [data-word][data-accent] {
   animation: marquee var(--speed, 40s) linear infinite;
 }
 
-.marquee:hover .marquee-track {
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
   animation-play-state: paused;
 }
 
@@ -156,6 +157,15 @@ html:not(.js) [data-word][data-accent] {
   .marquee-track,
   .bob {
     animation: none;
+  }
+
+  /* Sin movimiento, el carrusel de tarjetas pasa a deslizarse a mano */
+  .marquee-scroll {
+    overflow-x: auto;
+  }
+
+  .marquee-scroll [data-dup] {
+    display: none;
   }
 
   *,
