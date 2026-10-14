@@ -10,8 +10,7 @@ export const site = {
   instagramHandle: "@alisios.downwind",
   // PENDIENTE: enlace de invitación al grupo de WhatsApp (https://chat.whatsapp.com/...). Si se deja vacío se muestra Instagram.
   whatsappGroup: "",
-  // PENDIENTE: email de contacto real
-  email: "hola@alisiosdownwind.com",
+  email: "alisios.downwind@gmail.com",
   // PENDIENTE: endpoint del formulario (Formspree, Web3Forms, Basin...). Si se deja vacío, el formulario abre el correo del usuario con los datos.
   formEndpoint: "",
   // PENDIENTE: URL del formulario de suscripción de la newsletter. Con Kit es la dirección "action" de su código
@@ -21,7 +20,7 @@ export const site = {
   legal: {
     owner: "Alisios Downwind (comunidad en proceso de constitución como club deportivo)",
     taxId: "Pendiente de alta",
-    address: "Gran Canaria, Islas Canarias, España",
+    address: "35200 Gran Canaria, Islas Canarias, España",
   },
 } as const;
 

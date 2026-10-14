@@ -25,7 +25,7 @@ Es una web 100 % estática. Cualquiera de estas opciones sirve, gratis:
 | Campo | Qué poner |
 |---|---|
 | `url` | Dominio definitivo (y el mismo en `astro.config.mjs`) |
-| `email` | Email de contacto real |
+| `email` | Email de contacto (alisios.downwind@gmail.com) |
 | `whatsappGroup` | Enlace de invitación al grupo (`https://chat.whatsapp.com/...`). Vacío = se muestra Instagram |
 | `formEndpoint` | URL del servicio de formulario (ver abajo). Vacío = el formulario abre el correo del usuario con los datos |
 | `legal` | Titular, NIF y domicilio cuando exista el club o asociación |
