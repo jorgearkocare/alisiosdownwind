@@ -1,38 +1,81 @@
 ---
-// Formulario "Manda tu run": cualquiera, desde cualquier costa, puede mandar su downwind para el Report
+// "Cuéntalo en el Report": cualquiera puede mandar un run, una experiencia o una opinión para la newsletter.
+// Cada envío llega por email (site.contributionEndpoint). Si marca la casilla, además se suscribe en Kit.
+// variant="card" se usa dentro de la sección de la newsletter de la portada; "section" en la página del archivo.
 import Icon from "./Icon.astro";
-import { site } from "../config";
+import { kitTags, site } from "../config";
 import { btnPrimary, field, fieldError, fieldLabel } from "../ui";
 import { useI18n } from "../i18n";
 
+interface Props {
+  variant?: "card" | "section";
+}
+
+const { variant = "section" } = Astro.props;
 const { t, lang } = useI18n(Astro.url);
 const s = t.report.send;
+const types = Object.entries(s.types).map(([value, label]) => ({ value, label }));
+const subscribeTags = [kitTags.newsletter, kitTags.colaborador, kitTags[`idioma:${lang}`]].filter(Boolean).join(",");
+const chip =
+  "inline-flex cursor-pointer items-center gap-2 rounded-full border-2 border-ink bg-paper px-3 py-2 text-sm font-semibold text-ink transition-all duration-700 ease-fluid peer-checked:bg-sun peer-checked:shadow-hard-sm peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-blue peer-active:scale-[0.98]";
+const Wrapper = variant === "section" ? "section" : "div";
 ---
 
-<section id="manda-tu-run" aria-labelledby="manda-tu-run-title" class="border-y-2 border-ink bg-blue py-24">
-  <div class="mx-auto w-full max-w-6xl px-4 md:px-6">
-    <div data-simple-wrap class="grid gap-12 rounded-2xl border-2 border-ink bg-cream p-6 shadow-hard md:p-12 lg:grid-cols-12">
+<Wrapper
+  id="manda-tu-run"
+  aria-labelledby="manda-tu-run-title"
+  class={variant === "section" ? "border-y-2 border-ink bg-blue py-24" : "scroll-mt-28"}
+>
+  <div class={variant === "section" ? "mx-auto w-full max-w-6xl px-4 md:px-6" : ""}>
+    <div data-simple-wrap class="grid gap-12 rounded-2xl border-2 border-ink bg-blue p-6 text-cream shadow-hard md:p-12 lg:grid-cols-12">
       <div class="lg:col-span-5">
         <h2 id="manda-tu-run-title" class="font-display text-5xl uppercase leading-none md:text-7xl">{s.title}</h2>
-        <p class="mt-6 text-lg text-ink/70">{s.lead}</p>
+        <p class="mt-6 text-lg text-cream/80">{s.lead}</p>
+        <ul class="mt-8 space-y-4">
+          {
+            s.ideas.map((idea) => (
+              <li class="flex items-start gap-2 text-base font-medium">
+                <Icon name="check" class="mt-0.5 size-5 shrink-0 text-sun" />
+                <span>{idea}</span>
+              </li>
+            ))
+          }
+        </ul>
       </div>
 
-      <div class="lg:col-span-7">
+      <div class="rounded-2xl border-2 border-ink bg-cream p-5 text-ink md:p-8 lg:col-span-7">
         <form
           data-simple-form
-          data-endpoint={site.formEndpoint}
+          data-endpoint={site.contributionEndpoint}
           data-email={site.email}
-          data-subject="Run para El Pez Volador Report"
+          data-subject="Envío para El Pez Volador Report"
           data-mailto-text={s.mailtoText}
-          action={site.formEndpoint || undefined}
+          data-kit-endpoint={site.newsletterEndpoint}
+          data-kit-tags={subscribeTags}
+          action={site.contributionEndpoint || undefined}
           method="post"
           novalidate
-          class="space-y-6"
+          class="send-form space-y-6"
         >
-          <input type="hidden" name="_subject" value="Run para El Pez Volador Report" />
-          <input type="hidden" name="tipo" value="run-report" />
+          <input type="hidden" name="_subject" value="Nuevo envío para El Pez Volador Report" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="idioma" value={lang} />
           <div class="hidden" aria-hidden="true"><input name="_gotcha" type="text" tabindex="-1" autocomplete="off" /></div>
+
+          <fieldset>
+            <legend class={fieldLabel}>{s.typeLabel}</legend>
+            <div class="mt-2 flex flex-wrap gap-2">
+              {
+                types.map((type, i) => (
+                  <label>
+                    <input type="radio" name="tipo" value={type.value} checked={i === 0} class="peer sr-only" />
+                    <span class={chip}>{type.label}</span>
+                  </label>
+                ))
+              }
+            </div>
+          </fieldset>
 
           <div class="grid gap-6 sm:grid-cols-2">
             <div>
@@ -41,22 +84,22 @@ const s = t.report.send;
               <p id="run-nombre-error" data-error-for="nombre" class={fieldError}></p>
             </div>
             <div>
-              <label for="run-instagram" class={fieldLabel}>{s.instagram}</label>
-              <input id="run-instagram" name="instagram" type="text" placeholder={s.instagramPlaceholder} class={field} />
+              <label for="run-email" class={fieldLabel}>{s.email}</label>
+              <input id="run-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="run-email-error" class={field} />
+              <p id="run-email-error" data-error-for="email" class={fieldError}></p>
             </div>
           </div>
 
           <div>
-            <label for="run-email" class={fieldLabel}>{s.email}</label>
-            <input id="run-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="run-email-error" class={field} />
-            <p id="run-email-error" data-error-for="email" class={fieldError}></p>
+            <label for="run-instagram" class={fieldLabel}>{s.instagram}</label>
+            <input id="run-instagram" name="instagram" type="text" placeholder={s.instagramPlaceholder} class={field} />
           </div>
 
-          <div class="grid gap-6 sm:grid-cols-2">
+          <!-- Solo para runs: dónde y con qué viento -->
+          <div class="run-only grid gap-6 sm:grid-cols-2">
             <div>
               <label for="run-spot" class={fieldLabel}>{s.spot}</label>
-              <input id="run-spot" name="spot" type="text" required placeholder={s.spotPlaceholder} aria-describedby="run-spot-error" class={field} />
-              <p id="run-spot-error" data-error-for="spot" class={fieldError}></p>
+              <input id="run-spot" name="spot" type="text" placeholder={s.spotPlaceholder} class={field} />
             </div>
             <div>
               <label for="run-viento" class={fieldLabel}>{s.wind}</label>
@@ -75,6 +118,11 @@ const s = t.report.send;
             <input id="run-enlace" name="enlace" type="url" inputmode="url" placeholder={s.linkPlaceholder} class={field} />
           </div>
 
+          <label class="flex items-start gap-3 text-sm font-medium">
+            <input name="suscribir" type="checkbox" value="si" class="mt-0.5 size-4 shrink-0 accent-blue" />
+            <span>{s.subscribeAlso}</span>
+          </label>
+
           <p class="text-sm text-ink/70">
             {s.consentBefore} <a href="/privacidad" class="font-semibold text-ink underline decoration-sun decoration-2 underline-offset-4 hover:decoration-blue">{t.report.consentLink}</a>{t.footer.legalLangNote && ` ${t.footer.legalLangNote}`}.
           </p>
@@ -88,8 +136,8 @@ const s = t.report.send;
           </div>
         </form>
 
-        <div data-simple-success hidden tabindex="-1" class="rounded-2xl border-2 border-ink bg-sun p-6 shadow-hard">
-          <span class="flex size-12 items-center justify-center rounded-full border-2 border-ink bg-paper">
+        <div data-simple-success hidden tabindex="-1">
+          <span class="flex size-12 items-center justify-center rounded-full border-2 border-ink bg-sun">
             <Icon name="check" class="size-6" />
           </span>
           <p class="mt-6 font-display text-4xl uppercase leading-none">{s.successTitle}</p>
@@ -98,4 +146,4 @@ const s = t.report.send;
       </div>
     </div>
   </div>
-</section>
+</Wrapper>

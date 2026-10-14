@@ -17,6 +17,9 @@ export const site = {
   // PENDIENTE: URL del formulario de suscripción de la newsletter. Con Kit es la dirección "action" de su código
   // "Embed using HTML", algo como https://app.kit.com/forms/1234567/subscriptions. Si se deja vacío, abre el correo del usuario.
   newsletterEndpoint: "https://app.kit.com/forms/10043700/subscriptions",
+  // "Cuéntalo en el Report": cada envío (run, experiencia u opinión) llega como email a esta dirección a través de FormSubmit.
+  // La primera vez FormSubmit manda un email de activación a alisios.downwind@gmail.com que hay que confirmar.
+  contributionEndpoint: "https://formsubmit.co/ajax/alisios.downwind@gmail.com",
   // PENDIENTE: datos del titular para aviso legal y privacidad (cuando exista el club o asociación)
   legal: {
     owner: "Alisios Downwind (comunidad en proceso de constitución como club deportivo)",
@@ -40,6 +43,8 @@ export const nav = [
 // En Kit, cada etiqueta muestra cuánta gente la tiene: así se sabe cuántos quieren cada curso o prenda.
 export const kitTags: Record<string, number> = {
   comunidad: 24631037,
+  newsletter: 24631147,
+  colaborador: 24631148,
   "nivel:aprendiendo": 24631043,
   "nivel:choppy": 24631044,
   "nivel:soltura": 24631045,

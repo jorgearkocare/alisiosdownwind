@@ -233,6 +233,11 @@ form:has(input[name="interes"][value="merch"]:checked) [data-sub="merch"] {
     visibility 0s;
 }
 
+/* "Cuéntalo en el Report": spot y viento solo se piden si lo que mandan es un run */
+.send-form:not(:has(input[name="tipo"][value="run"]:checked)) .run-only {
+  display: none;
+}
+
 /* Cintas de texto en movimiento */
 @keyframes marquee {
   to {

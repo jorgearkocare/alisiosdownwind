@@ -342,6 +342,7 @@ document.querySelectorAll<HTMLFormElement>("[data-simple-form]").forEach((form) 
       done();
       return;
     }
+    data.delete("_gotcha");
 
     const endpoint = form.dataset.endpoint ?? "";
     if (!endpoint) {
@@ -375,6 +376,18 @@ document.querySelectorAll<HTMLFormElement>("[data-simple-form]").forEach((form) 
       }
       const res = await fetch(endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
       if (!res.ok) throw new Error(String(res.status));
+      // FormSubmit responde {"success": "true"} o {"success": "false", "message": ...}
+      const json = await res.json().catch(() => ({}));
+      if (json.success === "false" || json.success === false) throw new Error(String(json.message ?? "error"));
+      // Casilla "Suscríbeme también": se da de alta en Kit con sus etiquetas, sin frenar el mensaje de éxito
+      const kitEndpoint = form.dataset.kitEndpoint;
+      if (kitEndpoint && data.get("suscribir")) {
+        const sub = new FormData();
+        sub.append("email_address", String(data.get("email") ?? "").trim());
+        sub.append("fields[first_name]", String(data.get("nombre") ?? "").trim());
+        (form.dataset.kitTags ?? "").split(",").filter(Boolean).forEach((id) => sub.append("tags[]", id));
+        fetch(kitEndpoint, { method: "POST", body: sub, mode: "no-cors" }).catch(() => {});
+      }
       done();
     } catch {
       if (status) status.textContent = `${text.sendError} ${form.dataset.email}.`;
