@@ -16,7 +16,7 @@ export const site = {
   formEndpoint: "",
   // PENDIENTE: URL del formulario de suscripción de la newsletter. Con Kit es la dirección "action" de su código
   // "Embed using HTML", algo como https://app.kit.com/forms/1234567/subscriptions. Si se deja vacío, abre el correo del usuario.
-  newsletterEndpoint: "",
+  newsletterEndpoint: "https://app.kit.com/forms/10043700/subscriptions",
   // PENDIENTE: datos del titular para aviso legal y privacidad (cuando exista el club o asociación)
   legal: {
     owner: "Alisios Downwind (comunidad en proceso de constitución como club deportivo)",
