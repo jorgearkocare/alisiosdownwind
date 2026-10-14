@@ -1,17 +1,16 @@
 ---
 import Icon from "./Icon.astro";
+import Sticker from "./Sticker.astro";
 import { container, h2, section, sticker } from "../ui";
 import { useI18n } from "../i18n";
 
 const { t } = useI18n(Astro.url);
 
-// Primera tirada (diseños provisionales). Cada prenda lleva nombre propio, como una colección.
-const looks = [
-  { bg: "bg-blue", garment: "tee" },
-  { bg: "bg-sun", garment: "cap" },
-  { bg: "bg-cream", garment: "hoodie" },
-];
-const items = t.merch.items.map((item, i) => ({ ...item, ...looks[i] }));
+// Primeros diseños (maquetas, aún por definir). Las fotos están en public/merch/ (480x600).
+// Nombre y descripción de cada prenda en los diccionarios (src/i18n), en merch.items, en este mismo orden.
+const files = ["gorra-de-agua", "gorra-trucker", "lycra-con-capucha", "camiseta-espalda"];
+const tilts = ["-rotate-1", "rotate-1", "-rotate-2", "rotate-2"];
+const items = t.merch.items.map((item, i) => ({ ...item, src: `/merch/${files[i]}.jpg`, tilt: tilts[i] }));
 ---
 
 <section id="merch" aria-labelledby="merch-title" class={section}>
@@ -24,46 +23,27 @@ const items = t.merch.items.map((item, i) => ({ ...item, ...looks[i] }));
           {t.merch.lead}
         </p>
       </div>
-      <a data-reveal href="#unete" data-interest="merch" class="inline-flex shrink-0 items-center gap-2 text-base font-semibold underline decoration-sun decoration-2 underline-offset-4 transition-all duration-700 ease-fluid hover:translate-x-1 hover:decoration-blue">
+      <a data-reveal href="#report" class="inline-flex shrink-0 items-center gap-2 text-base font-semibold underline decoration-sun decoration-2 underline-offset-4 transition-all duration-700 ease-fluid hover:translate-x-1 hover:decoration-blue">
         <span>{t.merch.cta}</span>
         <Icon name="arrowRight" class="size-4" />
       </a>
     </div>
 
-    <ul class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <ul class="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
       {
         items.map((item, i) => (
-          <li data-reveal style={`--d: ${120 + i * 80}ms`} class="group rounded-2xl border-2 border-ink bg-paper p-2 shadow-hard">
-            <div class={`relative aspect-square overflow-hidden rounded-lg border-2 border-ink ${item.bg}`}>
-              <svg viewBox="0 0 200 200" class="h-full w-full transition-transform duration-700 ease-fluid group-hover:-rotate-3 group-hover:scale-105" role="img" aria-label={`${t.merch.sketchOf} ${item.name}`}>
-                {item.garment === "tee" && (
-                  <>
-                    <path d="M72 32 L50 40 L22 62 L36 90 L54 82 L54 176 L146 176 L146 82 L164 90 L178 62 L150 40 L128 32 C122 44 112 50 100 50 C88 50 78 44 72 32 Z" fill="#f8f6ea" stroke="#0b0b09" stroke-width="3" stroke-linejoin="round" />
-                    <path d="M72 32 C78 44 88 50 100 50 C112 50 122 44 128 32" fill="none" stroke="#0b0b09" stroke-width="3" />
-                    <image href="/brand/logo.png" x="70" y="66" width="60" height="63" />
-                  </>
-                )}
-                {item.garment === "cap" && (
-                  <>
-                    <path d="M38 128 C38 78 66 52 104 52 C142 52 164 80 164 128 Z" fill="#0b0b09" stroke="#0b0b09" stroke-width="3" stroke-linejoin="round" />
-                    <path d="M118 56 C142 62 160 84 164 128 L124 128 Z" fill="#f8f6ea" stroke="#0b0b09" stroke-width="3" stroke-linejoin="round" />
-                    <path d="M130 70 L150 120 M140 66 L158 112 M124 82 L134 124" stroke="#0b0b09" stroke-width="1.5" opacity="0.5" />
-                    <path d="M26 128 L172 128 C172 140 158 148 140 148 L58 148 C40 148 26 140 26 128 Z" fill="#0b0b09" stroke="#0b0b09" stroke-width="3" stroke-linejoin="round" />
-                    <circle cx="104" cy="52" r="5" fill="#0b0b09" />
-                    <image href="/brand/mark.png" x="58" y="70" width="52" height="52" />
-                  </>
-                )}
-                {item.garment === "hoodie" && (
-                  <>
-                    <path d="M74 36 L48 44 L22 72 L18 164 L42 166 L52 104 L52 180 L148 180 L148 104 L158 166 L182 164 L178 72 L152 44 L126 36 C124 22 114 12 100 12 C86 12 76 22 74 36 Z" fill="#0035d5" stroke="#0b0b09" stroke-width="3" stroke-linejoin="round" />
-                    <path d="M84 38 C88 54 112 54 116 38" fill="#0b0b09" stroke="#0b0b09" stroke-width="3" />
-                    <path d="M94 54 L92 76 M106 54 L108 76" stroke="#f8f6ea" stroke-width="2.5" stroke-linecap="round" />
-                    <path d="M70 140 L130 140 L136 172 L64 172 Z" fill="none" stroke="#0b0b09" stroke-width="3" stroke-linejoin="round" />
-                    <image href="/brand/mark.png" x="74" y="84" width="52" height="52" />
-                  </>
-                )}
-              </svg>
-              <span class="absolute right-3 top-3 rotate-3 rounded-full border-2 border-ink bg-paper px-2 py-0.5 text-xs font-semibold uppercase tracking-wide">{t.merch.tag}</span>
+          <li data-reveal style={`--d: ${120 + i * 80}ms`} class={`group tape rounded-2xl border-2 border-ink bg-paper p-2 shadow-hard transition-transform duration-700 ease-fluid md:hover:rotate-0 ${item.tilt}`}>
+            <div class="relative overflow-hidden rounded-lg border-2 border-ink bg-white">
+              <img
+                src={item.src}
+                width="480"
+                height="600"
+                alt={`${t.merch.mockupOf} ${item.name}`}
+                loading="lazy"
+                decoding="async"
+                class="aspect-[4/5] h-auto w-full object-cover transition-transform duration-700 ease-fluid group-hover:scale-105"
+              />
+              <Sticker text={t.merch.tag} tone={i % 2 ? "sun" : "blue"} class="absolute right-3 top-3 rotate-6" />
             </div>
             <div class="px-2 pb-2 pt-4">
               <h3 class="font-display text-2xl uppercase leading-none">{item.name}</h3>
@@ -73,6 +53,6 @@ const items = t.merch.items.map((item, i) => ({ ...item, ...looks[i] }));
         ))
       }
     </ul>
-    <p class="mt-6 text-xs text-ink/50">{t.merch.note}</p>
+    <p class="mt-8 text-sm text-ink/60">{t.merch.note}</p>
   </div>
 </section>
