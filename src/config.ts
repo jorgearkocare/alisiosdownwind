@@ -3,7 +3,7 @@
 export const site = {
   name: "Alisios Downwind",
   // PENDIENTE: dominio definitivo (debe coincidir con "site" en astro.config.mjs)
-  url: "https://alisiosdownwind.com",
+  url: "https://alisiosdownwind.vercel.app",
   description:
     "Comunidad de downwind foil en Gran Canaria. Runs abiertos de SUP foil, parawing y wing foil por la costa de la isla, en grupo y con la logística resuelta.",
   instagram: "https://www.instagram.com/alisios.downwind/",

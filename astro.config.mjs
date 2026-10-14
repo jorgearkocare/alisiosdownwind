@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // Cambia "site" por el dominio definitivo antes de publicar (se usa en canonical y og:image)
 export default defineConfig({
-  site: "https://alisiosdownwind.com",
+  site: "https://alisiosdownwind.vercel.app",
   vite: {
     plugins: [tailwindcss()],
   },
