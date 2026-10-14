@@ -15,3 +15,9 @@ export const sticker = `${stickerBase} bg-sun`;
 export const h2 = "mt-6 max-w-[680px] font-display text-5xl uppercase leading-none md:text-7xl";
 export const lead = "mt-6 max-w-[680px] text-lg text-ink/70";
 export const card = "rounded-2xl border-2 border-ink bg-paper shadow-hard";
+
+// Formularios
+export const field =
+  "mt-2 block w-full rounded-xl border-2 border-ink bg-paper px-4 py-3 text-base text-ink placeholder:text-ink/30 transition-all duration-700 ease-fluid hover:bg-white focus:bg-white focus:shadow-hard-sm focus:outline-none aria-[invalid=true]:border-red-600 aria-[invalid=true]:bg-red-50";
+export const fieldLabel = "text-sm font-semibold uppercase tracking-wide text-ink";
+export const fieldError = "mt-2 hidden text-sm font-medium text-red-700";

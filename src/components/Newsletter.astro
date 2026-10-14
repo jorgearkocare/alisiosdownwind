@@ -1,0 +1,109 @@
+---
+// El Pez Volador Report: newsletter para llegar a riders de fuera de la isla
+import Icon from "./Icon.astro";
+import Logo from "./Logo.astro";
+import { site } from "../config";
+import { btnPrimary, container, field, fieldError, sticker } from "../ui";
+import { useI18n } from "../i18n";
+import { issues, reportPath } from "../report/issues";
+
+const { t, lang } = useI18n(Astro.url);
+const r = t.report;
+const latest = issues[0];
+const archive = reportPath(lang);
+const sendHref = `${archive}#manda-tu-run`;
+---
+
+<section id="report" aria-labelledby="report-title" class="py-24">
+  <div class={container}>
+    <p data-reveal class={`${sticker} rotate-1`}>{r.sticker}</p>
+
+    <div data-reveal style="--d: 80ms" class="mt-6 overflow-hidden rounded-2xl border-2 border-ink bg-paper shadow-hard">
+      <div class="px-6 pt-6 md:px-12 md:pt-12">
+        <div class="flex items-center gap-4">
+          <Logo class="size-16 shrink-0 -rotate-6 md:size-24" />
+          <h2 id="report-title" class="font-display text-5xl uppercase leading-none md:text-8xl">{r.name}</h2>
+        </div>
+
+        <div class="mt-6 flex flex-wrap items-center justify-between gap-2 border-y-2 border-ink py-2 text-xs font-semibold uppercase tracking-wide">
+          <span>{t.report.page.issue} {String(latest.number).padStart(2, "0")}</span>
+          <span>{r.edition}</span>
+          <span>Gran Canaria</span>
+        </div>
+
+        <div class="grid gap-8 py-8 lg:grid-cols-12">
+          <div class="lg:col-span-5">
+            <p class="font-display text-3xl uppercase leading-none md:text-4xl">{r.tagline}</p>
+            <p class="mt-4 text-base text-ink/70">{r.lead}</p>
+          </div>
+          <ol class="grid gap-6 sm:grid-cols-2 lg:col-span-7">
+            {
+              r.sections.map((s, i) => (
+                <li class="border-t-2 border-ink pt-4">
+                  <span class="text-outline font-display text-4xl leading-none tabular-nums">{`0${i + 1}`}</span>
+                  <h3 class="mt-2 font-display text-2xl uppercase leading-none">{s.title}</h3>
+                  <p class="mt-2 text-sm text-ink/70">{s.text}</p>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+
+      <div data-simple-wrap class="border-t-2 border-ink bg-sun px-6 py-8 md:px-12">
+        <form
+          data-simple-form
+          data-endpoint={site.newsletterEndpoint}
+          data-email={site.email}
+          data-subject="Suscripción a El Pez Volador Report"
+          data-mailto-text={r.mailtoText}
+          action={site.newsletterEndpoint || undefined}
+          method="post"
+          novalidate
+          class="grid gap-4 md:grid-cols-12 md:items-end"
+        >
+          <div class="md:col-span-7">
+            <label for="report-email" class="text-sm font-semibold uppercase tracking-wide">{r.emailLabel}</label>
+            <input id="report-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder={r.emailPlaceholder} aria-describedby="report-email-error report-note" class={field} />
+            <p id="report-email-error" data-error-for="email" class={fieldError}></p>
+          </div>
+          <input type="hidden" name="idioma" value={lang} />
+          <div class="hidden" aria-hidden="true"><input name="_gotcha" type="text" tabindex="-1" autocomplete="off" /></div>
+          <div class="md:col-span-5">
+            <button type="submit" class={`${btnPrimary} w-full`}>
+              <Icon name="envelope" class="size-5" />
+              <span data-label>{r.subscribe}</span>
+            </button>
+          </div>
+          <p id="report-note" class="text-sm text-ink/80 md:col-span-12">
+            {r.note} {r.consentBefore} <a href="/privacidad" class="font-semibold underline decoration-2 underline-offset-4 hover:decoration-blue">{r.consentLink}</a>{t.footer.legalLangNote && ` ${t.footer.legalLangNote}`}.
+          </p>
+          <p data-status role="status" aria-live="polite" class="text-sm font-medium md:col-span-12"></p>
+        </form>
+        <div data-simple-success hidden tabindex="-1" class="flex items-start gap-4">
+          <span class="flex size-12 shrink-0 items-center justify-center rounded-full border-2 border-ink bg-paper">
+            <Icon name="check" class="size-6" />
+          </span>
+          <div>
+            <p class="font-display text-3xl uppercase leading-none">{r.successTitle}</p>
+            <p data-simple-success-text class="mt-2 text-base">{r.successText}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-reveal class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <a href={archive} class="inline-flex items-center gap-2 text-base font-semibold underline decoration-sun decoration-2 underline-offset-4 transition-all duration-700 ease-fluid hover:translate-x-1 hover:decoration-blue">
+        <span>{r.archive}</span>
+        <Icon name="arrowRight" class="size-4" />
+      </a>
+      <p class="flex flex-wrap items-center gap-2 text-base">
+        <span class="text-ink/70">{r.sendTeaser}</span>
+        <a href={sendHref} class="inline-flex items-center gap-2 font-semibold underline decoration-sun decoration-2 underline-offset-4 transition-all duration-700 ease-fluid hover:translate-x-1 hover:decoration-blue">
+          <span>{r.sendCta}</span>
+          <Icon name="arrowRight" class="size-4" />
+        </a>
+      </p>
+    </div>
+  </div>
+</section>

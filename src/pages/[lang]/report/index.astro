@@ -1,0 +1,10 @@
+---
+import ReportArchive from "../../../components/ReportArchive.astro";
+import { translatedLocales } from "../../../i18n";
+
+export function getStaticPaths() {
+  return translatedLocales.map((lang) => ({ params: { lang } }));
+}
+---
+
+<ReportArchive />

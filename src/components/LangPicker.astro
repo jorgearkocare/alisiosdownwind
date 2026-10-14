@@ -1,7 +1,7 @@
 ---
 // Desplegable de idioma. Funciona sin JavaScript (details/summary); el script solo lo cierra al pulsar fuera.
 import Icon from "./Icon.astro";
-import { languages, localizePath, useI18n, type Lang } from "../i18n";
+import { languages, switchLangPath, useI18n, type Lang } from "../i18n";
 
 interface Props {
   class?: string;
@@ -9,7 +9,7 @@ interface Props {
 
 const { class: className = "" } = Astro.props;
 const { lang, t } = useI18n(Astro.url);
-const options = (Object.keys(languages) as Lang[]).map((code) => ({ code, name: languages[code], href: localizePath(code) }));
+const options = (Object.keys(languages) as Lang[]).map((code) => ({ code, name: languages[code], href: switchLangPath(Astro.url, code) }));
 ---
 
 <details data-lang-picker class={`group/lang relative ${className}`}>

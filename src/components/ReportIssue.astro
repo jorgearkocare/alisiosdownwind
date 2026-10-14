@@ -1,0 +1,68 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "./Icon.astro";
+import Logo from "./Logo.astro";
+import { container, sticker } from "../ui";
+import { useI18n } from "../i18n";
+import { issueContent, reportPath, type Issue } from "../report/issues";
+
+interface Props {
+  issue: Issue;
+}
+
+const { issue } = Astro.props;
+const { t, lang } = useI18n(Astro.url);
+const p = t.report.page;
+const c = issueContent(issue, lang);
+const num = String(issue.number).padStart(2, "0");
+const dateFmt = new Intl.DateTimeFormat(lang, { day: "numeric", month: "long", year: "numeric" });
+---
+
+<Layout title={`${t.report.name} ${p.issue} ${num}: ${c.title}`} description={c.intro}>
+  <article class="pb-24 pt-24">
+    <div class={`${container} mt-16`}>
+      <a href={reportPath(lang)} class="inline-flex items-center gap-2 text-sm font-semibold text-ink/70 transition-colors duration-700 ease-fluid hover:text-blue">
+        <Icon name="arrowLeft" class="size-4" />
+        <span>{p.back}</span>
+      </a>
+
+      <header class="mt-8">
+        <div class="flex items-center gap-4">
+          <Logo class="size-12 shrink-0 -rotate-6 md:size-16" eager />
+          <p class="font-display text-2xl uppercase leading-none md:text-3xl">{t.report.name}</p>
+        </div>
+        <div class="mt-4 flex flex-wrap items-center justify-between gap-2 border-y-2 border-ink py-2 text-xs font-semibold uppercase tracking-wide">
+          <span>{p.issue} {num}</span>
+          <time datetime={issue.date}>{dateFmt.format(new Date(issue.date))}</time>
+          <span>Gran Canaria</span>
+        </div>
+        <h1 class="mt-8 max-w-[680px] font-display text-5xl uppercase leading-none md:text-7xl">{c.title}</h1>
+        <p class="mt-6 max-w-[680px] text-xl text-ink/80">{c.intro}</p>
+        {p.langNote && <p class="mt-4 max-w-[680px] text-sm text-ink/60">{p.langNote}</p>}
+      </header>
+
+      <div class="mt-12 max-w-[680px] space-y-12">
+        {
+          c.blocks.map((block, i) => (
+            <section>
+              <div class="flex items-end gap-4 border-b-2 border-ink pb-2">
+                <span class="text-outline font-display text-5xl leading-none tabular-nums">{`0${i + 1}`}</span>
+                <h2 class="font-display text-3xl uppercase leading-none">{block.heading}</h2>
+              </div>
+              <div class="mt-4 space-y-4 text-lg text-ink/80">
+                {block.body.map((para) => <p>{para}</p>)}
+              </div>
+            </section>
+          ))
+        }
+      </div>
+
+      <div class="mt-16 flex flex-wrap gap-4">
+        <a href={`${reportPath(lang)}#manda-tu-run`} class="inline-flex items-center gap-2 rounded-full border-2 border-ink bg-sun px-3 py-2 text-base font-semibold shadow-hard-sm transition-all duration-700 ease-fluid hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none">
+          <Icon name="arrowUpRight" class="size-4" />
+          <span>{t.report.sendCta}</span>
+        </a>
+      </div>
+    </div>
+  </article>
+</Layout>

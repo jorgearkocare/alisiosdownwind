@@ -14,6 +14,8 @@ export const site = {
   email: "hola@alisiosdownwind.com",
   // PENDIENTE: endpoint del formulario (Formspree, Web3Forms, Basin...). Si se deja vacío, el formulario abre el correo del usuario con los datos.
   formEndpoint: "",
+  // PENDIENTE: URL del formulario de suscripción de la newsletter (Beehiiv, Kit, Buttondown...). Si se deja vacío, abre el correo del usuario.
+  newsletterEndpoint: "",
   // PENDIENTE: datos del titular para aviso legal y privacidad (cuando exista el club o asociación)
   legal: {
     owner: "Alisios Downwind (comunidad en proceso de constitución como club deportivo)",
@@ -27,6 +29,7 @@ export const nav = [
   { id: "por-que" },
   { id: "modalidades" },
   { id: "como-funciona" },
+  { id: "report" },
   { id: "merch" },
   { id: "faq" },
 ] as const;

@@ -3,7 +3,7 @@ import Logo from "./Logo.astro";
 import LangPicker from "./LangPicker.astro";
 import { nav } from "../config";
 import { btnSmall } from "../ui";
-import { languages, localizePath, useI18n, type Lang } from "../i18n";
+import { languages, switchLangPath, useI18n, type Lang } from "../i18n";
 
 const { t, lang, home } = useI18n(Astro.url);
 const items = nav.map((item) => ({ ...item, href: `${home}#${item.id}`, label: t.nav.items[item.id] }));
@@ -81,7 +81,7 @@ const fluid = "transition-all duration-700 ease-fluid";
           (Object.keys(languages) as Lang[]).map((code) => (
             <li>
               <a
-                href={localizePath(code)}
+                href={switchLangPath(Astro.url, code)}
                 hreflang={code}
                 lang={code}
                 aria-current={code === lang ? "true" : undefined}

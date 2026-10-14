@@ -38,6 +38,14 @@ Es una web 100 % estática. Cualquiera de estas opciones sirve, gratis:
 
 El formulario ya trae validación en el navegador, estados de carga, error y éxito, y un campo trampa (`_gotcha`) contra bots.
 
+## El Pez Volador Report (newsletter)
+
+- **Portada**: sección con suscripción por email (`src/components/Newsletter.astro`).
+- **Archivo**: `/report/` (y `/en/report/`, `/fr/report/`, `/de/report/`) con todos los números y el formulario "Manda tu run".
+- **Publicar un número**: añade un objeto al principio de `src/report/issues.ts` con su texto en español (`es`) e inglés (`en`). Francés y alemán muestran la versión inglesa.
+- **Conectar la suscripción**: crea la newsletter en Beehiiv, Kit o Buttondown y pega la URL de su formulario en `newsletterEndpoint` (`src/config.ts`).
+- **"Manda tu run"** llega por el mismo `formEndpoint` que el formulario de alta, con el campo `tipo: run-report` para distinguirlo.
+
 ## Idiomas
 
 La portada está en español (`/`), inglés (`/en/`), francés (`/fr/`) y alemán (`/de/`), con un desplegable de idioma en el menú.

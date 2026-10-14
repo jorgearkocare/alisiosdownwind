@@ -1,0 +1,13 @@
+---
+import ReportIssue from "../../../components/ReportIssue.astro";
+import { translatedLocales } from "../../../i18n";
+import { issues } from "../../../report/issues";
+
+export function getStaticPaths() {
+  return translatedLocales.flatMap((lang) => issues.map((issue) => ({ params: { lang, slug: issue.slug }, props: { issue } })));
+}
+
+const { issue } = Astro.props;
+---
+
+<ReportIssue issue={issue} />

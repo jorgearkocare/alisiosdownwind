@@ -1,0 +1,51 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "./Icon.astro";
+import Logo from "./Logo.astro";
+import SendRun from "./SendRun.astro";
+import { container, sticker } from "../ui";
+import { useI18n } from "../i18n";
+import { issueContent, issues, reportPath } from "../report/issues";
+
+const { t, lang } = useI18n(Astro.url);
+const p = t.report.page;
+const dateFmt = new Intl.DateTimeFormat(lang, { day: "numeric", month: "long", year: "numeric" });
+---
+
+<Layout title={p.title} description={p.lead}>
+  <section class="pb-24 pt-24">
+    <div class={`${container} mt-16`}>
+      <p class={`${sticker} -rotate-1`}>{t.report.sticker}</p>
+      <div class="mt-6 flex items-center gap-4">
+        <Logo class="size-16 shrink-0 -rotate-6 md:size-24" eager />
+        <h1 class="font-display text-5xl uppercase leading-none md:text-8xl">{t.report.name}</h1>
+      </div>
+      <p class="mt-6 max-w-[680px] text-lg text-ink/70">{p.lead}</p>
+      {p.langNote && <p class="mt-2 max-w-[680px] text-sm text-ink/60">{p.langNote}</p>}
+
+      <ul class="mt-12 border-t-2 border-ink">
+        {
+          issues.map((issue) => {
+            const c = issueContent(issue, lang);
+            return (
+              <li class="border-b-2 border-ink">
+                <a href={reportPath(lang, issue.slug)} class="group grid items-center gap-4 px-2 py-6 transition-colors duration-700 ease-fluid hover:bg-sun md:grid-cols-12 md:px-4">
+                  <span class="text-outline font-display text-6xl leading-none tabular-nums md:col-span-2">{String(issue.number).padStart(2, "0")}</span>
+                  <span class="md:col-span-7">
+                    <span class="block font-display text-3xl uppercase leading-none md:text-4xl">{c.title}</span>
+                    <span class="mt-2 block text-sm text-ink/60">{dateFmt.format(new Date(issue.date))}</span>
+                  </span>
+                  <span class="inline-flex items-center gap-2 text-sm font-semibold md:col-span-3 md:justify-end">
+                    <span>{p.read}</span>
+                    <Icon name="arrowRight" class="size-4 transition-transform duration-700 ease-fluid group-hover:translate-x-1" />
+                  </span>
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </section>
+  <SendRun />
+</Layout>

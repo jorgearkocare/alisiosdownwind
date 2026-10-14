@@ -5,7 +5,7 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 
 // Textos del idioma de la página (los escribe Layout.astro desde src/i18n)
 type ClientText = Record<
-  | "nameRequired" | "emailRequired" | "emailInvalid" | "levelRequired" | "consentRequired"
+  | "required" | "nameRequired" | "emailRequired" | "emailInvalid" | "levelRequired" | "consentRequired"
   | "review" | "sending" | "submit" | "sendError" | "mailtoTitle" | "mailtoText" | "openMenu" | "closeMenu",
   string
 >;
@@ -250,6 +250,98 @@ document.addEventListener("keydown", (e) => {
     if (p.open) {
       p.open = false;
       p.querySelector("summary")?.focus();
+    }
+  });
+});
+
+/* ---------- Formularios sencillos (newsletter y "Manda tu run") ---------- */
+const simpleEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+document.querySelectorAll<HTMLFormElement>("[data-simple-form]").forEach((form) => {
+  const wrap = form.closest<HTMLElement>("[data-simple-wrap]");
+  const success = wrap?.querySelector<HTMLElement>("[data-simple-success]");
+  const successText = wrap?.querySelector<HTMLElement>("[data-simple-success-text]");
+  const status = form.querySelector<HTMLElement>("[data-status]");
+  const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const label = button?.querySelector<HTMLElement>("[data-label]");
+  const original = label?.textContent ?? "";
+  const fields = Array.from(
+    form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("input[required], textarea[required], input[type='email']"),
+  );
+
+  const check = (el: HTMLInputElement | HTMLTextAreaElement) => {
+    const value = el.value.trim();
+    let msg = "";
+    if (el.required && !value) msg = el.type === "email" ? text.emailRequired : text.required;
+    else if (el.type === "email" && value && !simpleEmail.test(value)) msg = text.emailInvalid;
+    el.setAttribute("aria-invalid", String(Boolean(msg)));
+    const err = form.querySelector<HTMLElement>(`[data-error-for="${el.name}"]`);
+    if (err) {
+      err.textContent = msg;
+      err.classList.toggle("hidden", !msg);
+    }
+    return !msg;
+  };
+
+  fields.forEach((el) => {
+    el.addEventListener("blur", () => check(el));
+    el.addEventListener("input", () => {
+      if (el.getAttribute("aria-invalid") === "true") check(el);
+    });
+  });
+
+  const done = (message?: string) => {
+    if (message && successText) successText.textContent = message;
+    form.hidden = true;
+    if (success) {
+      success.hidden = false;
+      success.focus();
+    }
+  };
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (status) status.textContent = "";
+    const invalid = fields.filter((el) => !check(el));
+    if (invalid.length) {
+      invalid[0].focus();
+      if (status) status.textContent = text.review;
+      return;
+    }
+
+    const data = new FormData(form);
+    if (String(data.get("_gotcha") ?? "")) {
+      done();
+      return;
+    }
+
+    const endpoint = form.dataset.endpoint ?? "";
+    if (!endpoint) {
+      const body = Array.from(data.entries())
+        .filter(([key, value]) => !key.startsWith("_") && String(value).trim())
+        .map(([key, value]) => `${key}: ${value}`)
+        .join("\n");
+      window.location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(form.dataset.subject ?? "")}&body=${encodeURIComponent(body)}`;
+      done(form.dataset.mailtoText);
+      return;
+    }
+
+    if (button && label) {
+      button.disabled = true;
+      button.setAttribute("aria-busy", "true");
+      label.textContent = text.sending;
+    }
+    try {
+      const res = await fetch(endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
+      if (!res.ok) throw new Error(String(res.status));
+      done();
+    } catch {
+      if (status) status.textContent = `${text.sendError} ${form.dataset.email}.`;
+    } finally {
+      if (button && label) {
+        button.disabled = false;
+        button.setAttribute("aria-busy", "false");
+        label.textContent = original;
+      }
     }
   });
 });

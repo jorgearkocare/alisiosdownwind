@@ -35,3 +35,12 @@ export function useI18n(url: URL) {
 export function localizePath(lang: Lang) {
   return lang === defaultLang ? "/" : `/${lang}/`;
 }
+
+/** Misma página en otro idioma. Si la página solo existe en español (legales), lleva a la portada de ese idioma. */
+export function switchLangPath(url: URL, target: Lang) {
+  const rest = url.pathname.replace(/^\/(en|fr|de)(?=\/|$)/, "") || "/";
+  const shared = rest === "/" || rest.startsWith("/report");
+  if (!shared) return localizePath(target);
+  const path = rest.endsWith("/") ? rest : `${rest}/`;
+  return target === defaultLang ? path : `/${target}${path}`;
+}

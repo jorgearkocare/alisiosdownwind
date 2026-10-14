@@ -1,0 +1,101 @@
+---
+// Formulario "Manda tu run": cualquiera, desde cualquier costa, puede mandar su downwind para el Report
+import Icon from "./Icon.astro";
+import { site } from "../config";
+import { btnPrimary, field, fieldError, fieldLabel } from "../ui";
+import { useI18n } from "../i18n";
+
+const { t, lang } = useI18n(Astro.url);
+const s = t.report.send;
+---
+
+<section id="manda-tu-run" aria-labelledby="manda-tu-run-title" class="border-y-2 border-ink bg-blue py-24">
+  <div class="mx-auto w-full max-w-6xl px-4 md:px-6">
+    <div data-simple-wrap class="grid gap-12 rounded-2xl border-2 border-ink bg-cream p-6 shadow-hard md:p-12 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <h2 id="manda-tu-run-title" class="font-display text-5xl uppercase leading-none md:text-7xl">{s.title}</h2>
+        <p class="mt-6 text-lg text-ink/70">{s.lead}</p>
+      </div>
+
+      <div class="lg:col-span-7">
+        <form
+          data-simple-form
+          data-endpoint={site.formEndpoint}
+          data-email={site.email}
+          data-subject="Run para El Pez Volador Report"
+          data-mailto-text={s.mailtoText}
+          action={site.formEndpoint || undefined}
+          method="post"
+          novalidate
+          class="space-y-6"
+        >
+          <input type="hidden" name="_subject" value="Run para El Pez Volador Report" />
+          <input type="hidden" name="tipo" value="run-report" />
+          <input type="hidden" name="idioma" value={lang} />
+          <div class="hidden" aria-hidden="true"><input name="_gotcha" type="text" tabindex="-1" autocomplete="off" /></div>
+
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div>
+              <label for="run-nombre" class={fieldLabel}>{s.name}</label>
+              <input id="run-nombre" name="nombre" type="text" autocomplete="given-name" required aria-describedby="run-nombre-error" class={field} />
+              <p id="run-nombre-error" data-error-for="nombre" class={fieldError}></p>
+            </div>
+            <div>
+              <label for="run-instagram" class={fieldLabel}>{s.instagram}</label>
+              <input id="run-instagram" name="instagram" type="text" placeholder={s.instagramPlaceholder} class={field} />
+            </div>
+          </div>
+
+          <div>
+            <label for="run-email" class={fieldLabel}>{s.email}</label>
+            <input id="run-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="run-email-error" class={field} />
+            <p id="run-email-error" data-error-for="email" class={fieldError}></p>
+          </div>
+
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div>
+              <label for="run-spot" class={fieldLabel}>{s.spot}</label>
+              <input id="run-spot" name="spot" type="text" required placeholder={s.spotPlaceholder} aria-describedby="run-spot-error" class={field} />
+              <p id="run-spot-error" data-error-for="spot" class={fieldError}></p>
+            </div>
+            <div>
+              <label for="run-viento" class={fieldLabel}>{s.wind}</label>
+              <input id="run-viento" name="viento" type="text" placeholder={s.windPlaceholder} class={field} />
+            </div>
+          </div>
+
+          <div>
+            <label for="run-historia" class={fieldLabel}>{s.story}</label>
+            <textarea id="run-historia" name="historia" rows="5" required placeholder={s.storyPlaceholder} aria-describedby="run-historia-error" class={field}></textarea>
+            <p id="run-historia-error" data-error-for="historia" class={fieldError}></p>
+          </div>
+
+          <div>
+            <label for="run-enlace" class={fieldLabel}>{s.link}</label>
+            <input id="run-enlace" name="enlace" type="url" inputmode="url" placeholder={s.linkPlaceholder} class={field} />
+          </div>
+
+          <p class="text-sm text-ink/70">
+            {s.consentBefore} <a href="/privacidad" class="font-semibold text-ink underline decoration-sun decoration-2 underline-offset-4 hover:decoration-blue">{t.report.consentLink}</a>{t.footer.legalLangNote && ` ${t.footer.legalLangNote}`}.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4">
+            <button type="submit" class={btnPrimary}>
+              <Icon name="arrowUpRight" class="size-4" />
+              <span data-label>{s.submit}</span>
+            </button>
+            <p data-status role="status" aria-live="polite" class="text-sm font-medium text-ink/70"></p>
+          </div>
+        </form>
+
+        <div data-simple-success hidden tabindex="-1" class="rounded-2xl border-2 border-ink bg-sun p-6 shadow-hard">
+          <span class="flex size-12 items-center justify-center rounded-full border-2 border-ink bg-paper">
+            <Icon name="check" class="size-6" />
+          </span>
+          <p class="mt-6 font-display text-4xl uppercase leading-none">{s.successTitle}</p>
+          <p data-simple-success-text class="mt-2 text-base text-ink/80">{s.successText}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
