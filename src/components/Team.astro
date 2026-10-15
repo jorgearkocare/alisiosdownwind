@@ -2,8 +2,9 @@
 import Icon from "./Icon.astro";
 import { container, h2, lead, section, sticker } from "../ui";
 import { useI18n } from "../i18n";
+import Sticker from "./Sticker.astro";
 
-const { t } = useI18n(Astro.url);
+const { t, lang } = useI18n(Astro.url);
 
 // Los cuatro amigos que empezaron Alisios. Para cambiar el orden o añadir a alguien, edita esta lista.
 // Las fotos están en public/equipo/ con el nombre de usuario de Instagram.
@@ -22,6 +23,30 @@ const looks = [
 const crew = people.map((p, i) => ({ ...p, photo: `/equipo/${p.handle}.jpg`, url: `https://www.instagram.com/${p.handle}/`, ...looks[i] }));
 // Se repiten las tarjetas para que el carrusel cubra pantallas anchas sin huecos
 const loop = [...crew, ...crew, ...crew];
+
+// Muro de fotos del crew (public/equipo/crew/). Pies de foto y textos alternativos en src/i18n, en team.wall.items, en este orden.
+const wallFiles = [
+  { src: "rumbo-a-la-salida", h: 1138 },
+  { src: "run-completado", h: 853 },
+  { src: "preparando-material-en-pozo", h: 853 },
+  { src: "listos-para-remar", h: 1138 },
+  { src: "atardecer-en-la-furgo", h: 853 },
+  { src: "antes-de-salir", h: 853 },
+  { src: "revisando-la-gopro", h: 853 },
+  { src: "cafe-de-despues", h: 1138 },
+  { src: "de-vuelta-en-tierra", h: 854 },
+];
+const frames = ["bg-paper", "bg-sun", "bg-paper", "bg-blue text-cream", "bg-paper", "bg-ink text-cream", "bg-sun", "bg-paper", "bg-blue text-cream"];
+const tilts = ["-rotate-2", "rotate-1", "-rotate-1", "rotate-2", "-rotate-1", "rotate-1", "-rotate-2", "rotate-1", "-rotate-1"];
+const wall = wallFiles.map((f, i) => ({ ...f, src: `/equipo/crew/${f.src}.jpg`, ...t.team.wall.items[i], frame: frames[i], tilt: tilts[i] }));
+// Ruta GPS del downwind del 12 de mayo de 2026 (Waterspeed)
+const w = t.team.wall;
+const num = (n: number) => new Intl.NumberFormat(lang, { maximumFractionDigits: 1 }).format(n);
+const routeStats = [
+  { value: num(22.8), unit: "km", label: w.distance },
+  { value: num(16.4), unit: w.knots, label: w.max },
+  { value: num(7.7), unit: w.knots, label: w.avg },
+];
 ---
 
 <section id="equipo" aria-labelledby="equipo-title" class={section}>
@@ -73,6 +98,49 @@ const loop = [...crew, ...crew, ...crew];
           </ul>
         ))
       }
+    </div>
+  </div>
+  <!-- Muro del crew: fotos fuera y dentro del agua, con la ruta GPS destacada -->
+  <div class={`${container} mt-16`}>
+    <div class="grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <h3 data-reveal class="font-display text-4xl uppercase leading-none md:text-5xl">{w.title}</h3>
+        <p data-reveal style="--d: 80ms" class="mt-4 text-lg text-ink/70">{w.lead}</p>
+        <figure data-reveal style="--d: 160ms" class="tape relative mt-10 -rotate-1 rounded-2xl border-2 border-ink bg-ink p-2 text-cream shadow-hard lg:sticky lg:top-28">
+          <Sticker text={`${num(22.8)} km`} tone="sun" class="absolute -right-3 top-6 z-10 rotate-6" />
+          <img src="/equipo/crew/ruta-12-mayo.jpg" width="720" height="1280" alt={w.routeAlt} loading="lazy" decoding="async" class="h-auto w-full rounded-lg border-2 border-ink" />
+          <figcaption class="px-2 pb-2 pt-4">
+            <span class="block text-xs font-semibold uppercase tracking-wide text-sun">{w.routeLabel}</span>
+            <span class="mt-1 block font-display text-2xl uppercase leading-none">{w.routeTitle}</span>
+            <dl class="mt-4 grid grid-cols-3 gap-2 border-t-2 border-cream/20 pt-4">
+              {
+                routeStats.map((stat) => (
+                  <div>
+                    <dt class="text-xs text-cream/60">{stat.label}</dt>
+                    <dd class="mt-1 font-display text-2xl leading-none">
+                      {stat.value}
+                      <span class="mt-1 block font-sans text-xs font-semibold uppercase tracking-wide text-cream/60">{stat.unit}</span>
+                    </dd>
+                  </div>
+                ))
+              }
+            </dl>
+          </figcaption>
+        </figure>
+      </div>
+
+      <ul class="columns-2 gap-6 md:columns-3 lg:col-span-8">
+        {
+          wall.map((photo, i) => (
+            <li data-reveal style={`--d: ${(i % 3) * 80}ms`} class="mb-8 break-inside-avoid pt-4">
+              <figure class={`tape rounded-2xl border-2 border-ink p-2 shadow-hard transition-transform duration-700 ease-fluid md:hover:rotate-0 ${photo.frame} ${photo.tilt}`}>
+                <img src={photo.src} width="640" height={photo.h} alt={photo.alt} loading="lazy" decoding="async" class="h-auto w-full rounded-lg border-2 border-ink" />
+                <figcaption class="px-1 pb-1 pt-3 font-display text-lg uppercase leading-none md:text-xl">{photo.caption}</figcaption>
+              </figure>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </div>
 </section>
