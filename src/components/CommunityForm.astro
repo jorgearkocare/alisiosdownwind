@@ -11,10 +11,13 @@ const { t, lang } = useI18n(Astro.url);
 const f = t.signup;
 const modes = ["SUP foil", "Parawing", "Wing foil"];
 const levels = Object.entries(f.levels).map(([value, label]) => ({ value, label }));
+// Solo "Cursos" y "Merch" abren un desplegable
+const hasPanel = (value: string) => value === "cursos" || value === "merch";
 const interests = Object.entries(f.interestLabels).map(([value, label]) => ({ value, label }));
 // Actividades: mismas que en "Lo que viene", en el mismo orden
 const activityKeys = ["rescate", "iniciacion-sup-foil", "parawing", "runs-con-paradas", "pro-run", "filmacion"];
-const activities = t.coming.items.map((item, i) => ({ value: activityKeys[i], label: item.title }));
+// (la última de "Lo que viene", downwind con embarcación de apoyo, va como interés propio y no en esta lista)
+const activities = t.coming.items.slice(0, activityKeys.length).map((item, i) => ({ value: activityKeys[i], label: item.title }));
 // Prendas: mismas que en la sección de merch, en el mismo orden
 const garmentKeys = ["gorra-de-agua", "trucker", "lycra", "camiseta"];
 const garments = t.merch.items.map((item, i) => ({ value: garmentKeys[i], label: item.name }));
@@ -107,10 +110,10 @@ const error = "mt-2 hidden text-sm font-medium text-red-700";
               {
                 interests.map((it) => (
                   <label>
-                    <input type="checkbox" name="interes" value={it.value} aria-controls={it.value === "runs" ? undefined : `sub-${it.value}`} class="peer sr-only" />
+                    <input type="checkbox" name="interes" value={it.value} aria-controls={hasPanel(it.value) ? `sub-${it.value}` : undefined} class="peer sr-only" />
                     <span class={chip}>
                       {it.label}
-                      {it.value !== "runs" && <Icon name="caretDown" class="size-3.5 transition-transform duration-700 ease-fluid [label:has(:checked)_&]:rotate-180" />}
+                      {hasPanel(it.value) && <Icon name="caretDown" class="size-3.5 transition-transform duration-700 ease-fluid [label:has(:checked)_&]:rotate-180" />}
                     </span>
                   </label>
                 ))

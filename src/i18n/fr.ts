@@ -14,7 +14,6 @@ const fr: typeof es = {
     items: {
       "por-que": "Pourquoi",
       modalidades: "Disciplines",
-      "como-funciona": "Comment ça marche",
       merch: "Merch",
       report: "Report",
       faq: "Questions",
@@ -25,7 +24,7 @@ const fr: typeof es = {
     language: "Langue",
   },
   hero: {
-    sticker: "Gran Canaria · Downwind foil",
+    sticker: "Îles Canaries · Downwind foil",
     title: ["Fais du downwind", "avec les alizés."],
     titleAccent: "Jamais seul.",
     lead: "Nous sommes une communauté de riders en SUP foil, parawing et wing foil qui organise des runs ouverts le long de la côte de Gran Canaria. On prévient quand le vent rentre, on organise les voitures entre départ et arrivée et on fait le downwind ensemble.",
@@ -35,7 +34,7 @@ const fr: typeof es = {
     logoAlt: "Logo d'Alisios DW : un poisson à crête qui vole sur un foil, dans une explosion bleue et jaune",
     alertLabel: "Voilà à quoi ressemble une annonce dans le groupe",
     alert:
-      "Demain l'alizé rentre. Rendez-vous à 10h30 à l'arrivée pour laisser les voitures, puis on monte ensemble au départ. Niveau intermédiaire, il reste 3 places.",
+      "Demain l'alizé rentre. Rendez-vous à 10h30 à Pozo, on laisse les voitures et on monte ensemble à El Burrero. Niveau intermédiaire, il reste 3 places.",
   },
   marquee: {
     top: ["SUP foil", "Parawing", "Wing foil", "Gran Canaria", "Runs ouverts"],
@@ -54,8 +53,8 @@ const fr: typeof es = {
       },
       {
         title: "Sécurité",
-        problem: "Si tu casses un foil ou que tu n'as plus de jambes à mi-parcours, tu es seul face à des kilomètres de côte.",
-        solution: "On part ensemble, avec un parcours partagé et des riders qui connaissent chaque entrée et sortie de l'eau.",
+        problem: "Casser du matériel en plein downwind peut vite se compliquer, surtout si tu es seul et loin de la côte.",
+        solution: "Être accompagné aide toujours à revenir à la côte. On part ensemble, avec un parcours partagé et des riders qui connaissent chaque entrée et sortie de l'eau.",
       },
       {
         title: "Progression",
@@ -87,7 +86,7 @@ const fr: typeof es = {
       {
         name: "Parawing",
         text: "Une aile sans wishbone qui te donne l'élan pour décoller et que tu ranges pour surfer la houle.",
-        needs: ["Planche, foil et parawing", "À l'aise avec une aile"],
+        needs: ["Planche, foil et parawing", "À l'aise en parawing"],
       },
       {
         name: "Wing foil",
@@ -114,7 +113,7 @@ const fr: typeof es = {
   gallery: {
     sticker: "Galerie",
     title: "Voilà à quoi ressemble un run",
-    lead: "De la cale à la dernière bosse : une journée d'alizés avec la bande.",
+    lead: "Voilà nos journées de downwind avec la communauté.",
     more: "Plus de photos sur Instagram",
     items: [
       { caption: "Briefing avant le run", alt: "Quatre riders près d'un van font le point, planches et foils posés au sol" },
@@ -158,11 +157,11 @@ const fr: typeof es = {
   report: {
     sticker: "Newsletter",
     name: "El Pez Volador Report",
-    edition: "Toutes les deux semaines · En espagnol et en anglais",
+    edition: "Toutes les trois semaines · En espagnol et en anglais",
     tagline: "Le downwind de Gran Canaria et du monde, dans ta boîte mail.",
     lead: "Pour ceux qui font du downwind ici et ceux qui rêvent de venir. Des runs, des conseils, ce qui se passe sur d'autres côtes et les nouveautés d'Alisios.",
     sections: [
-      { title: "Le run de la quinzaine", text: "Où, avec quel vent et qui était sur l'eau, avec photos ou vidéo." },
+      { title: "Le run à la une", text: "Où, avec quel vent et qui était sur l'eau, avec photos ou vidéo." },
       { title: "Un conseil", text: "Technique, matériel ou sécurité à appliquer dès ta prochaine session." },
       { title: "Le downwind dans le monde", text: "Ce qui bouge à Maui, Tarifa, en Australie ou dans la Baltique." },
       { title: "Chez nous", text: "Prochains runs, merch, cours et riders invités sur l'île." },
@@ -171,7 +170,7 @@ const fr: typeof es = {
     emailPlaceholder: "toi@email.com",
     subscribe: "M'abonner",
     subscribeTitle: "Abonne-toi gratuitement",
-    subscribeText: "Juste ton email. Un numéro toutes les deux semaines, sans spam.",
+    subscribeText: "Juste ton email. Un numéro toutes les trois semaines, sans spam.",
     note: "Gratuit. Désinscription en un clic.",
     consentBefore: "En t'abonnant, tu acceptes la",
     consentLink: "politique de confidentialité",
@@ -228,7 +227,7 @@ const fr: typeof es = {
     mockupOf: "Maquette de",
     note: "Maquettes provisoires. Les designs, couleurs et vêtements définitifs seront d'abord partagés avec les abonnés à la newsletter.",
     items: [
-      { name: "Casquette de surf Nordeste", detail: "Casquette de surf avec jugulaire et écusson du poisson, pour qu'elle ne s'envole pas en plein run" },
+      { name: "Casquette d'eau Este", detail: "Casquette de surf avec jugulaire et écusson du poisson, pour qu'elle ne s'envole pas en plein run" },
       { name: "Trucker Poisson Volant", detail: "Devant crème, filet noir et écusson avec le logo" },
       { name: "Lycra Bump", detail: "Manches longues, capuche et cache-cou pour les heures de soleil" },
       { name: "T-shirt Alisios", detail: "Le grand logo dans le dos, sur bleu marine" },
@@ -249,6 +248,7 @@ const fr: typeof es = {
       { title: "Runs avec arrêts", text: "Des tronçons courts en groupe, avec des arrêts pour corriger la technique au fur et à mesure." },
       { title: "Pro run", text: "Un rider professionnel fait le downwind avec toi d'un bout à l'autre et te montre sa trajectoire." },
       { title: "Vidéo de ton run", text: "On te filme depuis l'eau ou depuis un jet ski pour que tu voies quoi corriger." },
+      { title: "Downwind avec bateau d'assistance", text: "Des downwinds organisés avec un jet ski ou un bateau d'assistance qui suit le groupe du départ à l'arrivée." },
     ],
   },
   faq: {
@@ -318,6 +318,7 @@ const fr: typeof es = {
       runs: "Runs ouverts",
       cursos: "Cours et activités",
       merch: "Merch",
+      embarcacion: "Downwind avec bateau d'assistance",
     },
     activitiesLabel: "À quelles activités tu t'inscrirais ?",
     activitiesHint: "Coche-en autant que tu veux. Ça nous aide à choisir celles à lancer en premier.",

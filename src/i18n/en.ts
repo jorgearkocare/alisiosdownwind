@@ -14,7 +14,6 @@ const en: typeof es = {
     items: {
       "por-que": "Why",
       modalidades: "Disciplines",
-      "como-funciona": "How it works",
       merch: "Merch",
       report: "Report",
       faq: "FAQ",
@@ -25,7 +24,7 @@ const en: typeof es = {
     language: "Language",
   },
   hero: {
-    sticker: "Gran Canaria · Downwind foil",
+    sticker: "Canary Islands · Downwind foil",
     title: ["Ride the downwind", "with the trade winds."],
     titleAccent: "Never alone.",
     lead: "We are a community of SUP foil, parawing and wing foil riders running open downwinds along the coast of Gran Canaria. We call it when the wind fills in, sort out cars between start and finish, and do the downwind together.",
@@ -35,7 +34,7 @@ const en: typeof es = {
     logoAlt: "Alisios DW logo: a crested fish flying on a foil inside a blue and yellow burst",
     alertLabel: "What a call looks like in the group",
     alert:
-      "Trade winds kick in tomorrow. Meet at 10:30 at the finish to drop cars, then we drive up to the start together. Intermediate level, 3 seats left.",
+      "Trade winds kick in tomorrow. Meet at 10:30 in Pozo, drop the cars and drive up to El Burrero together. Intermediate level, 3 seats left.",
   },
   marquee: {
     top: ["SUP foil", "Parawing", "Wing foil", "Gran Canaria", "Open runs"],
@@ -54,8 +53,8 @@ const en: typeof es = {
       },
       {
         title: "Safety",
-        problem: "Break a foil or run out of legs halfway and you are alone facing miles of coastline.",
-        solution: "We go out together, with a shared route and riders who know every way in and out of the water.",
+        problem: "Breaking gear in the middle of a downwind can get tricky, especially if you are alone and far from the coast.",
+        solution: "Having company always helps you get back to shore. We go out together, with a shared route and riders who know every way in and out of the water.",
       },
       {
         title: "Progression",
@@ -87,7 +86,7 @@ const en: typeof es = {
       {
         name: "Parawing",
         text: "A boomless wing that gives you the push to get up, then packs away so you can surf the swell.",
-        needs: ["Board, foil and parawing", "Comfortable riding with a wing"],
+        needs: ["Board, foil and parawing", "Comfortable riding a parawing"],
       },
       {
         name: "Wing foil",
@@ -114,7 +113,7 @@ const en: typeof es = {
   gallery: {
     sticker: "Gallery",
     title: "This is what a run looks like",
-    lead: "From the slipway to the last bump: a trade-wind day with the crew.",
+    lead: "This is what our downwind days with the community look like.",
     more: "More photos on Instagram",
     items: [
       { caption: "Briefing before the run", alt: "Four riders by a van going over the plan, with boards and foils on the ground" },
@@ -158,11 +157,11 @@ const en: typeof es = {
   report: {
     sticker: "Newsletter",
     name: "El Pez Volador Report",
-    edition: "Every two weeks · Spanish and English",
+    edition: "Every three weeks · Spanish and English",
     tagline: "Downwind from Gran Canaria and the world, in your inbox.",
     lead: "For people who ride downwind here and people who dream of coming. Runs, tips, what is happening on other coasts and what is new at Alisios.",
     sections: [
-      { title: "Run of the fortnight", text: "Where it was, the wind and who was on the water, with photos or video." },
+      { title: "Featured run", text: "Where it was, the wind and who was on the water, with photos or video." },
       { title: "One tip", text: "Technique, gear or safety you can use on your next session." },
       { title: "Downwind around the world", text: "What is going on in Maui, Tarifa, Australia or the Baltic." },
       { title: "Our news", text: "Upcoming runs, merch, courses and guest riders on the island." },
@@ -171,7 +170,7 @@ const en: typeof es = {
     emailPlaceholder: "you@email.com",
     subscribe: "Subscribe",
     subscribeTitle: "Subscribe for free",
-    subscribeText: "Just your email. One issue every two weeks, no spam.",
+    subscribeText: "Just your email. One issue every three weeks, no spam.",
     note: "Free. Unsubscribe in one click.",
     consentBefore: "By subscribing you accept the",
     consentLink: "privacy policy",
@@ -228,7 +227,7 @@ const en: typeof es = {
     mockupOf: "Mockup of",
     note: "Provisional mockups. Final designs, colours and garments will be shared with newsletter subscribers first.",
     items: [
-      { name: "Nordeste Surf Cap", detail: "Surf cap with chin strap and fish patch, so it stays on mid-run" },
+      { name: "Este Water Cap", detail: "Surf cap with chin strap and fish patch, so it stays on mid-run" },
       { name: "Flying Fish Trucker", detail: "Cream front, black mesh and logo patch" },
       { name: "Bump Hooded Lycra", detail: "Long sleeves, hood and neck cover for the sunny hours" },
       { name: "Alisios Tee", detail: "Big logo on the back, on navy blue" },
@@ -249,6 +248,7 @@ const en: typeof es = {
       { title: "Runs with stops", text: "Short group legs with stops to fix technique as you go." },
       { title: "Pro run", text: "A pro rider does the downwind with you from start to finish and shows you their line." },
       { title: "Filming your run", text: "We film you from the water or from a jet ski so you can see what to fix." },
+      { title: "Downwind with support boat", text: "Organised downwinds with a jet ski or support boat following the group from start to finish." },
     ],
   },
   faq: {
@@ -318,6 +318,7 @@ const en: typeof es = {
       runs: "Open runs",
       cursos: "Courses and activities",
       merch: "Merch",
+      embarcacion: "Downwind with support boat",
     },
     activitiesLabel: "Which activities would you join?",
     activitiesHint: "Tick as many as you like. It helps us decide which ones to run first.",

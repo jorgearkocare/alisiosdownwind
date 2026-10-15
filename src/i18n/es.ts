@@ -14,7 +14,6 @@ const es = {
     items: {
       "por-que": "Por qué",
       modalidades: "Modalidades",
-      "como-funciona": "Cómo funciona",
       merch: "Merch",
       report: "Report",
       faq: "Preguntas",
@@ -25,7 +24,7 @@ const es = {
     language: "Idioma",
   },
   hero: {
-    sticker: "Gran Canaria · Downwind foil",
+    sticker: "Islas Canarias · Downwind foil",
     title: ["Haz el downwind", "con los alisios."],
     titleAccent: "Nunca solo.",
     lead: "Somos una comunidad de riders de SUP foil, parawing y wing foil que organiza runs abiertos por la costa de Gran Canaria. Avisamos cuando entra el viento, cuadramos coches entre salida y llegada y hacemos el downwind juntos.",
@@ -35,7 +34,7 @@ const es = {
     logoAlt: "Logo de Alisios DW: un pez con cresta volando sobre un foil, dentro de una explosión azul y amarilla",
     alertLabel: "Así llega un aviso al grupo",
     alert:
-      "Mañana entra el alisio. Quedamos a las 10:30 en la llegada para dejar coches y subimos juntos a la salida. Nivel intermedio, quedan 3 plazas.",
+      "Mañana entra el alisio. Quedamos a las 10:30 en Pozo, dejamos coches y subimos juntos al Burrero. Nivel intermedio, quedan 3 plazas.",
   },
   marquee: {
     top: ["SUP foil", "Parawing", "Wing foil", "Gran Canaria", "Runs abiertos"],
@@ -54,8 +53,8 @@ const es = {
       },
       {
         title: "Seguridad",
-        problem: "Si rompes un foil o te quedas sin piernas a mitad de ruta, estás solo frente a kilómetros de costa.",
-        solution: "Salimos juntos, con la ruta compartida y riders que conocen cada entrada y salida del mar.",
+        problem: "Romper material en mitad del downwind puede ser complicado, sobre todo si estás solo y lejos de la costa.",
+        solution: "Estar acompañado siempre ayuda a volver a la costa. Salimos juntos, con la ruta compartida y riders que conocen cada entrada y salida del mar.",
       },
       {
         title: "Progresión",
@@ -87,7 +86,7 @@ const es = {
       {
         name: "Parawing",
         text: "Un ala sin botavara que te da el empujón para despegar y que recoges para surfear el swell.",
-        needs: ["Tabla, foil y parawing", "Soltura navegando con ala"],
+        needs: ["Tabla, foil y parawing", "Soltura navegando con parawing"],
       },
       {
         name: "Wing foil",
@@ -114,7 +113,7 @@ const es = {
   gallery: {
     sticker: "Galería",
     title: "Así se vive un run",
-    lead: "De la rampa al último bump: así son nuestros días de alisio con la comunidad.",
+    lead: "Así son nuestros días de downwind con la comunidad.",
     more: "Más fotos en Instagram",
     items: [
       { caption: "Briefing antes del run", alt: "Cuatro riders junto a una furgoneta repasando el plan, con tablas y foils en el suelo" },
@@ -158,11 +157,11 @@ const es = {
   report: {
     sticker: "Newsletter",
     name: "El Pez Volador Report",
-    edition: "Cada dos semanas · Español e inglés",
+    edition: "Cada tres semanas · Español e inglés",
     tagline: "El downwind de Gran Canaria y del mundo, en tu email.",
     lead: "Para quien hace downwind aquí y para quien sueña con venir. Runs, consejos, lo que pasa en otras costas del mundo y lo nuevo de Alisios.",
     sections: [
-      { title: "El run de la quincena", text: "Dónde fue, con qué viento y quién estaba en el agua, con fotos o vídeo." },
+      { title: "El run destacado", text: "Dónde fue, con qué viento y quién estaba en el agua, con fotos o vídeo." },
       { title: "Un consejo", text: "Técnica, material o seguridad para aplicar en tu próxima sesión." },
       { title: "Downwind en el mundo", text: "Lo que se mueve en Maui, Tarifa, Australia o el Báltico." },
       { title: "Lo nuestro", text: "Próximos runs, merch, cursos y riders invitados en la isla." },
@@ -171,7 +170,7 @@ const es = {
     emailPlaceholder: "tu@email.com",
     subscribe: "Suscribirme",
     subscribeTitle: "Suscríbete gratis",
-    subscribeText: "Solo tu email. Un número cada dos semanas, sin spam.",
+    subscribeText: "Solo tu email. Un número cada tres semanas, sin spam.",
     note: "Gratis. Te das de baja con un clic.",
     consentBefore: "Al suscribirte aceptas la",
     consentLink: "política de privacidad",
@@ -228,7 +227,7 @@ const es = {
     mockupOf: "Maqueta de",
     note: "Maquetas provisionales. Los diseños, colores y prendas finales los compartiremos primero con los suscritos a la newsletter.",
     items: [
-      { name: "Gorra de agua Nordeste", detail: "Gorra de surf con barboquejo y parche del pez, para que no se vuele en pleno run" },
+      { name: "Gorra para el agua Este", detail: "Gorra de surf con barboquejo y parche del pez, para que no se vuele en pleno run" },
       { name: "Trucker Pez Volador", detail: "Frontal crema, rejilla negra y parche con el logo" },
       { name: "Lycra Bump", detail: "Manga larga con capucha y cubrecuello para las horas de sol" },
       { name: "Camiseta Alisios", detail: "El logo en grande a la espalda, sobre azul marino" },
@@ -249,6 +248,7 @@ const es = {
       { title: "Runs con paradas", text: "Tramos cortos en grupo, con paradas para corregir técnica sobre la marcha." },
       { title: "Pro run", text: "Un rider profesional hace el downwind contigo de punta a punta y te enseña su línea." },
       { title: "Filmación de tu run", text: "Te grabamos desde el agua o desde moto de agua para que veas qué corregir." },
+      { title: "Downwind con embarcación de apoyo", text: "Downwinds organizados con moto de agua o lancha de soporte acompañando al grupo de la salida a la llegada." },
     ],
   },
   faq: {
@@ -318,6 +318,7 @@ const es = {
       runs: "Runs abiertos",
       cursos: "Cursos y actividades",
       merch: "Merch",
+      embarcacion: "Downwind con embarcación de apoyo",
     },
     activitiesLabel: "¿A qué actividades te apuntarías?",
     activitiesHint: "Marca todas las que quieras. Nos ayuda a decidir cuáles montamos primero.",

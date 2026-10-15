@@ -32,7 +32,6 @@ export const site = {
 export const nav = [
   { id: "por-que" },
   { id: "modalidades" },
-  { id: "como-funciona" },
   { id: "report" },
   { id: "merch" },
   { id: "faq" },
@@ -54,6 +53,7 @@ export const kitTags: Record<string, number> = {
   "interes:runs": 24631049,
   "interes:cursos": 24631050,
   "interes:merch": 24631052,
+  "interes:embarcacion": 24648494,
   "actividad:rescate": 24631053,
   "actividad:iniciacion-sup-foil": 24631054,
   "actividad:parawing": 24631055,

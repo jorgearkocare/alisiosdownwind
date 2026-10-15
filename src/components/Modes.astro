@@ -8,7 +8,7 @@ const { t } = useI18n(Astro.url);
 const look: { icon: IconName; tone: string; tilt: string }[] = [
   { icon: "waves", tone: "bg-sun text-ink", tilt: "md:-rotate-1" },
   { icon: "wind", tone: "bg-blue text-cream", tilt: "md:rotate-1" },
-  { icon: "sailboat", tone: "bg-ink text-cream", tilt: "md:-rotate-1" },
+  { icon: "wind", tone: "bg-ink text-cream", tilt: "md:-rotate-1" },
 ];
 const modes = t.modes.items.map((m, i) => ({ ...m, ...look[i] }));
 ---

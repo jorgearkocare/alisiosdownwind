@@ -23,10 +23,10 @@ export const issues: Issue[] = [
     es: {
       title: "Así será El Pez Volador Report",
       intro:
-        "Este es el número cero. Todavía no hay run de la quincena, pero sí hay plan: cada dos semanas os mandaremos cuatro bloques cortos sobre downwind, escritos desde Gran Canaria para cualquiera que lo viva en cualquier costa.",
+        "Este es el número cero. Todavía no hay run destacado, pero sí hay plan: cada tres semanas os mandaremos cuatro bloques cortos sobre downwind, escritos desde Gran Canaria para cualquiera que lo viva en cualquier costa.",
       blocks: [
         {
-          heading: "El run de la quincena",
+          heading: "El run destacado",
           body: [
             "Cada número abre con un run: el mejor que hayamos hecho en la isla o el que nos mandéis vosotros desde cualquier parte del mundo.",
             "Spot, viento, distancia y quién estaba en el agua. Con fotos o vídeo siempre que haya.",
@@ -59,10 +59,10 @@ export const issues: Issue[] = [
     en: {
       title: "What El Pez Volador Report will be",
       intro:
-        "This is issue zero. There is no run of the fortnight yet, but there is a plan: every two weeks we will send you four short blocks about downwind, written from Gran Canaria for anyone who lives it on any coast.",
+        "This is issue zero. There is no featured run yet, but there is a plan: every three weeks we will send you four short blocks about downwind, written from Gran Canaria for anyone who lives it on any coast.",
       blocks: [
         {
-          heading: "Run of the fortnight",
+          heading: "Featured run",
           body: [
             "Every issue opens with a run: the best one we did on the island, or one you send us from anywhere in the world.",
             "Spot, wind, distance and who was on the water. With photos or video whenever there are some.",
