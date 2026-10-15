@@ -33,7 +33,7 @@ const files = [
 const photos = files.map((f, i) => ({ ...f, ...t.community.photos[i] }));
 ---
 
-<section aria-labelledby="comunidad-title" class="border-y-2 border-ink bg-sun py-24">
+<section id="comunidad" aria-labelledby="comunidad-title" class="border-y-2 border-ink bg-sun py-24">
   <div class={container}>
     <div class="grid gap-12 lg:grid-cols-12 lg:items-end">
       <div class="lg:col-span-7">

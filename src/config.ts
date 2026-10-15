@@ -28,12 +28,16 @@ export const site = {
   },
 } as const;
 
-// Secciones del menú (los textos de cada idioma están en src/i18n)
-export const nav = [
+// Secciones del menú (los textos de cada idioma están en src/i18n, en nav.items y nav.moreItems)
+export const nav = [{ id: "equipo" }, { id: "formar-parte" }, { id: "report" }, { id: "merch" }] as const;
+// Resto de secciones, dentro del desplegable "Otros"
+export const navMore = [
   { id: "por-que" },
   { id: "modalidades" },
-  { id: "report" },
-  { id: "merch" },
+  { id: "galeria" },
+  { id: "comunidad" },
+  { id: "lo-que-viene" },
+  { id: "unete" },
   { id: "faq" },
 ] as const;
 

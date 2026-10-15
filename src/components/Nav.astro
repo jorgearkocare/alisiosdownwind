@@ -1,13 +1,15 @@
 ---
+import Icon from "./Icon.astro";
 import Logo from "./Logo.astro";
 import LangPicker from "./LangPicker.astro";
-import { nav } from "../config";
+import { nav, navMore, site } from "../config";
 import { btnSmall } from "../ui";
 import { languages, switchLangPath, useI18n, type Lang } from "../i18n";
 
 const { t, lang, home } = useI18n(Astro.url);
+// Menú principal: Quiénes somos, Únete a la comunidad, Report y Merch. El resto va en "Otros".
 const items = nav.map((item) => ({ ...item, href: `${home}#${item.id}`, label: t.nav.items[item.id] }));
-const menu = [...items, { id: "unete", href: `${home}#unete`, label: t.nav.join }];
+const more = navMore.map((item) => ({ ...item, href: `${home}#${item.id}`, label: t.nav.moreItems[item.id] }));
 const fluid = "transition-all duration-700 ease-fluid";
 ---
 
@@ -26,23 +28,48 @@ const fluid = "transition-all duration-700 ease-fluid";
       <span class="whitespace-nowrap font-display text-xl uppercase leading-none">Alisios DW</span>
     </a>
 
-    <ul class="hidden items-center gap-1 lg:flex">
+    <ul class="hidden items-center gap-1 xl:flex">
       {
         items.map((item) => (
           <li>
             <a
               href={item.href}
               data-spy={item.id}
-              class={`rounded-full px-3 py-2 text-sm font-semibold ${fluid} hover:bg-ink/5 aria-[current=true]:bg-sun`}
+              class={`whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold ${fluid} hover:bg-ink/5 aria-[current=true]:bg-sun`}
             >{item.label}</a>
           </li>
         ))
       }
+      <li>
+        <!-- "Otros": el resto de secciones. Funciona sin JavaScript; el script lo cierra al pulsar fuera o al elegir una sección -->
+        <details data-lang-picker class="group/more relative">
+          <summary class={`flex cursor-pointer list-none items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold ${fluid} hover:bg-ink/5 [&::-webkit-details-marker]:hidden`}>
+            <span>{t.nav.more}</span>
+            <Icon name="caretDown" class="size-3 transition-transform duration-700 ease-fluid group-open/more:rotate-180" />
+          </summary>
+          <ul class="absolute left-0 top-full z-20 mt-2 w-64 rounded-2xl border-2 border-ink bg-paper p-2 shadow-hard-sm">
+            {
+              more.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    data-spy={item.id}
+                    class={`block rounded-lg px-3 py-2 text-sm font-semibold ${fluid} hover:bg-sun aria-[current=true]:bg-ink aria-[current=true]:text-cream`}
+                  >{item.label}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </details>
+      </li>
     </ul>
 
     <LangPicker />
 
-    <a href={`${home}#unete`} class={`${btnSmall.replace("inline-flex ", "")} hidden sm:inline-flex`}>{t.nav.join}</a>
+    <a href={site.whatsappGroup} target="_blank" rel="noopener" class={`${btnSmall.replace("inline-flex ", "")} hidden whitespace-nowrap sm:inline-flex`}>
+      <Icon name="whatsapp" class="size-4" />
+      <span>{t.nav.join}</span>
+    </a>
 
     <button
       type="button"
@@ -50,7 +77,7 @@ const fluid = "transition-all duration-700 ease-fluid";
       aria-expanded="false"
       aria-controls="menu-movil"
       aria-label={t.nav.openMenu}
-      class={`group relative size-10 shrink-0 rounded-full bg-ink ${fluid} hover:bg-blue active:scale-[0.98] lg:hidden`}
+      class={`group relative size-10 shrink-0 rounded-full bg-ink ${fluid} hover:bg-blue active:scale-[0.98] xl:hidden`}
     >
       <span class={`absolute inset-0 m-auto block h-0.5 w-4 -translate-y-1 rounded-full bg-cream ${fluid} group-aria-expanded:translate-y-0 group-aria-expanded:rotate-45`}></span>
       <span class={`absolute inset-0 m-auto block h-0.5 w-4 translate-y-1 rounded-full bg-cream ${fluid} group-aria-expanded:translate-y-0 group-aria-expanded:-rotate-45`}></span>
@@ -59,23 +86,54 @@ const fluid = "transition-all duration-700 ease-fluid";
 
   <div
     id="menu-movil"
-    class={`invisible fixed inset-0 bg-blue/90 opacity-0 backdrop-blur-3xl ${fluid} group-data-[open=true]/nav:visible group-data-[open=true]/nav:opacity-100 lg:hidden`}
+    class={`invisible fixed inset-0 overflow-y-auto bg-blue/90 opacity-0 backdrop-blur-3xl ${fluid} group-data-[open=true]/nav:visible group-data-[open=true]/nav:opacity-100 xl:hidden`}
   >
-    <div class="flex h-full flex-col justify-center gap-12 px-6">
-      <ul class="flex flex-col gap-4">
+    <div class="flex min-h-full flex-col justify-center gap-10 px-6 pb-12 pt-32">
+      <ul class="flex flex-col gap-3">
         {
-          menu.map((item, i) => (
+          items.map((item, i) => (
             <li class="overflow-hidden">
               <a
                 href={item.href}
                 data-menu-link
                 style={`transition-delay: ${100 + i * 50}ms`}
-                class={`block translate-y-12 font-display text-6xl uppercase leading-none text-cream opacity-0 ${fluid} hover:text-sun group-data-[open=true]/nav:translate-y-0 group-data-[open=true]/nav:opacity-100`}
+                class={`block translate-y-12 font-display text-5xl uppercase leading-none text-cream opacity-0 sm:text-6xl ${fluid} hover:text-sun group-data-[open=true]/nav:translate-y-0 group-data-[open=true]/nav:opacity-100`}
               >{item.label}</a>
             </li>
           ))
         }
+        <li class="overflow-hidden">
+          <a
+            href={site.whatsappGroup}
+            target="_blank"
+            rel="noopener"
+            data-menu-link
+            style={`transition-delay: ${100 + items.length * 50}ms`}
+            class={`flex translate-y-12 items-start gap-3 font-display text-5xl uppercase leading-none text-sun opacity-0 sm:text-6xl ${fluid} hover:text-cream group-data-[open=true]/nav:translate-y-0 group-data-[open=true]/nav:opacity-100`}
+          >
+            <Icon name="whatsapp" class="mt-1 size-9 shrink-0" />
+            <span>{t.nav.join}</span>
+          </a>
+        </li>
       </ul>
+
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-wide text-cream/60">{t.nav.more}</p>
+        <ul class="mt-3 flex flex-wrap gap-2">
+          {
+            more.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  data-menu-link
+                  class={`inline-flex rounded-full border-2 border-cream px-3 py-1 text-sm font-semibold text-cream ${fluid} hover:bg-cream hover:text-blue`}
+                >{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
       <ul class="flex flex-wrap gap-2" aria-label={t.nav.language}>
         {
           (Object.keys(languages) as Lang[]).map((code) => (

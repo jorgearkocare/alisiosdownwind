@@ -266,11 +266,12 @@ document.querySelectorAll<HTMLAnchorElement>("[data-interest]").forEach((link) =
   });
 });
 
-/* ---------- Desplegable de idioma: se cierra al pulsar fuera o con Escape ---------- */
+/* ---------- Desplegables (idioma y "Otros"): se cierran al pulsar fuera, al elegir una opción o con Escape ---------- */
 const pickers = document.querySelectorAll<HTMLDetailsElement>("[data-lang-picker]");
 document.addEventListener("click", (e) => {
   pickers.forEach((p) => {
-    if (p.open && !p.contains(e.target as Node)) p.open = false;
+    const target = e.target as Element;
+    if (p.open && (!p.contains(target) || target.closest("a"))) p.open = false;
   });
 });
 document.addEventListener("keydown", (e) => {
