@@ -60,6 +60,9 @@ const ogImage = new URL("/og.png", base).href;
     <meta name="twitter:image" content={ogImage} />
 
     <script is:inline>document.documentElement.classList.add("js");</script>
+    <!-- Vercel Web Analytics: cuenta visitas sin cookies. Los datos se ven en Vercel > proyecto > Analytics -->
+    <script is:inline>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+    <script is:inline defer src="/_vercel/insights/script.js"></script>
   </head>
   <body class="min-h-dvh">
     <Nav />
