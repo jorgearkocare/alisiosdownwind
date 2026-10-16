@@ -146,6 +146,7 @@ const es = {
       "Moritz Mauch": "Windsurfista y rider de SUP profesional",
       "Miguel Chapuis": "Windsurfista profesional",
       "Ramón Sánchez": "Parawinger local",
+      "Alba Frey": "Atleta profesional de SUP de Fuerteventura",
     } as Record<string, string>,
     photos: [
       {

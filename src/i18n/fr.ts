@@ -146,6 +146,7 @@ const fr: typeof es = {
       "Moritz Mauch": "Windsurfeur et rider SUP professionnel",
       "Miguel Chapuis": "Windsurfeur professionnel",
       "Ramón Sánchez": "Parawinger local",
+      "Alba Frey": "Athlète professionnelle de SUP de Fuerteventura",
     } as Record<string, string>,
     photos: [
       {
