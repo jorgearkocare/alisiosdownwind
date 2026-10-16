@@ -153,7 +153,7 @@ const fr: typeof es = {
         alt: "Deux riders en SUP foil en plein downwind sur la mer bleue, l'un en gilet rose qui rame et l'autre qui salue",
       },
       { caption: "Avant le run", alt: "Selfie du groupe à côté du van avec les planches et les foils prêts avant de partir" },
-      { caption: "Après le run", alt: "Le groupe qui fête l'arrivée avec une planche de downwind violette et des bières à la main" },
+      { caption: "Après le run", alt: "Trois riders souriants sur la promenade avec leurs planches, foils et parawings après le run" },
     ],
   },
   team: {

@@ -153,7 +153,7 @@ const es = {
         alt: "Dos riders de SUP foil en pleno downwind sobre el mar azul, uno con chaleco rosa remando y otro saludando",
       },
       { caption: "Antes del run", alt: "Selfie del grupo junto a la furgoneta con las tablas y los foils preparados antes de salir" },
-      { caption: "Después del run", alt: "El grupo celebrando en la llegada con una tabla de downwind morada y cervezas en la mano" },
+      { caption: "Después del run", alt: "Tres riders sonrientes en el paseo con sus tablas, foils y parawings al terminar el run" },
     ],
   },
   team: {

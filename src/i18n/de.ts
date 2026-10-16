@@ -153,7 +153,7 @@ const de: typeof es = {
         alt: "Zwei SUP-Foil-Rider mitten im Downwind auf blauem Meer, einer in pinker Weste paddelt, der andere winkt",
       },
       { caption: "Vor dem Run", alt: "Gruppenselfie am Van mit Boards und Foils, bereit zum Rausfahren" },
-      { caption: "Nach dem Run", alt: "Die Gruppe feiert am Ziel mit einem lila Downwind-Board und Bier in der Hand" },
+      { caption: "Nach dem Run", alt: "Drei lachende Rider auf der Promenade mit Boards, Foils und Parawings nach dem Run" },
     ],
   },
   team: {

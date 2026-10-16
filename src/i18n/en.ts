@@ -153,7 +153,7 @@ const en: typeof es = {
         alt: "Two SUP foil riders mid downwind on blue water, one in a pink vest paddling and the other waving",
       },
       { caption: "Before the run", alt: "Group selfie by the van with boards and foils ready before heading out" },
-      { caption: "After the run", alt: "The group celebrating at the finish with a purple downwind board and beers in hand" },
+      { caption: "After the run", alt: "Three smiling riders on the promenade with their boards, foils and parawings after the run" },
     ],
   },
   team: {
