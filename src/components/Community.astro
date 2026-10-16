@@ -1,4 +1,5 @@
 ---
+import { existsSync } from "node:fs";
 import Icon from "./Icon.astro";
 import { site } from "../config";
 import { btnSecondary, container, h2, stickerBase } from "../ui";
@@ -14,13 +15,14 @@ const riderList = [
   { name: "Moritz Mauch", instagram: "moritzmauch" },
   { name: "Miguel Chapuis", instagram: "miguelitochapuis" },
   { name: "Ramón Sánchez", instagram: "ramonfoil" },
+  { name: "Alba Frey", instagram: "albafrey" },
 ];
 const riders = riderList.map((r) => ({
   ...r,
   role: t.community.roles[r.name] ?? "",
   url: r.instagram ? `https://www.instagram.com/${r.instagram}/` : "",
-  // Foto de perfil de Instagram (96x96) en public/riders/{instagram}.webp
-  photo: r.instagram ? `/riders/${r.instagram}.webp` : "",
+  // Foto de perfil de Instagram (96x96) en public/riders/{instagram}.webp. Si no hay foto, salen sus iniciales.
+  photo: r.instagram && existsSync(`public/riders/${r.instagram}.webp`) ? `/riders/${r.instagram}.webp` : "",
   initials: r.name.replace("@", "").split(" ").map((w) => w[0]).join("").slice(0, 2),
 }));
 
