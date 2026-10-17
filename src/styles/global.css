@@ -238,6 +238,29 @@ form:has(input[name="interes"][value="merch"]:checked) [data-sub="merch"] {
   display: none;
 }
 
+/* Ventana "Revisa tu email" */
+.confirm-dialog::backdrop {
+  background: rgb(11 11 9 / 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.confirm-dialog[open] {
+  animation: confirm-in 500ms var(--ease-fluid);
+}
+
+@keyframes confirm-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) rotate(-1deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confirm-dialog[open] {
+    animation: none;
+  }
+}
+
 /* Cintas de texto en movimiento */
 @keyframes marquee {
   to {

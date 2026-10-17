@@ -111,6 +111,18 @@ if (spySections.length && "IntersectionObserver" in window) {
   spySections.forEach((s) => spyIO.observe(s));
 }
 
+/* ---------- Ventana "Revisa tu email" (confirmar suscripción y mirar en spam) ---------- */
+const confirmDialog = document.querySelector<HTMLDialogElement>("[data-confirm-dialog]");
+function openConfirmDialog() {
+  if (!confirmDialog || confirmDialog.open) return;
+  if (typeof confirmDialog.showModal === "function") confirmDialog.showModal();
+  else confirmDialog.setAttribute("open", "");
+}
+// Pulsar fuera de la ventana también la cierra
+confirmDialog?.addEventListener("click", (e) => {
+  if (e.target === confirmDialog) confirmDialog.close();
+});
+
 /* ---------- Formulario de alta ---------- */
 const form = document.querySelector<HTMLFormElement>("[data-join-form]");
 if (form) {
@@ -245,6 +257,8 @@ if (form) {
         if (json.status && json.status !== "success") throw new Error(String(json.status));
       }
       showSuccess();
+      // Kit manda un email de confirmación: lo recordamos en una ventana
+      if (tagMap) openConfirmDialog();
     } catch {
       if (status) {
         status.textContent = `${text.sendError} ${contactEmail}.`;
@@ -373,6 +387,7 @@ document.querySelectorAll<HTMLFormElement>("[data-simple-form]").forEach((form) 
         }
         await fetch(endpoint, { method: "POST", body: data, mode: "no-cors" });
         done();
+        openConfirmDialog();
         return;
       }
       const res = await fetch(endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
@@ -390,6 +405,7 @@ document.querySelectorAll<HTMLFormElement>("[data-simple-form]").forEach((form) 
         fetch(kitEndpoint, { method: "POST", body: sub, mode: "no-cors" }).catch(() => {});
       }
       done();
+      if (kitEndpoint && data.get("suscribir")) openConfirmDialog();
     } catch {
       if (status) status.textContent = `${text.sendError} ${form.dataset.email}.`;
     } finally {

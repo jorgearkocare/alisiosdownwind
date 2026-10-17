@@ -393,6 +393,13 @@ const fr: typeof es = {
     openMenu: "Ouvrir le menu",
     closeMenu: "Fermer le menu",
   },
+  confirm: {
+    title: "Vérifie tes emails",
+    text: "On vient de t'envoyer un email pour confirmer ton inscription. Ouvre-le et clique sur le bouton de confirmation : sans ça, on ne pourra pas t'écrire.",
+    spamTitle: "Tu ne le vois pas ?",
+    spam: "Ça peut prendre quelques minutes et il arrive parfois dans les Spams ou Promotions. S'il y est, marque-le comme « Non spam » pour ne rien rater.",
+    button: "Compris",
+  },
   footer: {
     blurb: "Communauté de downwind foil à Gran Canaria. Runs ouverts en SUP foil, parawing et wing foil.",
     contact: "Des questions ? Écris-nous, on te répond dès qu'on sort de l'eau.",

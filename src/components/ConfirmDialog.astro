@@ -1,0 +1,32 @@
+---
+// Ventana que aparece al apuntarse ("Quiero formar parte" o newsletter): recuerda confirmar el email y mirar en spam.
+// La abre scripts/main.ts con openConfirmDialog(). Es un <dialog> nativo: se cierra con el botón, con Escape o pulsando fuera.
+import Icon from "./Icon.astro";
+import { btnPrimary } from "../ui";
+import { useI18n } from "../i18n";
+
+const { t } = useI18n(Astro.url);
+const c = t.confirm;
+---
+
+<dialog
+  data-confirm-dialog
+  aria-labelledby="confirm-title"
+  aria-describedby="confirm-text"
+  class="confirm-dialog m-auto w-[min(92vw,520px)] rounded-2xl border-2 border-ink bg-cream p-0 text-ink shadow-hard"
+>
+  <div class="p-6 md:p-8">
+    <span class="flex size-14 -rotate-6 items-center justify-center rounded-full border-2 border-ink bg-sun shadow-hard-sm" aria-hidden="true">
+      <Icon name="envelope" class="size-7" />
+    </span>
+    <h2 id="confirm-title" class="mt-5 font-display text-4xl uppercase leading-none md:text-5xl">{c.title}</h2>
+    <p id="confirm-text" class="mt-4 text-lg text-ink/80">{c.text}</p>
+    <div class="mt-6 flex items-start gap-3 rounded-xl border-2 border-dashed border-blue bg-paper p-4">
+      <Icon name="warning" class="mt-0.5 size-6 shrink-0 text-blue" />
+      <p class="text-base"><strong class="font-semibold">{c.spamTitle}</strong> {c.spam}</p>
+    </div>
+    <form method="dialog" class="mt-8">
+      <button type="submit" class={`${btnPrimary} w-full sm:w-auto`} autofocus>{c.button}</button>
+    </form>
+  </div>
+</dialog>

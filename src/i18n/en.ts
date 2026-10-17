@@ -393,6 +393,13 @@ const en: typeof es = {
     openMenu: "Open menu",
     closeMenu: "Close menu",
   },
+  confirm: {
+    title: "Check your email",
+    text: "We have just sent you an email to confirm your subscription. Open it and tap the confirm button: until then we can't write to you.",
+    spamTitle: "Can't see it?",
+    spam: "It can take a few minutes and sometimes lands in Spam or Promotions. If it's there, mark it as \"Not spam\" so you don't miss anything.",
+    button: "Got it",
+  },
   footer: {
     blurb: "Downwind foil community in Gran Canaria. Open SUP foil, parawing and wing foil runs.",
     contact: "Questions? Write to us and we will reply as soon as we are out of the water.",

@@ -393,6 +393,13 @@ const de: typeof es = {
     openMenu: "Menü öffnen",
     closeMenu: "Menü schließen",
   },
+  confirm: {
+    title: "Schau in dein Postfach",
+    text: "Wir haben dir gerade eine Email geschickt, um dein Abo zu bestätigen. Öffne sie und tippe auf den Bestätigungsbutton: Vorher können wir dir nicht schreiben.",
+    spamTitle: "Nicht gefunden?",
+    spam: "Es kann ein paar Minuten dauern und manchmal landet sie im Spam oder bei Werbung. Falls ja, markiere sie als „Kein Spam“, damit du nichts verpasst.",
+    button: "Alles klar",
+  },
   footer: {
     blurb: "Downwind-Foil-Community auf Gran Canaria. Offene SUP-Foil-, Parawing- und Wing-Foil-Runs.",
     contact: "Fragen? Schreib uns, wir antworten, sobald wir aus dem Wasser sind.",
