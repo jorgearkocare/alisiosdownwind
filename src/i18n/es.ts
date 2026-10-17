@@ -2,7 +2,7 @@
 
 const es = {
   meta: {
-    title: "Alisios DW · Comunidad de downwind foil en Gran Canaria",
+    title: "Alisios Downwind · Comunidad de downwind foil en Gran Canaria",
     description:
       "Comunidad de downwind foil en Gran Canaria. Runs abiertos de SUP foil, parawing y wing foil por la costa de la isla, en grupo y con la logística resuelta.",
     ogAlt: "Logo de Alisios DW, comunidad de downwind foil en Gran Canaria",

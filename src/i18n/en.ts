@@ -2,7 +2,7 @@ import type es from "./es";
 
 const en: typeof es = {
   meta: {
-    title: "Alisios DW · Downwind foil community in Gran Canaria",
+    title: "Alisios Downwind · Downwind foil community in Gran Canaria",
     description:
       "Downwind foil community in Gran Canaria. Open SUP foil, parawing and wing foil runs along the island's coast, as a group and with the logistics sorted.",
     ogAlt: "Alisios DW logo, downwind foil community in Gran Canaria",
