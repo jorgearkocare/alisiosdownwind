@@ -147,6 +147,7 @@ const es = {
       "Miguel Chapuis": "Windsurfista profesional",
       "Ramón Sánchez": "Parawinger local",
       "Alba Frey": "Atleta profesional de SUP de Fuerteventura",
+      "Miki Brown": "Rider local de Tenerife",
     } as Record<string, string>,
     photos: [
       {

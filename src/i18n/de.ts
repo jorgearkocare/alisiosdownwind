@@ -147,6 +147,7 @@ const de: typeof es = {
       "Miguel Chapuis": "Profi-Windsurfer",
       "Ramón Sánchez": "Lokaler Parawinger",
       "Alba Frey": "SUP-Profisportlerin aus Fuerteventura",
+      "Miki Brown": "Local Rider aus Teneriffa",
     } as Record<string, string>,
     photos: [
       {
