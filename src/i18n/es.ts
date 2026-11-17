@@ -11,6 +11,7 @@ const es = {
   nav: {
     label: "Principal",
     home: "Alisios DW, ir al inicio",
+    runs: "Runs",
     items: {
       equipo: "Quiénes somos",
       "formar-parte": "Únete a la comunidad",

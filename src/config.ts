@@ -28,6 +28,22 @@ export const site = {
   },
 } as const;
 
+// Webapp de runs (/runs): listado de downwinds, apuntarse, quién va y chat de cada run. Código en src/runs/.
+// Los datos viven en Supabase. Sus dos claves NO se escriben aquí: van como variables de entorno
+// (en Vercel > Settings > Environment Variables y, en local, en un archivo .env):
+//   PUBLIC_SUPABASE_URL   URL del proyecto (https://xxxx.supabase.co)
+//   PUBLIC_SUPABASE_KEY   clave "publishable" (sb_publishable_...). Es pública por diseño: los datos los protegen
+//                         las reglas de supabase/schema.sql, no esta clave.
+// Sin ellas, /runs funciona en modo demo (datos de ejemplo en el navegador) y no sale en el menú ni en el sitemap.
+const supabaseUrl: string = import.meta.env.PUBLIC_SUPABASE_URL ?? "";
+const supabaseKey: string = import.meta.env.PUBLIC_SUPABASE_KEY ?? "";
+export const runs = {
+  path: "/runs",
+  supabaseUrl,
+  supabaseKey,
+  enabled: Boolean(supabaseUrl && supabaseKey),
+};
+
 // Secciones del menú (los textos de cada idioma están en src/i18n, en nav.items y nav.moreItems)
 export const nav = [{ id: "equipo" }, { id: "formar-parte" }, { id: "report" }, { id: "merch" }] as const;
 // Resto de secciones, dentro del desplegable "Otros"

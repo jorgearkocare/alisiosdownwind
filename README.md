@@ -46,6 +46,61 @@ El formulario ya trae validación en el navegador, estados de carga, error y éx
 - **Conectar la suscripción**: crea la newsletter en Beehiiv, Kit o Buttondown y pega la URL de su formulario en `newsletterEndpoint` (`src/config.ts`).
 - **"Manda tu run"** llega por el mismo `formEndpoint` que el formulario de alta, con el campo `tipo: run-report` para distinguirlo.
 
+## Runs (webapp de reservas)
+
+`/runs` es la sección donde los riders se apuntan a los downwinds: cuenta con teléfono y contraseña, listado de runs con su ruta y su nivel, plazas con lista de espera, quién va, reparto de coches y chat de cada run. Los organizadores crean, confirman y cancelan los runs desde la misma página.
+
+- **Código**: `src/runs/` (pantallas en `app.js`, datos en `store-supabase.js`, spots y mapa en `geo.js`). La página `src/pages/runs.astro` solo pone el hueco.
+- **Estilos**: `src/runs/runs.css`. La app se monta dentro de un *shadow root*, así que estos estilos no afectan al resto de la web ni al revés. Repite los colores de `global.css`.
+- **Datos**: un proyecto de [Supabase](https://supabase.com) (cuentas, base de datos y tiempo real). El esquema completo, con las reglas de quién puede ver y tocar cada cosa, está en `supabase/schema.sql`.
+- **Idioma**: solo español por ahora.
+
+**Sin configurar Supabase**, `/runs` funciona en modo demo: riders y runs de ejemplo guardados en el navegador de cada visitante. En ese estado no sale en el menú ni en el sitemap y lleva `noindex`.
+
+### Ponerla en marcha (unos 15 minutos)
+
+1. **Crea el proyecto** en supabase.com. Elige una región de la Unión Europea y guarda la contraseña de la base de datos.
+2. **Crea las tablas**: en el panel, *SQL Editor* > nueva consulta, pega entero `supabase/schema.sql` y ejecútalo. Solo se hace una vez.
+3. **Quita la confirmación por email**: en *Authentication*, dentro de los proveedores de acceso, abre *Email* y desactiva la opción de confirmar el email (aparece como «Confirm email»). Las cuentas usan un email interno del tipo `34612345678@tel.alisiosdownwind.com`, que no existe: si la confirmación sigue activa, nadie podrá entrar tras registrarse.
+4. **Copia las dos claves**: la URL del proyecto y la clave *publishable* (`sb_publishable_...`, en los ajustes de *API Keys*). La clave *secret* no se usa en la web y no debe ponerse nunca aquí.
+5. **Ponlas en Vercel**: proyecto > *Settings* > *Environment Variables*, para Production y Preview:
+   - `PUBLIC_SUPABASE_URL` = la URL del proyecto
+   - `PUBLIC_SUPABASE_KEY` = la clave publishable
+
+   Vuelve a desplegar para que la web las recoja. En local van en un archivo `.env` en la raíz (ya está en `.gitignore`).
+6. **Hazte organizador**: crea tu cuenta en `/runs` y después ejecuta en *SQL Editor*, con tu teléfono:
+
+   ```sql
+   update public.profiles set role = 'organizer'
+   where id = (select id from public.private_profiles where phone = '+34612345678');
+   ```
+
+   Cierra sesión y vuelve a entrar. Repítelo con cada organizador.
+
+Con las claves puestas, el enlace **Runs** aparece solo en el menú, la página entra en el sitemap y la política de privacidad enseña el apartado de la cuenta de Runs.
+
+### Día a día
+
+- **Un rider ha olvidado la contraseña.** No hay recuperación automática porque no se envían SMS ni emails. Lo más simple es borrar su cuenta (*Authentication* > *Users*, se busca por su teléfono dentro del email interno) y que se registre otra vez; pierde sus apuntes a runs, no los mensajes ya escritos. Alternativa sin borrar nada, desde *SQL Editor* (pruébala antes con tu propia cuenta, no está verificada contra un proyecto real):
+
+  ```sql
+  update auth.users set encrypted_password = extensions.crypt('ClaveNueva2026', extensions.gen_salt('bf'))
+  where email = '34612345678@tel.alisiosdownwind.com';
+  ```
+
+- **Quitar a alguien de un run o borrar un mensaje**: desde *Table Editor*, en `signups` o `messages`. Los organizadores tienen permiso; todavía no hay botón en la web.
+- **Añadir un spot**: una línea en `SPOTS` (`src/runs/geo.js`), en su sitio de norte a sur. Las coordenadas y la distancia estimada son aproximadas; el organizador puede escribir la distancia real al crear el run.
+- **Plan gratuito de Supabase**: el proyecto se pausa si pasa una semana sin actividad y hay que reactivarlo desde el panel. En temporada no debería ocurrir.
+
+### Cómo están protegidos los datos
+
+La clave publishable va en el código de la web y cualquiera puede verla: es lo normal en Supabase. Lo que decide qué puede leer o cambiar cada persona son las reglas de `supabase/schema.sql`:
+
+- Sin cuenta solo se ven fecha, ruta y nivel de los tres próximos runs.
+- Con cuenta se ven runs, apuntados, chat y la ficha de los demás (nombre, nivel, modalidades).
+- El teléfono solo lo ven los organizadores y, si el rider lo activa en su perfil, quienes comparten un run con él.
+- Solo los organizadores crean, editan y borran runs. Nadie puede hacerse organizador desde la web.
+
 ## Idiomas
 
 La portada está en español (`/`), inglés (`/en/`), francés (`/fr/`) y alemán (`/de/`), con un desplegable de idioma en el menú.
@@ -65,10 +120,12 @@ src/
   ui.ts                Clases compartidas de botones y títulos
   layouts/Layout.astro Head, SEO, Open Graph, nav y footer
   components/          Una sección por archivo (Hero, Marquee, WhyGroup, Tagline, Modes, Merch...)
-  pages/               index (español), [lang]/index (en, fr, de), privacidad, aviso-legal, 404
+  pages/               index (español), [lang]/index (en, fr, de), runs, privacidad, aviso-legal, 404
+  runs/                Webapp de reservas de /runs: pantallas, datos (Supabase o demo), spots y estilos propios
   scripts/main.ts      Menú, apariciones con IntersectionObserver, frase palabra a palabra, formulario
   styles/global.css    Tema de Tailwind (colores, fuente Geist, curva de movimiento)
 public/                favicon, og.png (imagen al compartir), robots.txt
+supabase/schema.sql    Tablas y reglas de acceso de la webapp de runs
 ```
 
 ## Siguientes mejoras recomendadas

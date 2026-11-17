@@ -1,7 +1,7 @@
 // Mapa del sitio para Google y otros buscadores. Se genera solo al construir la web:
 // incluye las portadas, el archivo del Report y cada número en los cuatro idiomas.
 import type { APIRoute } from "astro";
-import { site } from "../config";
+import { runs, site } from "../config";
 import { locales } from "../i18n";
 import { issues, reportPath } from "../report/issues";
 
@@ -11,6 +11,8 @@ export const GET: APIRoute = () => {
   const base = site.url.replace(/\/$/, "");
   const groups: { paths: Record<string, string>; lastmod?: string; priority: string }[] = [
     { paths: Object.fromEntries(locales.map((l) => [l, home(l)])), priority: "1.0" },
+    // La webapp de runs solo existe en español y solo se anuncia cuando está conectada a Supabase
+    ...(runs.enabled ? [{ paths: { es: runs.path }, priority: "0.8" }] : []),
     { paths: Object.fromEntries(locales.map((l) => [l, reportPath(l)])), lastmod: issues[0]?.date, priority: "0.7" },
     ...issues.map((issue) => ({
       paths: Object.fromEntries(locales.map((l) => [l, reportPath(l, issue.slug)])),
