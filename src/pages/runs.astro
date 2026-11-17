@@ -1,0 +1,34 @@
+---
+// Runs: listado de downwinds planificados, apuntarse, ver quién va y chat de cada run.
+// Esta página solo pone el hueco; la webapp se monta dentro desde src/runs/main.js.
+// Con las claves de Supabase (ver src/config.ts) usa datos reales. Sin ellas enseña la demo y no se indexa.
+import Layout from "../layouts/Layout.astro";
+import { runs, site } from "../config";
+import { container } from "../ui";
+---
+
+<Layout
+  title="Runs"
+  description="Próximos downwinds de Alisios DW en Gran Canaria, con su ruta, su nivel y el punto de encuentro. Apúntate, mira quién va y cuadra coches en el chat de cada run."
+  current="runs"
+  noindex={!runs.enabled}
+>
+  <div class="pb-24 pt-32">
+    <div
+      id="runs-app"
+      data-supabase-url={runs.supabaseUrl}
+      data-supabase-key={runs.supabaseKey}
+      data-privacy="/privacidad"
+      data-whatsapp={site.whatsappGroup}
+      data-logo="/brand/logo.png"
+    >
+      <p data-runs-fallback class={`${container} text-base font-semibold text-ink/70`}>Cargando los runs…</p>
+      <noscript>
+        <p class={`${container} mt-4 text-base text-ink/70`}>Para apuntarte a un run necesitas activar JavaScript en tu navegador.</p>
+      </noscript>
+    </div>
+  </div>
+  <script>
+    import "../runs/main.js";
+  </script>
+</Layout>

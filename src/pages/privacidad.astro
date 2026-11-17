@@ -1,12 +1,13 @@
 ---
 import LegalPage from "../components/LegalPage.astro";
-import { site } from "../config";
+import { runs, site } from "../config";
+// Lo que habla de la cuenta de Runs solo se publica cuando esa sección está conectada (runs.enabled, ver src/config.ts)
 ---
 
 <LegalPage
   title="Política de privacidad"
   description="Cómo trata Alisios Downwind los datos que nos dejas al apuntarte a la comunidad."
-  updated="octubre de 2026"
+  updated={runs.enabled ? "noviembre de 2026" : "octubre de 2026"}
   current="privacidad"
 >
   <p>Esta política explica qué datos recogemos cuando te apuntas a la comunidad a través de esta web, para qué los usamos y qué derechos tienes, conforme al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica 3/2018 (LOPDGDD).</p>
@@ -29,14 +30,29 @@ import { site } from "../config";
     <li>Saber qué niveles y modalidades hay en la comunidad para organizar mejor las rutas.</li>
   </ul>
 
+  {
+    runs.enabled && (
+      <>
+        <h2>Cuenta para apuntarte a los runs</h2>
+        <p>Para usar la sección <a href={runs.path}>Runs</a> creas una cuenta con tu teléfono y una contraseña. Guardamos tu teléfono, tu nombre, tu nivel, las modalidades que practicas, los runs a los que te apuntas (con qué vas y si llevas coche) y los mensajes que escribes en el chat de cada run. La contraseña se guarda cifrada y no podemos leerla.</p>
+        <ul>
+          <li><strong>Qué ven los demás riders con cuenta:</strong> tu nombre, tu nivel, tus modalidades, los runs a los que te apuntas y tus mensajes del chat.</li>
+          <li><strong>Quién ve tu teléfono:</strong> los organizadores, para coordinar los runs. Los riders que comparten un run contigo solo lo ven si lo activas en tu perfil.</li>
+          <li><strong>Para qué lo usamos:</strong> organizar los runs, saber cuántos vamos y cuadrar coches. No comprobamos el número por SMS ni lo usamos para publicidad.</li>
+          <li><strong>Cómo borrar tu cuenta:</strong> escríbenos a <a href={`mailto:${site.email}`}>{site.email}</a> y la eliminamos con tus datos. Los mensajes que hayas escrito en un chat se quedan sin tu nombre.</li>
+        </ul>
+      </>
+    )
+  }
+
   <h2>Base legal</h2>
-  <p>Tu consentimiento, que nos das al marcar la casilla del formulario. Puedes retirarlo en cualquier momento sin que afecte a lo tratado antes.</p>
+  <p>Tu consentimiento, que nos das al marcar la casilla del formulario{runs.enabled && " o al crear tu cuenta de Runs"}. Puedes retirarlo en cualquier momento sin que afecte a lo tratado antes.</p>
 
   <h2>Cuánto tiempo los guardamos</h2>
   <p>Mientras sigas en la lista. Si te das de baja, los borramos salvo que una ley nos obligue a conservarlos durante un plazo concreto.</p>
 
   <h2>Con quién los compartimos</h2>
-  <p>Con nadie para fines comerciales. Los proveedores que nos dan el servicio de formulario y de envío de email (Kit, para la newsletter y el formulario de la comunidad, y FormSubmit, para los envíos al Report) actúan como encargados del tratamiento y solo los usan para prestarnos ese servicio.</p>
+  <p>Con nadie para fines comerciales. Los proveedores que nos dan el servicio de formulario y de envío de email (Kit, para la newsletter y el formulario de la comunidad, y FormSubmit, para los envíos al Report) actúan como encargados del tratamiento y solo los usan para prestarnos ese servicio.{runs.enabled && " Lo mismo ocurre con Supabase, donde se guardan las cuentas y los datos de la sección Runs."}</p>
 
   <h2>Tus derechos</h2>
   <p>Puedes pedir acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad escribiendo a <a href={`mailto:${site.email}`}>{site.email}</a>. Si crees que no hemos atendido bien tu petición, puedes reclamar ante la Agencia Española de Protección de Datos en <a href="https://www.aepd.es" target="_blank" rel="noopener">aepd.es</a>.</p>

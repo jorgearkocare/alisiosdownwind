@@ -2,7 +2,7 @@
 import Icon from "./Icon.astro";
 import Logo from "./Logo.astro";
 import LangPicker from "./LangPicker.astro";
-import { nav, navMore, site } from "../config";
+import { nav, navMore, runs, site } from "../config";
 import { btnSmall } from "../ui";
 import { languages, switchLangPath, useI18n, type Lang } from "../i18n";
 
@@ -11,6 +11,8 @@ const { t, lang, home } = useI18n(Astro.url);
 const items = nav.map((item) => ({ ...item, href: `${home}#${item.id}`, label: t.nav.items[item.id] }));
 const more = navMore.map((item) => ({ ...item, href: `${home}#${item.id}`, label: t.nav.moreItems[item.id] }));
 const fluid = "transition-all duration-700 ease-fluid";
+// Runs es una página propia (/runs), no una sección de la portada. Solo se enlaza cuando está conectada a Supabase.
+const onRuns = Astro.url.pathname.replace(/\/$/, "") === runs.path;
 ---
 
 <a
@@ -29,6 +31,17 @@ const fluid = "transition-all duration-700 ease-fluid";
     </a>
 
     <ul class="hidden items-center gap-1 xl:flex">
+      {
+        runs.enabled && (
+          <li>
+            <a
+              href={runs.path}
+              aria-current={onRuns ? "page" : undefined}
+              class={`whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold ${fluid} hover:bg-ink/5 aria-[current=page]:bg-sun`}
+            >{t.nav.runs}</a>
+          </li>
+        )
+      }
       {
         items.map((item) => (
           <li>
@@ -90,6 +103,18 @@ const fluid = "transition-all duration-700 ease-fluid";
   >
     <div class="flex min-h-full flex-col justify-center gap-10 px-6 pb-12 pt-32">
       <ul class="flex flex-col gap-3">
+        {
+          runs.enabled && (
+            <li class="overflow-hidden">
+              <a
+                href={runs.path}
+                data-menu-link
+                style="transition-delay: 50ms"
+                class={`block translate-y-12 font-display text-5xl uppercase leading-none text-cream opacity-0 sm:text-6xl ${fluid} hover:text-sun group-data-[open=true]/nav:translate-y-0 group-data-[open=true]/nav:opacity-100`}
+              >{t.nav.runs}</a>
+            </li>
+          )
+        }
         {
           items.map((item, i) => (
             <li class="overflow-hidden">

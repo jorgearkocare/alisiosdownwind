@@ -11,6 +11,7 @@ const fr: typeof es = {
   nav: {
     label: "Principale",
     home: "Alisios DW, aller à l'accueil",
+    runs: "Runs",
     items: {
       equipo: "Qui sommes-nous",
       "formar-parte": "Rejoindre la communauté",
